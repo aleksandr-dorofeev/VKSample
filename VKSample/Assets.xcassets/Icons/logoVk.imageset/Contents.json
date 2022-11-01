@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "logoVk.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

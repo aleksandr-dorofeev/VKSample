@@ -13,6 +13,10 @@
 		F80EC5202910FFA4007E9437 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80EC51E2910FFA4007E9437 /* Main.storyboard */; };
 		F80EC5222910FFA8007E9437 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F80EC5212910FFA8007E9437 /* Assets.xcassets */; };
 		F80EC5252910FFA8007E9437 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80EC5232910FFA8007E9437 /* LaunchScreen.storyboard */; };
+		F82272CB2911B5F3003EEB1B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82272CA2911B5F3003EEB1B /* UIViewController+Extension.swift */; };
+		F82272CD2911B6F9003EEB1B /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82272CC2911B6F9003EEB1B /* UITextField+Extension.swift */; };
+		F82272D02911B8CC003EEB1B /* Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82272CF2911B8CC003EEB1B /* Verification.swift */; };
+		F82272D42911CB0E003EEB1B /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82272D32911CB0E003EEB1B /* FriendsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		F80EC5212910FFA8007E9437 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F80EC5242910FFA8007E9437 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F80EC5262910FFA8007E9437 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F82272CA2911B5F3003EEB1B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		F82272CC2911B6F9003EEB1B /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		F82272CF2911B8CC003EEB1B /* Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
+		F82272D32911CB0E003EEB1B /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +64,9 @@
 		F80EC5172910FFA4007E9437 /* VKSample */ = {
 			isa = PBXGroup;
 			children = (
+				F82272C92911B5D5003EEB1B /* Extensions */,
 				F80EC52E29110245007E9437 /* SupportingFiles */,
-				F80EC51C2910FFA4007E9437 /* LoginViewController.swift */,
+				F85569F52911A0380094902A /* Modules */,
 				F80EC51E2910FFA4007E9437 /* Main.storyboard */,
 				F80EC5212910FFA8007E9437 /* Assets.xcassets */,
 				F80EC5232910FFA8007E9437 /* LaunchScreen.storyboard */,
@@ -73,6 +82,57 @@
 				F80EC51A2910FFA4007E9437 /* SceneDelegate.swift */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		F80EC52F291102DE007E9437 /* LoginModule */ = {
+			isa = PBXGroup;
+			children = (
+				F82272CE2911B8BA003EEB1B /* Models */,
+				F80EC51C2910FFA4007E9437 /* LoginViewController.swift */,
+			);
+			path = LoginModule;
+			sourceTree = "<group>";
+		};
+		F82272C92911B5D5003EEB1B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F82272CA2911B5F3003EEB1B /* UIViewController+Extension.swift */,
+				F82272CC2911B6F9003EEB1B /* UITextField+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F82272CE2911B8BA003EEB1B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F82272CF2911B8CC003EEB1B /* Verification.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F82272D12911CA8B003EEB1B /* FriendsModule */ = {
+			isa = PBXGroup;
+			children = (
+				F82272D32911CB0E003EEB1B /* FriendsTableViewController.swift */,
+			);
+			path = FriendsModule;
+			sourceTree = "<group>";
+		};
+		F82272D22911CA98003EEB1B /* GroupsModule */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GroupsModule;
+			sourceTree = "<group>";
+		};
+		F85569F52911A0380094902A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				F82272D22911CA98003EEB1B /* GroupsModule */,
+				F82272D12911CA8B003EEB1B /* FriendsModule */,
+				F80EC52F291102DE007E9437 /* LoginModule */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,8 +249,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F82272D02911B8CC003EEB1B /* Verification.swift in Sources */,
+				F82272CD2911B6F9003EEB1B /* UITextField+Extension.swift in Sources */,
+				F82272CB2911B5F3003EEB1B /* UIViewController+Extension.swift in Sources */,
 				F80EC51D2910FFA4007E9437 /* LoginViewController.swift in Sources */,
 				F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */,
+				F82272D42911CB0E003EEB1B /* FriendsTableViewController.swift in Sources */,
 				F80EC51B2910FFA4007E9437 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
