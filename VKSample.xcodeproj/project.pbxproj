@@ -17,6 +17,7 @@
 		F82272CD2911B6F9003EEB1B /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82272CC2911B6F9003EEB1B /* UITextField+Extension.swift */; };
 		F82272D02911B8CC003EEB1B /* Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82272CF2911B8CC003EEB1B /* Verification.swift */; };
 		F82272D42911CB0E003EEB1B /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82272D32911CB0E003EEB1B /* FriendsTableViewController.swift */; };
+		F82272D62911DB37003EEB1B /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82272D52911DB37003EEB1B /* GroupsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		F82272CC2911B6F9003EEB1B /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		F82272CF2911B8CC003EEB1B /* Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
 		F82272D32911CB0E003EEB1B /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		F82272D52911DB37003EEB1B /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		F82272D22911CA98003EEB1B /* GroupsModule */ = {
 			isa = PBXGroup;
 			children = (
+				F82272D52911DB37003EEB1B /* GroupsTableViewController.swift */,
 			);
 			path = GroupsModule;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F82272D02911B8CC003EEB1B /* Verification.swift in Sources */,
+				F82272D62911DB37003EEB1B /* GroupsTableViewController.swift in Sources */,
 				F82272CD2911B6F9003EEB1B /* UITextField+Extension.swift in Sources */,
 				F82272CB2911B5F3003EEB1B /* UIViewController+Extension.swift in Sources */,
 				F80EC51D2910FFA4007E9437 /* LoginViewController.swift in Sources */,
