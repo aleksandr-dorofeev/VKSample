@@ -13,14 +13,14 @@ final class LoginViewController: UIViewController {
 
     // MARK: Private IBOutlets.
 
-    @IBOutlet var loginContentScrollView: UIScrollView!
-    @IBOutlet var loginTextField: UITextField! {
+    @IBOutlet private var loginContentScrollView: UIScrollView!
+    @IBOutlet private var loginTextField: UITextField! {
         didSet {
             loginTextField.setLeftPaddingPoints(3)
         }
     }
 
-    @IBOutlet var passwordTextField: UITextField! {
+    @IBOutlet private var passwordTextField: UITextField! {
         didSet {
             passwordTextField.setLeftPaddingPoints(3)
         }
