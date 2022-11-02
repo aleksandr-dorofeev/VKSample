@@ -8,17 +8,15 @@ extension UIViewController {
     // MARK: - Private Constants.
 
     private enum Constants {
-        static let titleText = "Ошибка"
-        static let messageText = "Логин и/или пароль не верны"
         static let buttonTitleText = "OK"
     }
 
     // MARK: - Public methods.
 
-    func showLoginError() {
+    func showLoginError(title: String?, message: String?) {
         let alertError = UIAlertController(
-            title: Constants.titleText,
-            message: Constants.messageText,
+            title: title,
+            message: message,
             preferredStyle: .alert
         )
         let actionError = UIAlertAction(title: Constants.buttonTitleText, style: .default, handler: nil)

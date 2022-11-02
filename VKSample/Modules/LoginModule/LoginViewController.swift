@@ -11,6 +11,11 @@ final class LoginViewController: UIViewController {
         static let loginSegueID = "friendsSegueID"
     }
 
+    private enum Constants {
+        static let titleText = "Ошибка"
+        static let messageText = "Логин и/или пароль не верны"
+    }
+
     // MARK: Private IBOutlets.
 
     @IBOutlet private var loginContentScrollView: UIScrollView!
@@ -45,7 +50,7 @@ final class LoginViewController: UIViewController {
             if checkLogInfo() {
                 return true
             } else {
-                showLoginError()
+                showLoginError(title: Constants.titleText, message: Constants.messageText)
                 return false
             }
         }
