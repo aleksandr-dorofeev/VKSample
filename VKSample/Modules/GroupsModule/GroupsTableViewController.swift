@@ -13,13 +13,11 @@ final class GroupsTableViewController: UITableViewController {
         static let groupsCellID = "GroupCell"
     }
 
-    // MARK: - Public properties.
-
-    var subscribedGroupHandler: GroupHandler?
 
     // MARK: - Private properties.
 
     private var groups = Groups.getGroups()
+    private var subscribedGroupHandler: GroupHandler?
 
     // MARK: - Public methods.
 
@@ -45,7 +43,7 @@ final class GroupsTableViewController: UITableViewController {
     }
 }
 
-/// Data source.
+// MARK: - UITableViewDataSource.
 extension GroupsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         groups.count

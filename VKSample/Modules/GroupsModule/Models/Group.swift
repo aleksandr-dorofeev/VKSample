@@ -9,7 +9,7 @@ struct Group: Equatable {
     let titleImageName: String
 }
 
-/// Amount of groups.
+/// Mock of groups.
 struct Groups {
     static func getGroups() -> [Group] {
         [

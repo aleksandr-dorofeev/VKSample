@@ -21,7 +21,7 @@ struct Friend {
     let profileImageNames: [String]?
 }
 
-/// Amount of users.
+/// Mock of users.
 struct Friends {
     static func getFriends() -> [Friend] {
         [

@@ -5,23 +5,23 @@ import UIKit
 
 /// Shadow view for avatar.
 @IBDesignable final class ShadowAvatarView: UIView {
-    // MARK: - Public Properties.
+    // MARK: - Private Properties.
 
-    @IBInspectable var shadowRadius: CGFloat = 50 {
+    @IBInspectable private var shadowRadius: CGFloat = 50 {
         didSet {
-            updateShadowRadius()
+          layer.shadowRadius = shadowRadius
         }
     }
 
-    @IBInspectable var shadowOpacity: CGFloat = 1 {
+    @IBInspectable private var shadowOpacity: CGFloat = 1 {
         didSet {
-            updateShadowOpacity()
+          layer.shadowOpacity = Float(shadowOpacity)
         }
     }
 
-    @IBInspectable var shadowColor: UIColor = .black {
+    @IBInspectable private var shadowColor: UIColor = .black {
         didSet {
-            updateShadowColor()
+          layer.shadowColor = shadowColor.cgColor
         }
     }
 
@@ -47,17 +47,5 @@ import UIKit
         layer.shadowRadius = 10
         layer.shadowOffset = CGSize.zero
         layer.masksToBounds = false
-    }
-
-    private func updateShadowRadius() {
-        layer.shadowRadius = shadowRadius
-    }
-
-    private func updateShadowOpacity() {
-        layer.shadowOpacity = Float(shadowOpacity)
-    }
-
-    private func updateShadowColor() {
-        layer.shadowColor = shadowColor.cgColor
     }
 }
