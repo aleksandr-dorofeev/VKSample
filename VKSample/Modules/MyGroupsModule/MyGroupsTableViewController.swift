@@ -30,6 +30,7 @@ final class MyGroupsTableViewController: UITableViewController {
 }
 
 // MARK: - UITableViewDataSource.
+
 extension MyGroupsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         myGroups.count
@@ -47,6 +48,7 @@ extension MyGroupsTableViewController {
 }
 
 // MARK: - UITableViewDelegate.
+
 extension MyGroupsTableViewController {
     override func tableView(
         _ tableView: UITableView,

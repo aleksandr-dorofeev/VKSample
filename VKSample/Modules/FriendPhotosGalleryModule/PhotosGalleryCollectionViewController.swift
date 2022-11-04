@@ -51,7 +51,8 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
     }
 }
 
-// MARK: -  UICollectionViewDataSource.
+// MARK: - UICollectionViewDataSource.
+
 extension PhotosGalleryCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photoInGalleryNames.count

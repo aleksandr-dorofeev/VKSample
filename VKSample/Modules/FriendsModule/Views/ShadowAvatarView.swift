@@ -9,19 +9,19 @@ import UIKit
 
     @IBInspectable private var shadowRadius: CGFloat = 50 {
         didSet {
-          layer.shadowRadius = shadowRadius
+            layer.shadowRadius = shadowRadius
         }
     }
 
     @IBInspectable private var shadowOpacity: CGFloat = 1 {
         didSet {
-          layer.shadowOpacity = Float(shadowOpacity)
+            layer.shadowOpacity = Float(shadowOpacity)
         }
     }
 
     @IBInspectable private var shadowColor: UIColor = .black {
         didSet {
-          layer.shadowColor = shadowColor.cgColor
+            layer.shadowColor = shadowColor.cgColor
         }
     }
 
