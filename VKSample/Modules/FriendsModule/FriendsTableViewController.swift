@@ -54,7 +54,8 @@ final class FriendsTableViewController: UITableViewController {
     }
 }
 
-/// Data source.
+// MARK: - UITableViewDataSource.
+
 extension FriendsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         sections[sectionTitles[section]]?.count ?? 0
