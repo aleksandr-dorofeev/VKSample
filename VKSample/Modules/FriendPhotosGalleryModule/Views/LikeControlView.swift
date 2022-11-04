@@ -14,10 +14,6 @@ import UIKit
         static let blueColorName = "Blue"
     }
 
-    // MARK: - Public properties.
-
-    var amountLikes = 0
-
     // MARK: - Private Visual properties.
 
     private var likeStackView: UIStackView = {
@@ -42,6 +38,10 @@ import UIKit
         button.addTarget(self, action: #selector(likeAction), for: .touchUpInside)
         return button
     }()
+
+    // MARK: - Public properties.
+
+    var amountLikes = 0
 
     // MARK: - Private properties.
 

@@ -32,7 +32,7 @@ final class GroupsTableViewController: UITableViewController {
         subscribedGroupHandler = completion
     }
 
-    // MARK: - Private methods.
+    // MARK: - Private @IBAction.
 
     @IBAction private func subscribeAction(_ sender: UIButton) {
         if let indexPath = tableView.indexPathForSelectedRow {
