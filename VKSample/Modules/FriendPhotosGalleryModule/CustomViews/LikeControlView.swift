@@ -21,6 +21,7 @@ import UIKit
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
         stackView.alignment = .center
+        stackView.spacing = 5
         return stackView
     }()
 
@@ -28,7 +29,7 @@ import UIKit
         let label = UILabel()
         label.text = "\(amountLikes)"
         label.textAlignment = .center
-        label.textColor = .white
+        label.textColor = .systemBlue
         return label
     }()
 
@@ -39,11 +40,9 @@ import UIKit
         return button
     }()
 
-    // MARK: - Public properties.
-
-    var amountLikes = 0
-
     // MARK: - Private properties.
+
+    private var amountLikes = 0
 
     @IBInspectable private var isLiked: Bool = false {
         didSet {
@@ -73,7 +72,7 @@ import UIKit
     // MARK: - Private methods.
 
     private func setupView() {
-        likeStackView = UIStackView(arrangedSubviews: [amountLikeLabel, likeButton])
+        likeStackView = UIStackView(arrangedSubviews: [likeButton, amountLikeLabel])
         addSubview(likeStackView)
     }
 

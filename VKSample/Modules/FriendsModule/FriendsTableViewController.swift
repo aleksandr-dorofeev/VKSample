@@ -42,7 +42,8 @@ final class FriendsTableViewController: UITableViewController {
 
     private func setupCellsToSections() {
         for friend in friends {
-            guard let firstLetter = friend.name.first else { return }
+            guard let firstLetterOfFirstName = friend.name.firstName.first else { return }
+            let firstLetter = friend.name.lastName?.first ?? firstLetterOfFirstName
             if sections[firstLetter] != nil {
                 sections[firstLetter]?.append(friend)
             } else {
@@ -71,6 +72,11 @@ extension FriendsTableViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         String(sectionTitles[section])
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let view = view as? UITableViewHeaderFooterView else { return }
+        view.textLabel?.textColor = .darkGray.withAlphaComponent(0.3)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
