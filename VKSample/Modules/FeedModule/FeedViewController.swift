@@ -41,13 +41,14 @@ final class FeedViewController: UIViewController {
         )
     }
 
-    private func hightCellForImageCollection(numberRow: Int) -> CGFloat {
-        guard numberRow < posts.count else { return 0 }
-        switch posts[numberRow].imageNames.count {
+    private func setupHightCellForPostImageCollectionView(numberRow: Int) -> CGFloat {
+        let amountOfImages = posts[numberRow].imageNames.count
+        let widthOfBounds = view.bounds.width
+        switch amountOfImages {
         case 1:
-            return view.bounds.width
+            return widthOfBounds
         case let count where count > 1:
-            return (view.bounds.width / 2) * CGFloat(lroundf(Float(posts[numberRow].imageNames.count) / 2))
+            return (widthOfBounds / 2) * CGFloat(lroundf(Float(amountOfImages) / 2))
         default:
             return 0
         }
@@ -71,7 +72,7 @@ extension FeedViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let post = posts[indexPath.row]
-        cell.configure(post: post, viewHight: hightCellForImageCollection(numberRow: indexPath.row))
+        cell.configure(post: post, viewHight: setupHightCellForPostImageCollectionView(numberRow: indexPath.row))
         return cell
     }
 }
