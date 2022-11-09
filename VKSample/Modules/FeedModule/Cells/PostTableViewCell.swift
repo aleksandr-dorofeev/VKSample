@@ -86,11 +86,11 @@ final class PostTableViewCell: UITableViewCell {
 
     private func tapGesture() {
         shadowAvatarView.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarAnimation))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarAnimationAction))
         shadowAvatarView.addGestureRecognizer(tapGesture)
     }
 
-    @objc private func avatarAnimation() {
+    @objc private func avatarAnimationAction() {
         let animation = CASpringAnimation(keyPath: Constants.transformKeyPathText)
         animation.fromValue = 0.1
         animation.toValue = 1
