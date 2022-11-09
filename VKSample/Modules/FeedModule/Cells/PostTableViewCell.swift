@@ -10,7 +10,6 @@ final class PostTableViewCell: UITableViewCell {
     private enum Constants {
         static let viewColorName = "ViewColor"
         static let blueColorName = "Blue"
-        static let transformKeyPathText = "transform.scale"
     }
 
     private enum Identifiers {
@@ -29,7 +28,6 @@ final class PostTableViewCell: UITableViewCell {
     }
 
     @IBOutlet private var likeControlView: LikeControlView!
-    @IBOutlet private var shadowAvatarView: ShadowAvatarView!
     @IBOutlet private var postingTimeLabel: UILabel!
     @IBOutlet private var postTextView: UITextView!
     @IBOutlet private var imagePostCollectionView: UICollectionView!
@@ -66,7 +64,6 @@ final class PostTableViewCell: UITableViewCell {
     private func configureUI() {
         configureBackgroundView()
         registerCellForImagePostCollectionView()
-      createTapGestureRecognizer()
     }
 
     private func registerCellForImagePostCollectionView() {
@@ -82,23 +79,6 @@ final class PostTableViewCell: UITableViewCell {
     private func configureBackgroundView() {
         backgroundCustomView.layer.cornerRadius = 15
         backgroundCustomView.backgroundColor = UIColor(named: Constants.viewColorName)
-    }
-
-    private func createTapGestureRecognizer() {
-        shadowAvatarView.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarAnimationAction))
-        shadowAvatarView.addGestureRecognizer(tapGesture)
-    }
-
-    @objc private func avatarAnimationAction() {
-        let animation = CASpringAnimation(keyPath: Constants.transformKeyPathText)
-        animation.fromValue = 0.1
-        animation.toValue = 1
-        animation.stiffness = 50
-        animation.mass = 2
-        animation.duration = 4
-        animation.fillMode = .forwards
-        shadowAvatarView.layer.add(animation, forKey: nil)
     }
 }
 

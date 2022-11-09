@@ -223,7 +223,6 @@
                 <outlet property="postingTimeLabel" destination="wox-82-sQx" id="oIc-OI-xxg"/>
                 <outlet property="profileImageView" destination="X9S-23-hdZ" id="y7k-LE-A27"/>
                 <outlet property="profileNameLabel" destination="ZVk-Ka-H0y" id="twn-Xk-Cru"/>
-                <outlet property="shadowAvatarView" destination="Xkv-FD-ntu" id="Ur7-lu-upy"/>
             </connections>
             <point key="canvasLocation" x="227.69230769230768" y="-25.592417061611375"/>
         </tableViewCell>

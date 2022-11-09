@@ -302,7 +302,6 @@
                                 <connections>
                                     <outlet property="friendImageView" destination="SiI-75-Cf0" id="DjV-xc-8p9"/>
                                     <outlet property="nameLabel" destination="bOF-0v-2iI" id="KkW-9F-AAS"/>
-                                    <outlet property="shadowAvatarView" destination="TDk-wO-ZyA" id="GXg-9f-SKu"/>
                                     <segue destination="ovu-WK-GCN" kind="show" identifier="PhotosGallerySegue" id="afg-af-u7n"/>
                                 </connections>
                             </tableViewCell>

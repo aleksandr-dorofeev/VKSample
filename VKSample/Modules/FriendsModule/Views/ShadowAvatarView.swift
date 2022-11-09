@@ -5,6 +5,12 @@ import UIKit
 
 /// Shadow view for avatar.
 @IBDesignable final class ShadowAvatarView: UIView {
+    // MARK: - Private Constant.
+
+    private enum Constants {
+        static let transformKeyPathText = "transform.scale"
+    }
+
     // MARK: - Private Properties.
 
     @IBInspectable private var shadowRadius: CGFloat = 50 {
@@ -47,5 +53,23 @@ import UIKit
         layer.shadowRadius = 10
         layer.shadowOffset = CGSize.zero
         layer.masksToBounds = false
+        createTapGestureRecognizer()
+    }
+
+    private func createTapGestureRecognizer() {
+        isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarAnimationAction))
+        addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func avatarAnimationAction() {
+        let animation = CASpringAnimation(keyPath: Constants.transformKeyPathText)
+        animation.fromValue = 0.1
+        animation.toValue = 1
+        animation.stiffness = 50
+        animation.mass = 2
+        animation.duration = 4
+        animation.fillMode = .forwards
+        layer.add(animation, forKey: nil)
     }
 }
