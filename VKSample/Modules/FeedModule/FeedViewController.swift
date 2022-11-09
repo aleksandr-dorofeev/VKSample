@@ -8,7 +8,7 @@ final class FeedViewController: UIViewController {
     // MARK: - Private Constants.
 
     private enum Constants {
-        static let postCellName = "PostTableViewCell"
+        static let postCellNibName = "PostTableViewCell"
         static let postCellID = "PostCell"
     }
 
@@ -36,7 +36,7 @@ final class FeedViewController: UIViewController {
     private func configureTableView() {
         feedTableView.rowHeight = UITableView.automaticDimension
         feedTableView.register(
-            UINib(nibName: Constants.postCellName, bundle: nil),
+            UINib(nibName: Constants.postCellNibName, bundle: nil),
             forCellReuseIdentifier: Constants.postCellID
         )
     }
@@ -45,7 +45,7 @@ final class FeedViewController: UIViewController {
         guard numberRow < posts.count else { return 0 }
         switch posts[numberRow].imageNames.count {
         case 1:
-            return view.bounds.width / 2
+            return view.bounds.width
         case let count where count > 1:
             return (view.bounds.width / 2) * CGFloat(lroundf(Float(posts[numberRow].imageNames.count) / 2))
         default:
@@ -54,7 +54,8 @@ final class FeedViewController: UIViewController {
     }
 }
 
-/// UITableViewDataSource.
+// MARK: - UITableViewDataSource.
+
 extension FeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         posts.count

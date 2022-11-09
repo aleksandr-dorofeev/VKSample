@@ -104,6 +104,8 @@ extension GroupsTableViewController {
     }
 }
 
+// MARK: - UISearchBarDelegate.
+
 extension GroupsTableViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.searchBar.showsCancelButton = true

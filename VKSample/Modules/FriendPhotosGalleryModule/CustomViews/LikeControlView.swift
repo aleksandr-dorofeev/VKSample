@@ -28,6 +28,7 @@ import UIKit
     private lazy var amountLikeLabel: UILabel = {
         let label = UILabel()
         label.text = "\(amountLikes)"
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
         label.textColor = .systemBlue
         return label
@@ -67,6 +68,10 @@ import UIKit
     override func layoutSubviews() {
         super.layoutSubviews()
         likeStackView.frame = bounds
+    }
+
+    func configureAmountLikes(amount: Int) {
+        amountLikes = amount
     }
 
     // MARK: - Private methods.
