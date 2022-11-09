@@ -25,9 +25,8 @@ import UIKit
         return stackView
     }()
 
-    private lazy var amountLikeLabel: UILabel = {
+    private let amountLikeLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(amountLikes)"
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
         label.textColor = .systemBlue
@@ -43,7 +42,11 @@ import UIKit
 
     // MARK: - Public properties.
 
-    var amountLikes = Int()
+    var amountLikes = Int() {
+        didSet {
+            amountLikeLabel.text = "\(amountLikes)"
+        }
+    }
 
     // MARK: - Private properties.
 

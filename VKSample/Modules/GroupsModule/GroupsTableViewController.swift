@@ -23,13 +23,13 @@ final class GroupsTableViewController: UITableViewController {
     private var subscribedGroupHandler: GroupHandler?
     private var filteredGroups: [Group]? = []
     private var isSearching = false
-    private var searchBarIsEmpty: Bool {
+    private var isSearchBarEmpty: Bool {
         guard let text = searchBar.text else { return false }
         return text.isEmpty
     }
 
     private var isFiltering: Bool {
-        isSearching && !searchBarIsEmpty
+        isSearching && !isSearchBarEmpty
     }
 
     // MARK: - Life cycle.

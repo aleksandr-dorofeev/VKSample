@@ -12,7 +12,7 @@ enum MaritalStatus: String {
     case none = "Unknown"
 }
 
-/// User model.
+/// User.
 struct Friend {
     let name: FullName
     let avatarImageName: String
@@ -21,7 +21,7 @@ struct Friend {
     let profileImageNames: [String]?
 }
 
-/// Name model.
+/// Name.
 struct FullName {
     let firstName: String
     let lastName: String?
