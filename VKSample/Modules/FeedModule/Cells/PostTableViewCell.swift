@@ -113,10 +113,12 @@ extension PostTableViewCell: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
+        let collectionViewWidth = collectionView.bounds.width
+        let collectionViewHeight = collectionView.bounds.height
         if postImages.count == 1 {
-            return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+            return CGSize(width: collectionViewWidth, height: collectionViewHeight)
         } else {
-            return CGSize(width: collectionView.bounds.width / 2.1, height: collectionView.bounds.width / 2.1)
+            return CGSize(width: collectionViewWidth / 2.1, height: collectionViewHeight / 2.1)
         }
     }
 }
