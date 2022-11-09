@@ -82,7 +82,7 @@ final class LoginViewController: UIViewController {
         loginContentScrollView.addGestureRecognizer(tapGesture)
     }
 
-    private func loadAnimation() {
+    private func loadEntryAnimation() {
         UIView.animateKeyframes(
             withDuration: 4,
             delay: 0,
@@ -135,14 +135,6 @@ final class LoginViewController: UIViewController {
         }
     }
 
-    @IBAction func entryLoginAction(_ sender: Any) {
-        if checkLogInfo() {
-            loadAnimation()
-        } else {
-            showLoginError(title: Constants.titleText, message: Constants.messageText)
-        }
-    }
-
     @objc private func keyboardWillShownAction(notification: Notification) {
         guard
             let info = notification.userInfo as? NSDictionary,
@@ -160,6 +152,16 @@ final class LoginViewController: UIViewController {
 
     @objc private func endEditingAction() {
         loginContentScrollView.endEditing(true)
+    }
+
+    // MARK: - Private @IBAction.
+
+    @IBAction private func entryLoginAction(_ sender: Any) {
+        if checkLogInfo() {
+            loadEntryAnimation()
+        } else {
+            showLoginError(title: Constants.titleText, message: Constants.messageText)
+        }
     }
 }
 

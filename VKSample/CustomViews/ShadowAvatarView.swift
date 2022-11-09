@@ -11,7 +11,7 @@ import UIKit
         static let transformKeyPathText = "transform.scale"
     }
 
-    // MARK: - Private Properties.
+    // MARK: - Private properties.
 
     @IBInspectable private var shadowRadius: CGFloat = 50 {
         didSet {
@@ -43,7 +43,7 @@ import UIKit
         setupView()
     }
 
-    // MARK: - Private Methods
+    // MARK: - Private methods.
 
     private func setupView() {
         backgroundColor = .white

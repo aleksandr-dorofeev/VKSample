@@ -98,6 +98,7 @@
 		F80EC5172910FFA4007E9437 /* VKSample */ = {
 			isa = PBXGroup;
 			children = (
+				F8490DBE291469800044E9EF /* CustomViews */,
 				F82272C92911B5D5003EEB1B /* Extensions */,
 				F80EC52E29110245007E9437 /* SupportingFiles */,
 				F85569F52911A0380094902A /* Modules */,
@@ -147,7 +148,6 @@
 		F82272D12911CA8B003EEB1B /* FriendsModule */ = {
 			isa = PBXGroup;
 			children = (
-				F8490DBB29145EA40044E9EF /* Views */,
 				F8490DA0291405490044E9EF /* Models */,
 				F8490DA3291412A20044E9EF /* Cells */,
 				F82272D32911CB0E003EEB1B /* FriendsTableViewController.swift */,
@@ -183,7 +183,6 @@
 		F8490DA7291418200044E9EF /* FriendPhotosGalleryModule */ = {
 			isa = PBXGroup;
 			children = (
-				F8490DBE291469800044E9EF /* CustomViews */,
 				F8490DAB29141B310044E9EF /* Cells */,
 				F8490DA92914197E0044E9EF /* PhotosGalleryCollectionViewController.swift */,
 			);
@@ -232,17 +231,10 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		F8490DBB29145EA40044E9EF /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F8490DBC29145EBF0044E9EF /* ShadowAvatarView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		F8490DBE291469800044E9EF /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				F8490DBC29145EBF0044E9EF /* ShadowAvatarView.swift */,
 				F8490DBF2914699D0044E9EF /* LikeControlView.swift */,
 			);
 			path = CustomViews;

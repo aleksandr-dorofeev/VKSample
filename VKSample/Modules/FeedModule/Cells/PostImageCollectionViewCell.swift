@@ -9,7 +9,7 @@ final class PostImageCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet private var postImageView: UIImageView!
 
-    // MARK: - Public Methods
+    // MARK: - Public methods.
 
     func configure(postImageName: String) {
         postImageView.image = UIImage(named: postImageName)
