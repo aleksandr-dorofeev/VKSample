@@ -66,7 +66,7 @@ final class PostTableViewCell: UITableViewCell {
     private func configureUI() {
         configureBackgroundView()
         registerCellForImagePostCollectionView()
-        tapGesture()
+      createTapGestureRecognizer()
     }
 
     private func registerCellForImagePostCollectionView() {
@@ -84,7 +84,7 @@ final class PostTableViewCell: UITableViewCell {
         backgroundCustomView.backgroundColor = UIColor(named: Constants.viewColorName)
     }
 
-    private func tapGesture() {
+    private func createTapGestureRecognizer() {
         shadowAvatarView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarAnimationAction))
         shadowAvatarView.addGestureRecognizer(tapGesture)

@@ -34,10 +34,10 @@ final class FriendTableViewCell: UITableViewCell {
     // MARK: - Private methods.
 
     private func setupUI() {
-        tapGesture()
+      createTapGestureRecognizer()
     }
 
-    private func tapGesture() {
+    private func createTapGestureRecognizer() {
         shadowAvatarView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarAnimationAction))
         shadowAvatarView.addGestureRecognizer(tapGesture)
