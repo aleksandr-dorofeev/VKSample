@@ -41,9 +41,11 @@ import UIKit
         return button
     }()
 
-    // MARK: - Private properties.
+    // MARK: - Public properties.
 
-    private var amountLikes = 0
+    var amountLikes = Int()
+
+    // MARK: - Private properties.
 
     @IBInspectable private var isLiked: Bool = false {
         didSet {
@@ -68,10 +70,6 @@ import UIKit
     override func layoutSubviews() {
         super.layoutSubviews()
         likeStackView.frame = bounds
-    }
-
-    func configureAmountLikes(amount: Int) {
-        amountLikes = amount
     }
 
     // MARK: - Private methods.

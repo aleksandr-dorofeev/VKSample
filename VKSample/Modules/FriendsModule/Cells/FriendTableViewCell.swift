@@ -17,7 +17,7 @@ final class FriendTableViewCell: UITableViewCell {
     @IBOutlet private var nameLabel: UILabel!
     @IBOutlet private var shadowAvatarView: ShadowAvatarView!
 
-    // MARK: Life cycle.
+    // MARK: - Life cycle.
 
     override func awakeFromNib() {
         super.awakeFromNib()

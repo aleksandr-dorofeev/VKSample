@@ -50,7 +50,7 @@ final class PostTableViewCell: UITableViewCell {
     // MARK: - Public methods.
 
     func configure(post: Post, viewHight: CGFloat) {
-        likeControlView.configureAmountLikes(amount: post.amountOfLikes)
+        likeControlView.amountLikes = post.amountOfLikes
         profileNameLabel.text = post.profileName
         profileImageView.image = UIImage(named: post.profileImageName)
         postingTimeLabel.text = post.publicationDate
