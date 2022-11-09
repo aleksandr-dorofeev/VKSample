@@ -16,7 +16,7 @@ final class MyGroupsTableViewController: UITableViewController {
 
     private var myGroups: [Group] = []
 
-    // MARK: - Public methods
+    // MARK: - Public methods.
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == Constants.groupsSegueID,

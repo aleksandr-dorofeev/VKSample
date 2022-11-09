@@ -21,14 +21,15 @@ import UIKit
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
         stackView.alignment = .center
+        stackView.spacing = 5
         return stackView
     }()
 
-    private lazy var amountLikeLabel: UILabel = {
+    private let amountLikeLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(amountLikes)"
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
-        label.textColor = .white
+        label.textColor = .systemBlue
         return label
     }()
 
@@ -41,7 +42,11 @@ import UIKit
 
     // MARK: - Public properties.
 
-    var amountLikes = 0
+    var amountLikes = Int() {
+        didSet {
+            amountLikeLabel.text = "\(amountLikes)"
+        }
+    }
 
     // MARK: - Private properties.
 
@@ -73,7 +78,7 @@ import UIKit
     // MARK: - Private methods.
 
     private func setupView() {
-        likeStackView = UIStackView(arrangedSubviews: [amountLikeLabel, likeButton])
+        likeStackView = UIStackView(arrangedSubviews: [likeButton, amountLikeLabel])
         addSubview(likeStackView)
     }
 

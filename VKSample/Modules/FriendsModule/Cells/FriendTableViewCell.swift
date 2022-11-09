@@ -10,10 +10,10 @@ final class FriendTableViewCell: UITableViewCell {
     @IBOutlet private var friendImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
 
-    // MARK: - Public methods
+    // MARK: - Public methods.
 
     func configure(with friend: Friend) {
         friendImageView.image = UIImage(named: friend.avatarImageName)
-        nameLabel.text = friend.name
+        nameLabel.text = "\(friend.name.firstName) \(friend.name.lastName ?? "")"
     }
 }

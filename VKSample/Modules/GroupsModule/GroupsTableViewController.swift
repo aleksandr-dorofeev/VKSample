@@ -13,10 +13,31 @@ final class GroupsTableViewController: UITableViewController {
         static let groupsCellID = "GroupCell"
     }
 
+    // MARK: - Private @IBOutlets.
+
+    @IBOutlet private var searchBar: UISearchBar!
+
     // MARK: - Private properties.
 
     private var groups = Groups.getGroups()
     private var subscribedGroupHandler: GroupHandler?
+    private var filteredGroups: [Group]? = []
+    private var isSearching = false
+    private var isSearchBarEmpty: Bool {
+        guard let text = searchBar.text else { return false }
+        return text.isEmpty
+    }
+
+    private var isFiltering: Bool {
+        isSearching && !isSearchBarEmpty
+    }
+
+    // MARK: - Life cycle.
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureTableHeaderView()
+    }
 
     // MARK: - Public methods.
 
@@ -29,16 +50,33 @@ final class GroupsTableViewController: UITableViewController {
         subscribedGroupHandler = completion
     }
 
+    // MARK: - Private methods.
+
+    private func configureTableHeaderView() {
+        tableView.tableHeaderView = searchBar
+    }
+
+    private func filterContentForSearch(_ searchText: String) {
+        isSearching = true
+        filteredGroups = groups.filter {
+            $0.name.lowercased().contains(searchText.lowercased())
+        }
+    }
+
     // MARK: - Private @IBAction.
 
     @IBAction private func subscribeAction(_ sender: UIButton) {
-        if let indexPath = tableView.indexPathForSelectedRow {
-            let group = groups[indexPath.row]
-            subscribedGroupHandler?(group)
-            tableView.beginUpdates()
-            sender.isHidden = true
-            tableView.endUpdates()
+        guard
+            let indexPath = tableView.indexPathForSelectedRow,
+            let group = isFiltering ? filteredGroups?[indexPath.row] : groups[indexPath.row]
+        else {
+            return
         }
+        tableView.beginUpdates()
+        sender.isHidden = true
+        subscribedGroupHandler?(group)
+        tableView.endUpdates()
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -46,16 +84,43 @@ final class GroupsTableViewController: UITableViewController {
 
 extension GroupsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        groups.count
+        if isFiltering {
+            return filteredGroups?.count ?? 0
+        } else {
+            return groups.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let groupCell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.groupsCellID,
-            for: indexPath
-        ) as? GroupTableViewCell else { return UITableViewCell() }
-        let group = groups[indexPath.row]
+        guard
+            let groupCell = tableView.dequeueReusableCell(
+                withIdentifier: Constants.groupsCellID,
+                for: indexPath
+            ) as? GroupTableViewCell,
+            let group = isFiltering ? filteredGroups?[indexPath.row] : groups[indexPath.row]
+        else { return UITableViewCell() }
         groupCell.configure(with: group)
         return groupCell
+    }
+}
+
+// MARK: - UISearchBarDelegate.
+
+extension GroupsTableViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = false
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        tableView.reloadData()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContentForSearch(searchText)
+        tableView.reloadData()
     }
 }

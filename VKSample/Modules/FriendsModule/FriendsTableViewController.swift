@@ -15,7 +15,7 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties.
 
     private let friends = Friends.getFriends()
-    private var sections: [Character: [Friend]] = [:]
+    private var sectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
 
     // MARK: - Life cycle.
@@ -31,7 +31,7 @@ final class FriendsTableViewController: UITableViewController {
         guard segue.identifier == Constants.photosGallerySegueID,
               let photosGalleryVC = segue.destination as? PhotosGalleryCollectionViewController,
               let indexPath = tableView.indexPathForSelectedRow,
-              let friendPhotos = sections[sectionTitles[indexPath.section]]?[indexPath.row].profileImageNames
+              let friendPhotos = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row].profileImageNames
         else {
             return
         }
@@ -42,14 +42,15 @@ final class FriendsTableViewController: UITableViewController {
 
     private func setupCellsToSections() {
         for friend in friends {
-            guard let firstLetter = friend.name.first else { return }
-            if sections[firstLetter] != nil {
-                sections[firstLetter]?.append(friend)
+            guard let firstLetterOfFirstName = friend.name.firstName.first else { return }
+            let firstLetter = friend.name.lastName?.first ?? firstLetterOfFirstName
+            if sectionsMap[firstLetter] != nil {
+                sectionsMap[firstLetter]?.append(friend)
             } else {
-                sections[firstLetter] = [friend]
+                sectionsMap[firstLetter] = [friend]
             }
         }
-        sectionTitles = Array(sections.keys).sorted()
+        sectionTitles = Array(sectionsMap.keys).sorted()
         tableView.reloadData()
     }
 }
@@ -58,11 +59,11 @@ final class FriendsTableViewController: UITableViewController {
 
 extension FriendsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sections[sectionTitles[section]]?.count ?? 0
+        sectionsMap[sectionTitles[section]]?.count ?? 0
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        sections.count
+        sectionsMap.count
     }
 
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -73,13 +74,18 @@ extension FriendsTableViewController {
         String(sectionTitles[section])
     }
 
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let view = view as? UITableViewHeaderFooterView else { return }
+        view.textLabel?.textColor = .darkGray.withAlphaComponent(0.3)
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.friendsCellID,
                 for: indexPath
             ) as? FriendTableViewCell,
-            let friend = sections[sectionTitles[indexPath.section]]?[indexPath.row]
+            let friend = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
         cell.configure(with: friend)
         return cell

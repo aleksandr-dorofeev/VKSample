@@ -12,13 +12,19 @@ enum MaritalStatus: String {
     case none = "Unknown"
 }
 
-/// User model.
+/// User.
 struct Friend {
-    let name: String
+    let name: FullName
     let avatarImageName: String
     let description: String?
     let maritalStatus: MaritalStatus
     let profileImageNames: [String]?
+}
+
+/// Name.
+struct FullName {
+    let firstName: String
+    let lastName: String?
 }
 
 /// Mock of users.
@@ -26,91 +32,130 @@ struct Friends {
     static func getFriends() -> [Friend] {
         [
             Friend(
-                name: "Валерий Меладзе",
+                name: FullName(
+                    firstName: "Валерий",
+                    lastName: "Меладзе"
+                ),
                 avatarImageName: "Meladze",
                 description: "Гыыыыыыыыыыыы",
                 maritalStatus: MaritalStatus.married,
                 profileImageNames: ["Meladze1", "Meladze2", "Meladze3", "Meladze4"]
             ),
             Friend(
-                name: "Леонид Агутин",
+                name: FullName(
+                    firstName: "Леонид",
+                    lastName: "Агутин"
+                ),
                 avatarImageName: "Agutin",
                 description: "Ээээээээээээээээ",
                 maritalStatus: MaritalStatus.married,
                 profileImageNames: nil
             ),
             Friend(
-                name: "Филип Киркоров",
+                name: FullName(
+                    firstName: "Филипп",
+                    lastName: "Киркоров"
+                ),
                 avatarImageName: "Kirkorov",
                 description: "Уууууууууууууууууууу",
                 maritalStatus: MaritalStatus.isComplicated,
                 profileImageNames: ["Fil1", "Fil2"]
             ),
             Friend(
-                name: "Елена Ваенга",
+                name: FullName(
+                    firstName: "Елена",
+                    lastName: "Ваенга"
+                ),
                 avatarImageName: "Vaenga",
                 description: "Уххххххххххх",
                 maritalStatus: MaritalStatus.isComplicated,
                 profileImageNames: ["Vaenga1"]
             ),
             Friend(
-                name: "Михаил Круг",
+                name: FullName(
+                    firstName: "Михаил",
+                    lastName: "Круг"
+                ),
                 avatarImageName: "Krug",
                 description: "Вечер в хатку",
                 maritalStatus: MaritalStatus.married,
                 profileImageNames: ["Krug1"]
             ),
             Friend(
-                name: "Лолита",
+                name: FullName(
+                    firstName: "Лолита",
+                    lastName: nil
+                ),
                 avatarImageName: "Lolita",
                 description: nil,
                 maritalStatus: MaritalStatus.isComplicated,
                 profileImageNames: nil
             ),
             Friend(
-                name: "Стас Пьеха",
+                name: FullName(
+                    firstName: "Стас",
+                    lastName: "Пьеха"
+                ),
                 avatarImageName: "Peha",
                 description: "Всем привет, добавляйтесь в друзья",
                 maritalStatus: MaritalStatus.none,
                 profileImageNames: nil
             ),
             Friend(
-                name: "София Ротару",
+                name: FullName(
+                    firstName: "София",
+                    lastName: "Ротару"
+                ),
                 avatarImageName: "Rotaru",
                 description: "Пою песни",
                 maritalStatus: MaritalStatus.single,
                 profileImageNames: nil
             ),
             Friend(
-                name: "Стас Костюшкин",
+                name: FullName(
+                    firstName: "Стас",
+                    lastName: "Костюшкин"
+                ),
                 avatarImageName: "Stas",
                 description: "Я не гей",
                 maritalStatus: MaritalStatus.isComplicated,
                 profileImageNames: nil
             ),
             Friend(
-                name: "Моргенштерн",
+                name: FullName(
+                    firstName: "Моргенштерн",
+                    lastName: nil
+                ),
                 avatarImageName: "Morgenshtern",
                 description: "Я такой крутой, ваще",
                 maritalStatus: MaritalStatus.activelyLooking,
                 profileImageNames: ["Morg1", "Morg2"]
             ),
             Friend(
-                name: "Валерий Леонтьев",
+                name: FullName(
+                    firstName: "Валерий",
+                    lastName: "Леонтьев"
+                ),
                 avatarImageName: "Leontev",
                 description: "Продаю наряды",
                 maritalStatus: MaritalStatus.activelyLooking,
                 profileImageNames: ["Leontev1", "Leontev2", "Leontev3"]
             ),
             Friend(
-                name: "Ева Польна",
+                name: FullName(
+                    firstName: "Ева",
+                    lastName: "Польна"
+                ),
                 avatarImageName: "Polna",
                 description: nil,
                 maritalStatus: MaritalStatus.married,
                 profileImageNames: ["Polna1", "Polna2"]
             ),
             Friend(
-                name: "Катя Лель",
+                name: FullName(
+                    firstName: "Катя",
+                    lastName: "Лель"
+                ),
                 avatarImageName: "Lel",
                 description: "Гадаю на картах",
                 maritalStatus: MaritalStatus.none,
