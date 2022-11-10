@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hi3-Sf-i0j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Si-AB-rkK">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
@@ -216,7 +216,7 @@
         <!--Friends-->
         <scene sceneID="gKr-NV-cgn">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CWf-f8-4rZ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CWf-f8-4rZ" customClass="CustomNavigationController" customModule="VKSample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="person.2" catalog="system" selectedImage="person.2.fill" id="Fwy-fo-6Sw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QeD-He-EoK">
@@ -451,7 +451,7 @@
         <!--Groups-->
         <scene sceneID="2F1-No-98H">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ciP-Od-1BZ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ciP-Od-1BZ" customClass="CustomNavigationController" customModule="VKSample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Groups" image="rectangle.3.group" catalog="system" selectedImage="rectangle.3.group.fill" id="jjz-UZ-RRi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rf1-VU-zfj">
@@ -665,7 +665,7 @@
         <!--Home-->
         <scene sceneID="pvx-OY-hrJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SMl-YT-pi7" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SMl-YT-pi7" customClass="CustomNavigationController" customModule="VKSample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house.fill" id="RvK-zF-O7d"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9AZ-oa-kIu">
