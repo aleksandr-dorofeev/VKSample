@@ -55,14 +55,14 @@ final class SwipeUserPhotosViewController: UIViewController {
         configureStartPositionForCurrentImage()
         switch typeOfSwipe {
         case .left:
-            configureAnimationForLeftSwipe()
+            prepareAnimationForLeftSwipe()
         case .right:
-            configureAnimationForRightSwipe()
+            prepareAnimationForRightSwipe()
         }
         view.layoutIfNeeded()
     }
 
-    private func configureAnimationForRightSwipe() {
+    private func prepareAnimationForRightSwipe() {
         currentImageView.layer.zPosition = 1
         currentImageView.image = UIImage(named: photoGalleryNames[currentPhotoIndex])
         nextImageTrailingConstraint.constant = 100
@@ -74,7 +74,7 @@ final class SwipeUserPhotosViewController: UIViewController {
         currentPhotoIndex -= 1
     }
 
-    private func configureAnimationForLeftSwipe() {
+    private func prepareAnimationForLeftSwipe() {
         let viewWidth = view.frame.width
         currentImageView.layer.zPosition = 1
         currentImageView.image = UIImage(named: photoGalleryNames[currentPhotoIndex])

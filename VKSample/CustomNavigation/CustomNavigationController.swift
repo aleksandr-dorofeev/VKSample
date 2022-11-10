@@ -23,6 +23,8 @@ final class CustomNavigationController: UINavigationController {
     }
 }
 
+// MARK: - UINavigationControllerDelegate.
+
 extension CustomNavigationController: UINavigationControllerDelegate {
     // MARK: - Public methods.
 
