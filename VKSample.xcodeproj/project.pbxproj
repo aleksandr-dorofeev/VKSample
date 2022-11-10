@@ -30,6 +30,7 @@
 		F8490DBA291439EE0044E9EF /* MyGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DB9291439EE0044E9EF /* MyGroupTableViewCell.swift */; };
 		F8490DBD29145EBF0044E9EF /* ShadowAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DBC29145EBF0044E9EF /* ShadowAvatarView.swift */; };
 		F8490DC02914699D0044E9EF /* LikeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DBF2914699D0044E9EF /* LikeControlView.swift */; };
+		F88D6F24291CE44B008B458F /* SwipeUserPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D6F23291CE44B008B458F /* SwipeUserPhotosViewController.swift */; };
 		F8E47B962919C9B70014AF31 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B952919C9B70014AF31 /* FeedViewController.swift */; };
 		F8E47B992919CAA50014AF31 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B982919CAA50014AF31 /* Post.swift */; };
 		F8E47B9C2919CB5A0014AF31 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B9A2919CB5A0014AF31 /* PostTableViewCell.swift */; };
@@ -62,6 +63,7 @@
 		F8490DB9291439EE0044E9EF /* MyGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupTableViewCell.swift; sourceTree = "<group>"; };
 		F8490DBC29145EBF0044E9EF /* ShadowAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowAvatarView.swift; sourceTree = "<group>"; };
 		F8490DBF2914699D0044E9EF /* LikeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControlView.swift; sourceTree = "<group>"; };
+		F88D6F23291CE44B008B458F /* SwipeUserPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeUserPhotosViewController.swift; sourceTree = "<group>"; };
 		F8E47B952919C9B70014AF31 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		F8E47B982919CAA50014AF31 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F8E47B9A2919CB5A0014AF31 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		F85569F52911A0380094902A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				F88D6F22291CE3EF008B458F /* SwipeUserPhotosModule */,
 				F8E47B932919C9750014AF31 /* FeedModule */,
 				F8490DA8291418440044E9EF /* GroupsModule */,
 				F8490DA7291418200044E9EF /* FriendPhotosGalleryModule */,
@@ -251,6 +254,14 @@
 				F80EC52F291102DE007E9437 /* LoginModule */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		F88D6F22291CE3EF008B458F /* SwipeUserPhotosModule */ = {
+			isa = PBXGroup;
+			children = (
+				F88D6F23291CE44B008B458F /* SwipeUserPhotosViewController.swift */,
+			);
+			path = SwipeUserPhotosModule;
 			sourceTree = "<group>";
 		};
 		F8E47B932919C9750014AF31 /* FeedModule */ = {
@@ -408,6 +419,7 @@
 				F80EC51D2910FFA4007E9437 /* LoginViewController.swift in Sources */,
 				F8490DBD29145EBF0044E9EF /* ShadowAvatarView.swift in Sources */,
 				F8490DA2291405530044E9EF /* Friend.swift in Sources */,
+				F88D6F24291CE44B008B458F /* SwipeUserPhotosViewController.swift in Sources */,
 				F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */,
 				F8490DB5291432600044E9EF /* GroupTableViewCell.swift in Sources */,
 				F8490DA5291412C10044E9EF /* FriendTableViewCell.swift in Sources */,
