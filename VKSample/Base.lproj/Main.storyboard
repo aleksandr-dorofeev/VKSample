@@ -216,7 +216,7 @@
         <!--Friends-->
         <scene sceneID="gKr-NV-cgn">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CWf-f8-4rZ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CWf-f8-4rZ" customClass="MainNavigationController" customModule="VKSample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="person.2" catalog="system" selectedImage="person.2.fill" id="Fwy-fo-6Sw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QeD-He-EoK">
@@ -386,16 +386,72 @@
                     <navigationItem key="navigationItem" title="Профиль" id="OM3-J3-vmf"/>
                     <connections>
                         <outlet property="photosGalleryCollectionView" destination="Mlb-3i-5VJ" id="hz5-hm-6ow"/>
+                        <segue destination="oBl-EB-8mH" kind="show" identifier="SwipePhotosSegue" id="RwJ-tg-d91"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81E-BI-svq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4039.1999999999998" y="-292.61083743842363"/>
         </scene>
+        <!--Swipe User Photos View Controller-->
+        <scene sceneID="DxE-jl-pZe">
+            <objects>
+                <viewController id="oBl-EB-8mH" customClass="SwipeUserPhotosViewController" customModule="VKSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t7C-w0-l3N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dc1-j9-GT7">
+                                <rect key="frame" x="0.0" y="91" width="375" height="638"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="YfI-Qk-uUX"/>
+                                    <constraint firstAttribute="height" constant="638" id="v2y-68-n3J"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="geT-zn-PAO">
+                                <rect key="frame" x="0.0" y="91" width="375" height="638"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="Mjl-es-rwM"/>
+                                    <constraint firstAttribute="height" constant="638" id="yLl-bR-hvG"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RMb-u6-VH6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dc1-j9-GT7" firstAttribute="top" secondItem="RMb-u6-VH6" secondAttribute="top" id="23R-h6-OE1"/>
+                            <constraint firstItem="RMb-u6-VH6" firstAttribute="trailing" secondItem="dc1-j9-GT7" secondAttribute="trailing" id="Kqq-dA-2GL"/>
+                            <constraint firstItem="geT-zn-PAO" firstAttribute="bottom" secondItem="RMb-u6-VH6" secondAttribute="bottom" id="Nbi-ho-eOX"/>
+                            <constraint firstItem="dc1-j9-GT7" firstAttribute="leading" secondItem="RMb-u6-VH6" secondAttribute="leading" id="Wco-el-Njn"/>
+                            <constraint firstItem="geT-zn-PAO" firstAttribute="leading" secondItem="RMb-u6-VH6" secondAttribute="leading" id="bTc-bx-tkH"/>
+                            <constraint firstItem="RMb-u6-VH6" firstAttribute="trailing" secondItem="geT-zn-PAO" secondAttribute="trailing" id="hY1-Tx-Kt1"/>
+                            <constraint firstItem="dc1-j9-GT7" firstAttribute="bottom" secondItem="RMb-u6-VH6" secondAttribute="bottom" id="jS4-8x-Mrm"/>
+                            <constraint firstItem="geT-zn-PAO" firstAttribute="top" secondItem="RMb-u6-VH6" secondAttribute="top" id="kL7-Rl-jX4"/>
+                            <constraint firstItem="dc1-j9-GT7" firstAttribute="centerY" secondItem="RMb-u6-VH6" secondAttribute="centerY" id="weM-YZ-LJJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="J4Z-Gp-nAQ"/>
+                    <connections>
+                        <outlet property="currentImageBottomConstraint" destination="Nbi-ho-eOX" id="hjx-hg-eyu"/>
+                        <outlet property="currentImageLeadingConstraint" destination="bTc-bx-tkH" id="HGU-BS-eor"/>
+                        <outlet property="currentImageTopConstraint" destination="kL7-Rl-jX4" id="VAP-x0-ikK"/>
+                        <outlet property="currentImageTrailingConstraint" destination="hY1-Tx-Kt1" id="HBU-0f-cts"/>
+                        <outlet property="currentImageView" destination="geT-zn-PAO" id="4YP-HZ-Xr3"/>
+                        <outlet property="nextImageBottomConstraint" destination="jS4-8x-Mrm" id="hm8-GN-YAa"/>
+                        <outlet property="nextImageLeadingConstraint" destination="Wco-el-Njn" id="xml-MV-Tj8"/>
+                        <outlet property="nextImageTopConstraint" destination="23R-h6-OE1" id="s6i-eL-cFZ"/>
+                        <outlet property="nextImageTrailingConstraint" destination="Kqq-dA-2GL" id="Bde-dC-Cb8"/>
+                        <outlet property="nextImageView" destination="dc1-j9-GT7" id="Klb-SD-tLF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LXp-hU-k0c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4821.6000000000004" y="-291.13300492610841"/>
+        </scene>
         <!--Groups-->
         <scene sceneID="2F1-No-98H">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ciP-Od-1BZ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ciP-Od-1BZ" customClass="MainNavigationController" customModule="VKSample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Groups" image="rectangle.3.group" catalog="system" selectedImage="rectangle.3.group.fill" id="jjz-UZ-RRi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rf1-VU-zfj">
@@ -609,7 +665,7 @@
         <!--Home-->
         <scene sceneID="pvx-OY-hrJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SMl-YT-pi7" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SMl-YT-pi7" customClass="MainNavigationController" customModule="VKSample" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house.fill" id="RvK-zF-O7d"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9AZ-oa-kIu">

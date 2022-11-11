@@ -9,6 +9,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
     private enum Constants {
         static let friendPhotosGalleryID = "FriendPhotoCell"
+        static let segueToSwipePhotosID = "SwipePhotosSegue"
     }
 
     // MARK: - Private @IBOutlet.
@@ -18,6 +19,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
     // MARK: - Private properties.
 
     private var photoInGalleryNames: [String] = []
+    private var selectedCellIndex = 0
 
     // MARK: - Life cycle.
 
@@ -28,8 +30,19 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
     // MARK: - Public methods.
 
-    func getPhotosGallery(by gallery: [String]) {
-        photoInGalleryNames = gallery
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard
+            segue.identifier == Constants.segueToSwipePhotosID,
+            let destination = segue.destination as? SwipeUserPhotosViewController
+        else { return }
+        destination.configurePhotosUserVC(
+            photoGalleryNames: photoInGalleryNames,
+            currentPhotoIndex: selectedCellIndex
+        )
+    }
+
+    func getPhotosGallery(by photos: [String]) {
+        photoInGalleryNames = photos
     }
 
     // MARK: - Private methods.
@@ -68,5 +81,14 @@ extension PhotosGalleryCollectionViewController {
         ) as? FriendPhotoGalleryCollectionViewCell else { return UICollectionViewCell() }
         photoCell.configure(imageName: photoInGalleryNames[indexPath.row])
         return photoCell
+    }
+}
+
+// MARK: - UICollectionViewDelegate.
+
+extension PhotosGalleryCollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedCellIndex = indexPath.row
+        performSegue(withIdentifier: Constants.segueToSwipePhotosID, sender: self)
     }
 }

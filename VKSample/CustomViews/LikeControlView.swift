@@ -12,6 +12,7 @@ import UIKit
         static let heartFillImageName = "heart.fill"
         static let redColorName = "Red"
         static let blueColorName = "Blue"
+        static let transformKeyPathText = "transform.scale"
     }
 
     // MARK: - Private Visual properties.
@@ -104,7 +105,19 @@ import UIKit
         setupDislikeComponents()
     }
 
+    private func heartAnimationAction() {
+        let animation = CASpringAnimation(keyPath: Constants.transformKeyPathText)
+        animation.fromValue = 0.3
+        animation.toValue = 1
+        animation.stiffness = 100
+        animation.mass = 2
+        animation.duration = 2
+        animation.fillMode = .forwards
+        likeButton.layer.add(animation, forKey: nil)
+    }
+
     @objc private func likeAction(_ sender: UIButton) {
+        heartAnimationAction()
         isLiked.toggle()
     }
 }
