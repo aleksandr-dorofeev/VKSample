@@ -33,7 +33,7 @@ extension CustomNavigationController: UINavigationControllerDelegate {
         interactionControllerFor animationController:
         UIViewControllerAnimatedTransitioning
     ) -> UIViewControllerInteractiveTransitioning? {
-        interactiveTransition.hasStarted ? interactiveTransition : nil
+        interactiveTransition.isStarted ? interactiveTransition : nil
     }
 
     func navigationController(
