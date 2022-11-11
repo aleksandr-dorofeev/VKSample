@@ -5,6 +5,12 @@ import UIKit
 
 /// Backward move animation.
 final class PopTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    // MARK: - Private Constants.
+
+    private enum Constants {
+        static let screenRotationAxisXDouble = 1.6
+    }
+
     // MARK: - Public methods.
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -32,7 +38,7 @@ final class PopTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioni
                 relativeDuration: 0.5
             ) {
                 let translation = CGAffineTransform(
-                    translationX: sourceWidth * 1.6,
+                    translationX: sourceWidth * Constants.screenRotationAxisXDouble,
                     y: sourceWidth / -2
                 )
                 let rotation = CGAffineTransform(rotationAngle: .pi / -2)

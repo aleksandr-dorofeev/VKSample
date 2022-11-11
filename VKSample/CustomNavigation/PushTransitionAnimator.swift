@@ -5,6 +5,12 @@ import UIKit
 
 /// Forward move animation.
 final class PushTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    // MARK: - Private Constants.
+
+    private enum Constants {
+        static let screenRotationAxisXDouble = 1.6
+    }
+
     // MARK: - Public methods.
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -21,7 +27,7 @@ final class PushTransitionAnimator: NSObject, UIViewControllerAnimatedTransition
         destination.view.frame = source.view.frame
         let rotation = CGAffineTransform(rotationAngle: .pi / -2)
         let translation = CGAffineTransform(
-            translationX: destinationWidth * 1.6,
+            translationX: destinationWidth * Constants.screenRotationAxisXDouble,
             y: destinationWidth / -2
         )
         destination.view.transform = rotation.concatenating(translation)

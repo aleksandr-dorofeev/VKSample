@@ -5,7 +5,7 @@ import UIKit
 
 /// Interactive transition animation.
 final class InteractiveTransition: UIPercentDrivenInteractiveTransition {
-    // MARK: - Public properties.
+    // MARK: - Public visual component.
 
     var viewController: UIViewController? {
         didSet {
@@ -17,6 +17,8 @@ final class InteractiveTransition: UIPercentDrivenInteractiveTransition {
             viewController?.view.addGestureRecognizer(panRecognizer)
         }
     }
+
+    // MARK: - Public properties.
 
     var isStarted = false
 

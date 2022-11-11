@@ -1,10 +1,10 @@
-// CustomNavigationController.swift
+// MainNavigationController.swift
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
-/// Custom navigation controller with animate transition.
-final class CustomNavigationController: UINavigationController {
+/// Navigation controller with animate transition.
+final class MainNavigationController: UINavigationController {
     // MARK: - Private properties.
 
     private let interactiveTransition = InteractiveTransition()
@@ -25,7 +25,7 @@ final class CustomNavigationController: UINavigationController {
 
 // MARK: - UINavigationControllerDelegate.
 
-extension CustomNavigationController: UINavigationControllerDelegate {
+extension MainNavigationController: UINavigationControllerDelegate {
     // MARK: - Public methods.
 
     func navigationController(

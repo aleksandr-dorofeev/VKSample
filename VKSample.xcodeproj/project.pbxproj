@@ -31,7 +31,7 @@
 		F8490DBD29145EBF0044E9EF /* ShadowAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DBC29145EBF0044E9EF /* ShadowAvatarView.swift */; };
 		F8490DC02914699D0044E9EF /* LikeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DBF2914699D0044E9EF /* LikeControlView.swift */; };
 		F88D6F24291CE44B008B458F /* SwipeUserPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D6F23291CE44B008B458F /* SwipeUserPhotosViewController.swift */; };
-		F88D6F65291D7FD0008B458F /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D6F64291D7FD0008B458F /* CustomNavigationController.swift */; };
+		F88D6F65291D7FD0008B458F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D6F64291D7FD0008B458F /* MainNavigationController.swift */; };
 		F88D6F67291D80A2008B458F /* PushTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D6F66291D80A2008B458F /* PushTransitionAnimator.swift */; };
 		F88D6F69291D8433008B458F /* PopTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D6F68291D8433008B458F /* PopTransitionAnimator.swift */; };
 		F88D6F6B291D84DD008B458F /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D6F6A291D84DD008B458F /* InteractiveTransition.swift */; };
@@ -68,7 +68,7 @@
 		F8490DBC29145EBF0044E9EF /* ShadowAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowAvatarView.swift; sourceTree = "<group>"; };
 		F8490DBF2914699D0044E9EF /* LikeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControlView.swift; sourceTree = "<group>"; };
 		F88D6F23291CE44B008B458F /* SwipeUserPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeUserPhotosViewController.swift; sourceTree = "<group>"; };
-		F88D6F64291D7FD0008B458F /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		F88D6F64291D7FD0008B458F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F88D6F66291D80A2008B458F /* PushTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransitionAnimator.swift; sourceTree = "<group>"; };
 		F88D6F68291D8433008B458F /* PopTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopTransitionAnimator.swift; sourceTree = "<group>"; };
 		F88D6F6A291D84DD008B458F /* InteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 		F88D6F63291D7F95008B458F /* CustomNavigation */ = {
 			isa = PBXGroup;
 			children = (
-				F88D6F64291D7FD0008B458F /* CustomNavigationController.swift */,
+				F88D6F64291D7FD0008B458F /* MainNavigationController.swift */,
 				F88D6F66291D80A2008B458F /* PushTransitionAnimator.swift */,
 				F88D6F68291D8433008B458F /* PopTransitionAnimator.swift */,
 				F88D6F6A291D84DD008B458F /* InteractiveTransition.swift */,
@@ -444,7 +444,7 @@
 				F8490DA2291405530044E9EF /* Friend.swift in Sources */,
 				F88D6F24291CE44B008B458F /* SwipeUserPhotosViewController.swift in Sources */,
 				F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */,
-				F88D6F65291D7FD0008B458F /* CustomNavigationController.swift in Sources */,
+				F88D6F65291D7FD0008B458F /* MainNavigationController.swift in Sources */,
 				F8490DB5291432600044E9EF /* GroupTableViewCell.swift in Sources */,
 				F8490DA5291412C10044E9EF /* FriendTableViewCell.swift in Sources */,
 				F8490DBA291439EE0044E9EF /* MyGroupTableViewCell.swift in Sources */,

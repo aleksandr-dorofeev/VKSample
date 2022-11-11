@@ -41,8 +41,8 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
         )
     }
 
-    func getPhotosGallery(by gallery: [String]) {
-        photoInGalleryNames = gallery
+    func getPhotosGallery(by photos: [String]) {
+        photoInGalleryNames = photos
     }
 
     // MARK: - Private methods.
