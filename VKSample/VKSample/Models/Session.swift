@@ -5,8 +5,16 @@ import Foundation
 
 /// Information about current session of user.
 struct Session {
-    static let shared = Session()
+    // MARK: - Static propreties.
+
+    static var shared = Session()
+
+    // MARK: - Public properties.
+
     var token = String()
     var userID = Int()
+
+    // MARK: - Life cycle.
+
     private init() {}
 }
