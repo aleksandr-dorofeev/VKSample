@@ -256,3 +256,4 @@ custom_rules:
     regex: "(?<!(Set)|(set))(((: Set<\\w+>(?!\\])([\\s]| *.)))| = Set<)"
     message: "Добавь суффикс Set"
     severity: error
+

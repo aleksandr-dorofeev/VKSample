@@ -8,6 +8,7 @@ DerivedData
 *.xcuserstate
 *.xcbkptlist
 *.pbxuser
+*.xcworkspace
 
 #Obj-C/Swift specific
 *.hmap
@@ -21,10 +22,10 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
-# Pods
+#Pods
 Pods/
-
-# SwiftGen
+ 
+#SwiftGen
 Generated
 
 #xcodegen

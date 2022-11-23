@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hi3-Sf-i0j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ec5-5f-KPR">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
@@ -11,6 +11,40 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--AuthorizationVK View Controller-->
+        <scene sceneID="YtU-u9-LGE">
+            <objects>
+                <viewController id="ec5-5f-KPR" customClass="AuthorizationVKViewController" customModule="VKSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qwf-tJ-Zwr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ei8-qv-WgJ">
+                                <rect key="frame" x="0.0" y="30" width="375" height="765"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pBC-3c-Kon"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ei8-qv-WgJ" firstAttribute="bottom" secondItem="pBC-3c-Kon" secondAttribute="bottom" constant="17" id="MjK-5b-goy"/>
+                            <constraint firstItem="pBC-3c-Kon" firstAttribute="top" secondItem="ei8-qv-WgJ" secondAttribute="top" constant="17" id="PNy-Da-6aO"/>
+                            <constraint firstItem="pBC-3c-Kon" firstAttribute="trailing" secondItem="ei8-qv-WgJ" secondAttribute="trailing" id="g1C-FE-W0l"/>
+                            <constraint firstItem="ei8-qv-WgJ" firstAttribute="leading" secondItem="pBC-3c-Kon" secondAttribute="leading" id="sWR-UM-rbN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="authWKWebView" destination="ei8-qv-WgJ" id="gNY-Gh-uZQ"/>
+                        <segue destination="1Si-AB-rkK" kind="presentation" identifier="showTabBarVC" modalPresentationStyle="fullScreen" id="xf2-YM-DAq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lJh-KS-kJg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="821.60000000000002" y="9.6059113300492616"/>
+        </scene>
         <!--Login view controller-->
         <scene sceneID="9n1-NJ-V8m">
             <objects>
@@ -186,12 +220,11 @@
                         <outlet property="passwordTextField" destination="Eh7-br-N7u" id="Y7Y-Cy-GIZ"/>
                         <outlet property="secondLoaderView" destination="oGR-1y-jZE" id="dNa-MA-IOI"/>
                         <outlet property="thirdLoaderView" destination="91Z-VN-MwM" id="KHc-E2-QYY"/>
-                        <segue destination="1Si-AB-rkK" kind="presentation" identifier="friendsSegueID" modalPresentationStyle="fullScreen" id="neV-tC-H1N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cr7-Y8-rdO" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="866" y="10"/>
+            <point key="canvasLocation" x="1010" y="-952"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="go3-hw-pOA">
