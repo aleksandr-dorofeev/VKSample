@@ -4,7 +4,7 @@
 import UIKit
 import WebKit
 
-/// Screen with  VK authorization.
+/// Screen VK authorization.
 final class AuthorizationVKViewController: UIViewController {
     // MARK: - Constants
 
@@ -44,7 +44,7 @@ final class AuthorizationVKViewController: UIViewController {
 
     // MARK: - Private properties.
 
-    private let networkService = NetworkService()
+    private let networkService = VKNetworkService()
 
     // MARK: - Life cycle.
 
@@ -115,10 +115,10 @@ extension AuthorizationVKViewController: WKNavigationDelegate {
         Session.shared.userID = secureUserID
         decisionHandler(.cancel)
 
-        networkService.getFriends(userIDText: Constants.userIDText)
-        networkService.getPhotoUser(ownerID: Constants.userPhotoID)
-        networkService.getGroupUser(userIDText: Constants.userIDText)
-        networkService.getSearchedGroup(text: Constants.testSearchedGroupText)
+        networkService.fetchFriends(userIDText: Constants.userIDText)
+        networkService.fetchPhotoUser(ownerID: Constants.userPhotoID)
+        networkService.fetchUsersGroups(userIDText: Constants.userIDText)
+        networkService.fetchSearchedGroups(text: Constants.testSearchedGroupText)
         performSegue(withIdentifier: Constants.segueTabBarID, sender: self)
     }
 }

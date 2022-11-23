@@ -38,7 +38,8 @@
 		F88D6F6B291D84DD008B458F /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88D6F6A291D84DD008B458F /* InteractiveTransition.swift */; };
 		F895E0B5292CEDC5001D4A88 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0B4292CEDC5001D4A88 /* Session.swift */; };
 		F895E0BC292D528F001D4A88 /* AuthorizationVKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0BB292D528F001D4A88 /* AuthorizationVKViewController.swift */; };
-		F895E0C0292D5F26001D4A88 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0BF292D5F26001D4A88 /* NetworkService.swift */; };
+		F895E0C0292D5F26001D4A88 /* VKNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */; };
+		F895E0D0292E4222001D4A88 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0CF292E4222001D4A88 /* NetworkService.swift */; };
 		F8E47B962919C9B70014AF31 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B952919C9B70014AF31 /* FeedViewController.swift */; };
 		F8E47B992919CAA50014AF31 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B982919CAA50014AF31 /* Post.swift */; };
 		F8E47B9C2919CB5A0014AF31 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B9A2919CB5A0014AF31 /* PostTableViewCell.swift */; };
@@ -81,7 +82,8 @@
 		F88D6F6A291D84DD008B458F /* InteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveTransition.swift; sourceTree = "<group>"; };
 		F895E0B4292CEDC5001D4A88 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		F895E0BB292D528F001D4A88 /* AuthorizationVKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVKViewController.swift; sourceTree = "<group>"; };
-		F895E0BF292D5F26001D4A88 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNetworkService.swift; sourceTree = "<group>"; };
+		F895E0CF292E4222001D4A88 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F8E47B952919C9B70014AF31 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		F8E47B982919CAA50014AF31 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F8E47B9A2919CB5A0014AF31 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -329,7 +331,8 @@
 		F895E0BE292D5EF9001D4A88 /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
-				F895E0BF292D5F26001D4A88 /* NetworkService.swift */,
+				F895E0CF292E4222001D4A88 /* NetworkService.swift */,
+				F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -525,7 +528,7 @@
 				F80EC51D2910FFA4007E9437 /* LoginViewController.swift in Sources */,
 				F8490DBD29145EBF0044E9EF /* ShadowAvatarView.swift in Sources */,
 				F8490DA2291405530044E9EF /* Friend.swift in Sources */,
-				F895E0C0292D5F26001D4A88 /* NetworkService.swift in Sources */,
+				F895E0C0292D5F26001D4A88 /* VKNetworkService.swift in Sources */,
 				F88D6F24291CE44B008B458F /* SwipeUserPhotosViewController.swift in Sources */,
 				F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */,
 				F88D6F65291D7FD0008B458F /* MainNavigationController.swift in Sources */,
@@ -539,6 +542,7 @@
 				F8490DAF29142CC10044E9EF /* MyGroupsTableViewController.swift in Sources */,
 				F80EC51B2910FFA4007E9437 /* SceneDelegate.swift in Sources */,
 				F8490DB229142DA70044E9EF /* Group.swift in Sources */,
+				F895E0D0292E4222001D4A88 /* NetworkService.swift in Sources */,
 				F83F5B8C291ADB6900FB7CC9 /* PostImageCollectionViewCell.swift in Sources */,
 				F8E47B992919CAA50014AF31 /* Post.swift in Sources */,
 			);
