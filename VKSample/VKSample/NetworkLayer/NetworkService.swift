@@ -34,29 +34,6 @@ final class NetworkService: NetworkServiceProvider {
 
     // MARK: - Public methods.
 
-    func loadData(method: String, parameterMap: [String: String]) {
-        let path = Constants.methodPathText + method
-        var parameters: Parameters = [
-            Constants.fieldsParamText: Constants.birthdayDateText,
-            Constants.accessTokenParamText: Session.shared.token,
-            Constants.versionParamText: Constants.versionText
-        ]
-        for parameter in parameterMap {
-            parameters[parameter.key] = parameter.value
-        }
-        let url = Constants.baseURL + path
-        AF.request(
-            url,
-            method: .get,
-            parameters: parameters
-        ).responseJSON { response in
-            guard let value = response.value else { return }
-            print(value)
-            print(url)
-            print(parameters)
-        }
-    }
-
     func getFriends(userIDText: String) {
         loadData(
             method: Constants.friendsGetText,
@@ -83,5 +60,30 @@ final class NetworkService: NetworkServiceProvider {
             method: Constants.groupsSearchText,
             parameterMap: [Constants.qText: text]
         )
+    }
+
+    // MARK: - Private methods.
+
+    private func loadData(method: String, parameterMap: [String: String]) {
+        let path = Constants.methodPathText + method
+        var parameters: Parameters = [
+            Constants.fieldsParamText: Constants.birthdayDateText,
+            Constants.accessTokenParamText: Session.shared.token,
+            Constants.versionParamText: Constants.versionText
+        ]
+        for parameter in parameterMap {
+            parameters[parameter.key] = parameter.value
+        }
+        let url = Constants.baseURL + path
+        AF.request(
+            url,
+            method: .get,
+            parameters: parameters
+        ).responseJSON { response in
+            guard let value = response.value else { return }
+            print(value)
+            print(url)
+            print(parameters)
+        }
     }
 }

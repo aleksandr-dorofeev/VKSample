@@ -36,7 +36,7 @@ final class AuthorizationVKViewController: UIViewController {
 
     // MARK: - Private @IBOutlet.
 
-    @IBOutlet var authWKWebView: WKWebView! {
+    @IBOutlet private var authWKWebView: WKWebView! {
         didSet {
             authWKWebView.navigationDelegate = self
         }
