@@ -5,7 +5,7 @@ import Alamofire
 import Foundation
 
 /// Network interface for VK API.
-protocol NetworkServiceProvider {
+protocol NetworkServiceProtocol {
     func getFriends(userIDText: String)
     func getPhotoUser(ownerID: Int)
     func getGroupUser(userIDText: String)
