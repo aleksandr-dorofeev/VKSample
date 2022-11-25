@@ -70,34 +70,28 @@ class NetworkService {
         Constants.accessTokenParamText: Session.shared.token,
         Constants.versionParamText: Constants.versionParamValue
     ]
-    private let decoder = JSONDecoder()
+    private let realmDataBase = RealmDataBase()
 
     // MARK: - Public methods.
 
-    func loadData<T: Decodable>(methodType: RequestMethod, completion: @escaping (Result<T, Error>) -> Void) {
+    func loadData<T: Decodable>(
+        methodType: RequestMethod,
+        completion: @escaping (Result<[T], Error>) -> Void
+    ) where T: Object {
         let url = "\(Constants.baseURLText)\(methodType.description)"
         let methodParams = methodType.parametersMap
         let parameters = baseQueryParameters.merging(methodParams) { _, _ in }
         AF.request(url, parameters: parameters).responseData { [weak self] response in
             guard
                 let self = self,
-                let data = response.value else { return }
+                let data = response.value
+            else { return }
             if let error = response.error {
                 completion(.failure(error))
             }
-            guard let result = try? self.decoder.decode(T.self, from: data) else { return }
-            completion(.success(result))
-        }
-    }
-
-    func saveData<T: Object>(items: [T]) where T: Decodable {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(items)
-            }
-        } catch {
-            print(error)
+            guard let result = try? JSONDecoder().decode(VKResponse<T>.self, from: data) else { return }
+            completion(.success(result.items))
+            self.realmDataBase.saveData(items: result.items)
         }
     }
 }

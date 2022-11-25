@@ -5,12 +5,13 @@ import UIKit
 
 /// Screen with groups list.
 final class GroupsTableViewController: UITableViewController {
-    typealias GroupHandler = (ItemGroup) -> ()
+    typealias GroupHandler = (Group) -> ()
 
     // MARK: - Private Constants.
 
     private enum Constants {
         static let groupsCellID = "GroupCell"
+        static let errorTitleString = "Ошибка"
     }
 
     // MARK: - Private @IBOutlets.
@@ -20,7 +21,7 @@ final class GroupsTableViewController: UITableViewController {
     // MARK: - Private properties.
 
     private let networkService = VKNetworkService()
-    private var filteredGroups: [ItemGroup] = []
+    private var filteredGroups: [Group] = []
 
     // MARK: - Life cycle.
 
@@ -36,11 +37,11 @@ final class GroupsTableViewController: UITableViewController {
             guard let self = self else { return }
             switch result {
             case let .success(result):
-                let groups = result.response.items
+                let groups = result
                 self.filteredGroups = groups
                 self.tableView.reloadData()
             case let .failure(error):
-                print(error.localizedDescription)
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
         }
     }

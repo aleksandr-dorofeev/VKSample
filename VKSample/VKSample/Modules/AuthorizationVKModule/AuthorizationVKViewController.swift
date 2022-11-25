@@ -114,9 +114,6 @@ extension AuthorizationVKViewController: WKNavigationDelegate {
         Session.shared.token = token
         Session.shared.userID = secureUserID
         decisionHandler(.cancel)
-
-//        networkService.fetchUsersGroups(userIDText: Constants.userIDText)
-//        networkService.fetchSearchedGroups(text: Constants.testSearchedGroupText)
         performSegue(withIdentifier: Constants.segueTabBarID, sender: self)
     }
 }

@@ -11,14 +11,15 @@ final class FriendsTableViewController: UITableViewController {
         static let friendsCellID = "FriendsCell"
         static let photosGallerySegueID = "PhotosGallerySegue"
         static let userIDText = "user_id"
+        static let errorTitleString = "Ошибка"
     }
 
     // MARK: - Private properties.
 
     private let networkService = VKNetworkService()
 
-    private var friends: [ItemFriend] = []
-    private var sectionsMap: [Character: [ItemFriend]] = [:]
+    private var friends: [Friend] = []
+    private var sectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
 
     // MARK: - Life cycle.
@@ -26,8 +27,7 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCellsToSections()
-        getFriends()
-        print(friends)
+        fetchFriends()
     }
 
     // MARK: - Public methods.
@@ -45,17 +45,17 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private methods.
 
-    private func getFriends() {
+    private func fetchFriends() {
         networkService.fetchFriends { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(users):
-                let items = users.response.items
+                let items = users
                 self.friends = items
                 self.setupCellsToSections()
                 self.tableView.reloadData()
             case let .failure(error):
-                print(error.localizedDescription)
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
         }
     }
@@ -106,7 +106,6 @@ extension FriendsTableViewController {
             ) as? FriendTableViewCell,
             let friend = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
-        print(friend)
         cell.configure(with: friend)
         return cell
     }

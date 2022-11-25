@@ -160,7 +160,7 @@ final class LoginViewController: UIViewController {
         if checkLogInfo() {
             loadEntryAnimation()
         } else {
-            showLoginError(title: Constants.titleText, message: Constants.messageText)
+            showErrorAlert(title: Constants.titleText, message: Constants.messageText)
         }
     }
 }

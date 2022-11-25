@@ -10,6 +10,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
     private enum Constants {
         static let friendPhotosGalleryID = "FriendPhotoCell"
         static let segueToSwipePhotosID = "SwipePhotosSegue"
+        static let errorTitleString = "Ошибка"
     }
 
     // MARK: - Private @IBOutlet.
@@ -43,7 +44,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
         )
     }
 
-    func configure(by friend: ItemFriend) {
+    func configure(by friend: Friend) {
         let friendID = friend.id
         title = "\(friend.firstName) \(friend.lastName)"
         getPhoto(friendID: friendID)
@@ -60,7 +61,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
             guard let self = self else { return }
             switch result {
             case let .success(photoString):
-                let photos = photoString.response.items
+                let photos = photoString
                 var photosNames: [String] = []
                 for item in photos {
                     photosNames.append(item.url)
@@ -68,7 +69,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
                 self.photoURLNames = photosNames
                 self.collectionView.reloadData()
             case let .failure(error):
-                print(error.localizedDescription)
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
         }
     }
@@ -101,7 +102,7 @@ extension PhotosGalleryCollectionViewController {
             withReuseIdentifier: Constants.friendPhotosGalleryID,
             for: indexPath
         ) as? FriendPhotoGalleryCollectionViewCell else { return UICollectionViewCell() }
-        photoCell.configure(imageURL: photoURLNames[indexPath.row])
+        photoCell.configure(imageUrlString: photoURLNames[indexPath.row])
         return photoCell
     }
 }

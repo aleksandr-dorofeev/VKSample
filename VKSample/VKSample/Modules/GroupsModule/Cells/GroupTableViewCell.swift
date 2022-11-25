@@ -32,9 +32,9 @@ final class GroupTableViewCell: UITableViewCell {
 
     // MARK: - Public methods.
 
-    func configure(with group: ItemGroup) {
+    func configure(with group: Group) {
         guard let groupAvatarText = group.avatar else { return }
-        groupImageView.image = UIImage(named: groupAvatarText)
+        ImageLoader.shared.setImage(userPhotoURLText: groupAvatarText, imageView: groupImageView)
         groupTitleLabel.text = group.name
     }
 
