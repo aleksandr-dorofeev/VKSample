@@ -18,7 +18,9 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
     // MARK: - Private properties.
 
-    private var photoInGalleryNames: [String] = []
+    private let networkService = VKNetworkService()
+    private var photoURLNames: [String] = []
+
     private var selectedCellIndex = 0
 
     // MARK: - Life cycle.
@@ -36,19 +38,38 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
             let destination = segue.destination as? SwipeUserPhotosViewController
         else { return }
         destination.configurePhotosUserVC(
-            photoGalleryNames: photoInGalleryNames,
+            photoGalleryNames: photoURLNames,
             currentPhotoIndex: selectedCellIndex
         )
     }
 
-    func getPhotosGallery(by photos: [String]) {
-        photoInGalleryNames = photos
+    func configure(by friend: ItemFriend) {
+        let friendID = friend.id
+        getPhoto(friendID: friendID)
     }
 
     // MARK: - Private methods.
 
     private func configureUI() {
         configureCollectionCellLayout()
+    }
+
+    private func getPhoto(friendID: Int) {
+        networkService.fetchUsersPhoto(ownerID: friendID) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(photoString):
+                let photos = photoString.response.items
+                var photosNames: [String] = []
+                for item in photos {
+                    photosNames.append(item.url)
+                }
+                self.photoURLNames = photosNames
+                self.collectionView.reloadData()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
     private func configureCollectionCellLayout() {
@@ -68,7 +89,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
 extension PhotosGalleryCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photoInGalleryNames.count
+        photoURLNames.count
     }
 
     override func collectionView(
@@ -79,7 +100,7 @@ extension PhotosGalleryCollectionViewController {
             withReuseIdentifier: Constants.friendPhotosGalleryID,
             for: indexPath
         ) as? FriendPhotoGalleryCollectionViewCell else { return UICollectionViewCell() }
-        photoCell.configure(imageName: photoInGalleryNames[indexPath.row])
+        photoCell.configure(imageURL: photoURLNames[indexPath.row])
         return photoCell
     }
 }

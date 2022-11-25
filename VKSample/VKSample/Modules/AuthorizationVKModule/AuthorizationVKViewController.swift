@@ -13,7 +13,7 @@ final class AuthorizationVKViewController: UIViewController {
         static let vkHostText = "oauth.vk.com"
         static let authorizePortText = "/authorize"
         static let clientIDParamText = "client_id"
-        static let clientIDText = "51484113"
+        static let clientIDText = "51486823"
         static let displayParamText = "display"
         static let displayMobileText = "mobile"
         static let redirectUriParamText = "redirect_uri"
@@ -115,10 +115,8 @@ extension AuthorizationVKViewController: WKNavigationDelegate {
         Session.shared.userID = secureUserID
         decisionHandler(.cancel)
 
-        networkService.fetchFriends(userIDText: Constants.userIDText)
-        networkService.fetchPhotoUser(ownerID: Constants.userPhotoID)
-        networkService.fetchUsersGroups(userIDText: Constants.userIDText)
-        networkService.fetchSearchedGroups(text: Constants.testSearchedGroupText)
+//        networkService.fetchUsersGroups(userIDText: Constants.userIDText)
+//        networkService.fetchSearchedGroups(text: Constants.testSearchedGroupText)
         performSegue(withIdentifier: Constants.segueTabBarID, sender: self)
     }
 }

@@ -5,56 +5,41 @@ import Foundation
 
 /// Network interface for VK API.
 protocol VKNetworkServiceProtocol {
-    func fetchFriends(userIDText: String)
-    func fetchPhotoUser(ownerID: Int)
-    func fetchUsersGroups(userIDText: String)
-    func fetchSearchedGroups(text: String)
+    func fetchFriends(completion: @escaping (Result<Friend, Error>) -> Void)
+    func fetchUsersPhoto(ownerID: Int, completion: @escaping (Result<Photo, Error>) -> Void)
+    func fetchUsersGroups(completion: @escaping (Result<Group, Error>) -> Void)
+    func fetchSearchedGroups(text: String, completion: @escaping (Result<Group, Error>) -> Void)
 }
 
 /// Service with requests to VK API.
 final class VKNetworkService: NetworkService, VKNetworkServiceProtocol {
-    // MARK: - Private Constants.
-
-    private enum Constants {
-        static let ownerIDText = "owner_id"
-        static let qText = "q"
-        static let friendsGetText = "friends.get"
-        static let photosGetAllText = "photos.getAll"
-        static let groupsGetText = "groups.get"
-        static let groupsSearchText = "groups.search"
-    }
-
     // MARK: - Public methods.
 
-    func fetchFriends(userIDText: String) {
-        let queryItem = URLQueryItem(name: userIDText, value: String(Session.shared.userID))
+    func fetchFriends(completion: @escaping (Result<Friend, Error>) -> Void) {
         loadData(
-            methodType: Constants.friendsGetText,
-            queryItem: queryItem
+            methodType: .getFriends,
+            completion: completion
         )
     }
 
-    func fetchPhotoUser(ownerID: Int) {
-        let queryItem = URLQueryItem(name: Constants.ownerIDText, value: String(ownerID))
+    func fetchUsersPhoto(ownerID: Int, completion: @escaping (Result<Photo, Error>) -> Void) {
         loadData(
-            methodType: Constants.photosGetAllText,
-            queryItem: queryItem
+            methodType: .getPhotos(ownerID: ownerID),
+            completion: completion
         )
     }
 
-    func fetchUsersGroups(userIDText: String) {
-        let queryItem = URLQueryItem(name: userIDText, value: String(Session.shared.userID))
+    func fetchUsersGroups(completion: @escaping (Result<Group, Error>) -> Void) {
         loadData(
-            methodType: Constants.groupsGetText,
-            queryItem: queryItem
+            methodType: .getGroups,
+            completion: completion
         )
     }
 
-    func fetchSearchedGroups(text: String) {
-        let queryItem = URLQueryItem(name: Constants.qText, value: text)
+    func fetchSearchedGroups(text: String, completion: @escaping (Result<Group, Error>) -> Void) {
         loadData(
-            methodType: Constants.groupsSearchText,
-            queryItem: queryItem
+            methodType: .searchGroups(queryText: text),
+            completion: completion
         )
     }
 }

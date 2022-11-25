@@ -21,12 +21,10 @@
 		F82272D62911DB37003EEB1B /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82272D52911DB37003EEB1B /* GroupsTableViewController.swift */; };
 		F83F5B8C291ADB6900FB7CC9 /* PostImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83F5B8A291ADB6800FB7CC9 /* PostImageCollectionViewCell.swift */; };
 		F83F5B8D291ADB6900FB7CC9 /* PostImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F83F5B8B291ADB6900FB7CC9 /* PostImageCollectionViewCell.xib */; };
-		F8490DA2291405530044E9EF /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DA1291405530044E9EF /* Friend.swift */; };
 		F8490DA5291412C10044E9EF /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DA4291412C10044E9EF /* FriendTableViewCell.swift */; };
 		F8490DAA2914197E0044E9EF /* PhotosGalleryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DA92914197E0044E9EF /* PhotosGalleryCollectionViewController.swift */; };
 		F8490DAD29141B550044E9EF /* FriendPhotoGalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DAC29141B550044E9EF /* FriendPhotoGalleryCollectionViewCell.swift */; };
 		F8490DAF29142CC10044E9EF /* MyGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DAE29142CC10044E9EF /* MyGroupsTableViewController.swift */; };
-		F8490DB229142DA70044E9EF /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DB129142DA70044E9EF /* Group.swift */; };
 		F8490DB5291432600044E9EF /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DB4291432600044E9EF /* GroupTableViewCell.swift */; };
 		F8490DBA291439EE0044E9EF /* MyGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DB9291439EE0044E9EF /* MyGroupTableViewCell.swift */; };
 		F8490DBD29145EBF0044E9EF /* ShadowAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DBC29145EBF0044E9EF /* ShadowAvatarView.swift */; };
@@ -40,10 +38,14 @@
 		F895E0BC292D528F001D4A88 /* AuthorizationVKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0BB292D528F001D4A88 /* AuthorizationVKViewController.swift */; };
 		F895E0C0292D5F26001D4A88 /* VKNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */; };
 		F895E0D0292E4222001D4A88 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0CF292E4222001D4A88 /* NetworkService.swift */; };
+		F895E0FC292FF324001D4A88 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0FB292FF324001D4A88 /* Friend.swift */; };
+		F895E0FE292FF53B001D4A88 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0FD292FF53B001D4A88 /* Photo.swift */; };
+		F895E100292FF7C4001D4A88 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0FF292FF7C4001D4A88 /* Group.swift */; };
 		F8E47B962919C9B70014AF31 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B952919C9B70014AF31 /* FeedViewController.swift */; };
-		F8E47B992919CAA50014AF31 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B982919CAA50014AF31 /* Post.swift */; };
 		F8E47B9C2919CB5A0014AF31 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B9A2919CB5A0014AF31 /* PostTableViewCell.swift */; };
 		F8E47B9D2919CB5A0014AF31 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8E47B9B2919CB5A0014AF31 /* PostTableViewCell.xib */; };
+		F8E74DB329310DFB0049E077 /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E74DB229310DFB0049E077 /* ResponseResult.swift */; };
+		F8FA9DE12930287200DEA105 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B982919CAA50014AF31 /* Post.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,10 +86,14 @@
 		F895E0BB292D528F001D4A88 /* AuthorizationVKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVKViewController.swift; sourceTree = "<group>"; };
 		F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNetworkService.swift; sourceTree = "<group>"; };
 		F895E0CF292E4222001D4A88 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		F895E0FB292FF324001D4A88 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		F895E0FD292FF53B001D4A88 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		F895E0FF292FF7C4001D4A88 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		F8E47B952919C9B70014AF31 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		F8E47B982919CAA50014AF31 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F8E47B9A2919CB5A0014AF31 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		F8E47B9B2919CB5A0014AF31 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
+		F8E74DB229310DFB0049E077 /* ResponseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +312,10 @@
 			isa = PBXGroup;
 			children = (
 				F895E0B4292CEDC5001D4A88 /* Session.swift */,
+				F895E0FB292FF324001D4A88 /* Friend.swift */,
+				F895E0FD292FF53B001D4A88 /* Photo.swift */,
+				F895E0FF292FF7C4001D4A88 /* Group.swift */,
+				F8E74DB229310DFB0049E077 /* ResponseResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -523,11 +533,12 @@
 				F8490DAA2914197E0044E9EF /* PhotosGalleryCollectionViewController.swift in Sources */,
 				F8E47B962919C9B70014AF31 /* FeedViewController.swift in Sources */,
 				F82272CD2911B6F9003EEB1B /* UITextField+Extension.swift in Sources */,
+				F8E74DB329310DFB0049E077 /* ResponseResult.swift in Sources */,
 				F88D6F69291D8433008B458F /* PopTransitionAnimator.swift in Sources */,
 				F82272CB2911B5F3003EEB1B /* UIViewController+Extension.swift in Sources */,
+				F8FA9DE12930287200DEA105 /* Post.swift in Sources */,
 				F80EC51D2910FFA4007E9437 /* LoginViewController.swift in Sources */,
 				F8490DBD29145EBF0044E9EF /* ShadowAvatarView.swift in Sources */,
-				F8490DA2291405530044E9EF /* Friend.swift in Sources */,
 				F895E0C0292D5F26001D4A88 /* VKNetworkService.swift in Sources */,
 				F88D6F24291CE44B008B458F /* SwipeUserPhotosViewController.swift in Sources */,
 				F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */,
@@ -539,12 +550,13 @@
 				F8490DC02914699D0044E9EF /* LikeControlView.swift in Sources */,
 				F82272D42911CB0E003EEB1B /* FriendsTableViewController.swift in Sources */,
 				F895E0BC292D528F001D4A88 /* AuthorizationVKViewController.swift in Sources */,
+				F895E0FE292FF53B001D4A88 /* Photo.swift in Sources */,
 				F8490DAF29142CC10044E9EF /* MyGroupsTableViewController.swift in Sources */,
 				F80EC51B2910FFA4007E9437 /* SceneDelegate.swift in Sources */,
-				F8490DB229142DA70044E9EF /* Group.swift in Sources */,
 				F895E0D0292E4222001D4A88 /* NetworkService.swift in Sources */,
+				F895E100292FF7C4001D4A88 /* Group.swift in Sources */,
 				F83F5B8C291ADB6900FB7CC9 /* PostImageCollectionViewCell.swift in Sources */,
-				F8E47B992919CAA50014AF31 /* Post.swift in Sources */,
+				F895E0FC292FF324001D4A88 /* Friend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

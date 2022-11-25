@@ -10,21 +10,34 @@ final class MyGroupsTableViewController: UITableViewController {
     private enum Constants {
         static let myGroupsCellID = "MyGroupCell"
         static let groupsSegueID = "GroupsSegue"
+        static let userIDText = "user_id"
     }
 
     // MARK: - Private properties.
 
-    private var myGroups: [Group] = []
+    private let networkService = VKNetworkService()
 
-    // MARK: - Public methods.
+    private var myGroups: [ItemGroup] = []
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == Constants.groupsSegueID,
-              let groupsVC = segue.destination as? GroupsTableViewController else { return }
-        groupsVC.configure(myGroups: myGroups) { [weak self] addedGroup in
-            guard let self = self else { return }
-            self.myGroups.append(addedGroup)
-            self.tableView.reloadData()
+    // MARK: - Life cycle.
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getUsersGroups()
+    }
+
+    // MARK: - Private methods.
+
+    private func getUsersGroups() {
+        networkService.fetchUsersGroups { [weak self] result in
+            switch result {
+            case let .success(groups):
+                let items = groups.response.items
+                self?.myGroups = items
+                self?.tableView.reloadData()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
         }
     }
 }

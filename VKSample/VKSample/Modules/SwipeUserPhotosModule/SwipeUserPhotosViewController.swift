@@ -51,6 +51,18 @@ final class SwipeUserPhotosViewController: UIViewController {
         configureImageViews()
     }
 
+    private func setImage(userPhotoURLText: String, imageView: UIImageView) {
+        let url = URL(string: userPhotoURLText)
+        guard let url = url else { return }
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: url)
+            DispatchQueue.main.async {
+                guard let data = data else { return }
+                imageView.image = UIImage(data: data)
+            }
+        }
+    }
+
     private func prepareAnimation(typeOfSwipe: TypeSwipes) {
         configureStartPositionForCurrentImage()
         switch typeOfSwipe {
@@ -64,24 +76,24 @@ final class SwipeUserPhotosViewController: UIViewController {
 
     private func prepareAnimationForRightSwipe() {
         currentImageView.layer.zPosition = 1
-        currentImageView.image = UIImage(named: photoGalleryNames[currentPhotoIndex])
+        setImage(userPhotoURLText: photoGalleryNames[currentPhotoIndex], imageView: currentImageView)
         nextImageTrailingConstraint.constant = 100
         nextImageLeadingConstraint.constant = 100
         nextImageTopConstraint.constant = 200
         nextImageBottomConstraint.constant = -200
         nextImageView.layer.zPosition = 1
-        nextImageView.image = UIImage(named: photoGalleryNames[currentPhotoIndex - 1])
+        setImage(userPhotoURLText: photoGalleryNames[currentPhotoIndex - 1], imageView: nextImageView)
         currentPhotoIndex -= 1
     }
 
     private func prepareAnimationForLeftSwipe() {
         let viewWidth = view.frame.width
         currentImageView.layer.zPosition = 1
-        currentImageView.image = UIImage(named: photoGalleryNames[currentPhotoIndex])
+        setImage(userPhotoURLText: photoGalleryNames[currentPhotoIndex], imageView: currentImageView)
         nextImageTrailingConstraint.constant = -viewWidth
         nextImageLeadingConstraint.constant = viewWidth
         nextImageView.layer.zPosition = 2
-        nextImageView.image = UIImage(named: photoGalleryNames[currentPhotoIndex + 1])
+        setImage(userPhotoURLText: photoGalleryNames[currentPhotoIndex + 1], imageView: nextImageView)
         currentPhotoIndex += 1
     }
 
@@ -129,7 +141,7 @@ final class SwipeUserPhotosViewController: UIViewController {
     }
 
     private func configureImageViews() {
-        currentImageView.image = UIImage(named: photoGalleryNames[currentPhotoIndex])
+        setImage(userPhotoURLText: photoGalleryNames[currentPhotoIndex], imageView: currentImageView)
     }
 
     @objc private func swipeGestureRecognizerAction(gesture: UISwipeGestureRecognizer) {

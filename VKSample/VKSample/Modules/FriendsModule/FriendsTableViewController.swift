@@ -10,12 +10,15 @@ final class FriendsTableViewController: UITableViewController {
     private enum Constants {
         static let friendsCellID = "FriendsCell"
         static let photosGallerySegueID = "PhotosGallerySegue"
+        static let userIDText = "user_id"
     }
 
     // MARK: - Private properties.
 
-    private let friends = Friends.getFriends()
-    private var sectionsMap: [Character: [Friend]] = [:]
+    private let networkService = VKNetworkService()
+
+    private var friends: [ItemFriend] = []
+    private var sectionsMap: [Character: [ItemFriend]] = [:]
     private var sectionTitles: [Character] = []
 
     // MARK: - Life cycle.
@@ -23,6 +26,8 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCellsToSections()
+        getFriends()
+        print(friends)
     }
 
     // MARK: - Public methods.
@@ -31,19 +36,34 @@ final class FriendsTableViewController: UITableViewController {
         guard segue.identifier == Constants.photosGallerySegueID,
               let photosGalleryVC = segue.destination as? PhotosGalleryCollectionViewController,
               let indexPath = tableView.indexPathForSelectedRow,
-              let friendPhotos = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row].profileImageNames
+              let friend = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row]
         else {
             return
         }
-        photosGalleryVC.getPhotosGallery(by: friendPhotos)
+        photosGalleryVC.configure(by: friend)
     }
 
     // MARK: - Private methods.
 
+    private func getFriends() {
+        networkService.fetchFriends { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(users):
+                let items = users.response.items
+                self.friends = items
+                self.setupCellsToSections()
+                self.tableView.reloadData()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     private func setupCellsToSections() {
         for friend in friends {
-            guard let firstLetterOfFirstName = friend.name.firstName.first else { return }
-            let firstLetter = friend.name.lastName?.first ?? firstLetterOfFirstName
+            guard let firstLetterOfFirstName = friend.firstName.first else { return }
+            let firstLetter = friend.lastName.first ?? firstLetterOfFirstName
             if sectionsMap[firstLetter] != nil {
                 sectionsMap[firstLetter]?.append(friend)
             } else {
@@ -51,7 +71,6 @@ final class FriendsTableViewController: UITableViewController {
             }
         }
         sectionTitles = Array(sectionsMap.keys).sorted()
-        tableView.reloadData()
     }
 }
 
@@ -87,6 +106,7 @@ extension FriendsTableViewController {
             ) as? FriendTableViewCell,
             let friend = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
+        print(friend)
         cell.configure(with: friend)
         return cell
     }
