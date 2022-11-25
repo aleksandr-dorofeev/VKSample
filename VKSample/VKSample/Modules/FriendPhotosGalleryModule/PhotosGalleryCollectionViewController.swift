@@ -45,6 +45,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
     func configure(by friend: ItemFriend) {
         let friendID = friend.id
+        title = "\(friend.firstName) \(friend.lastName)"
         getPhoto(friendID: friendID)
     }
 

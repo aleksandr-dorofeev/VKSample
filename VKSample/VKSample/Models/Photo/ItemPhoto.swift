@@ -1,19 +1,8 @@
-// Photo.swift
+// ItemPhoto.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 import RealmSwift
-
-/// Response about of user's photo.
-struct Photo: Decodable {
-    let response: ResponsePhoto
-}
-
-/// User's photos.
-struct ResponsePhoto: Decodable {
-    let count: Int
-    let items: [ItemPhoto]
-}
 
 /// User's photo.
 final class ItemPhoto: Object, Decodable {

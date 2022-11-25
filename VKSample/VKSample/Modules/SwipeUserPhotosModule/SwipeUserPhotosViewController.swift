@@ -54,13 +54,13 @@ final class SwipeUserPhotosViewController: UIViewController {
     private func setImage(userPhotoURLText: String, imageView: UIImageView) {
         let url = URL(string: userPhotoURLText)
         guard let url = url else { return }
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url)
+        URLSession.shared.dataTask(with: url) { data, _, _ in
             DispatchQueue.main.async {
-                guard let data = data else { return }
-                imageView.image = UIImage(data: data)
+                guard let data = data,
+                      let image = UIImage(data: data) else { return }
+                imageView.image = image
             }
-        }
+        }.resume()
     }
 
     private func prepareAnimation(typeOfSwipe: TypeSwipes) {

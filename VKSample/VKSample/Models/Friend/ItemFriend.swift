@@ -1,19 +1,8 @@
-// Friend.swift
+// ItemFriend.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 import RealmSwift
-
-/// Response about friends of user.
-struct Friend: Decodable {
-    let response: ResponseFriend
-}
-
-/// Friends list.
-struct ResponseFriend: Decodable {
-    let count: Int
-    let items: [ItemFriend]
-}
 
 /// Friend.
 final class ItemFriend: Object, Decodable {

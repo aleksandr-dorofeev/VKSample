@@ -62,7 +62,6 @@ class NetworkService {
         static let accessTokenParamText = "access_token"
         static let versionParamText = "v"
         static let versionParamValue = "5.131"
-        static let photoText = "photo_100"
     }
 
     // MARK: - Private properties.
