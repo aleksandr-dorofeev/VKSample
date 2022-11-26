@@ -5,6 +5,12 @@ import UIKit
 
 /// Cell with friend's photo.
 final class FriendPhotoGalleryCollectionViewCell: UICollectionViewCell {
+    // MARK: - Private Constants.
+
+    private enum Constants {
+        static let imagePlaceholderString = "imagePlaceholder"
+    }
+
     // MARK: - Private @IBOutlet.
 
     @IBOutlet private var friendPhotoImageView: UIImageView!
@@ -12,9 +18,14 @@ final class FriendPhotoGalleryCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public methods.
 
-    func configure(imageName: String) {
+    func configure(imageUrlString: String) {
         backgroundPhotoView.layer.borderWidth = 2
         backgroundPhotoView.layer.borderColor = UIColor.black.cgColor
-        friendPhotoImageView.image = UIImage(named: imageName)
+        ImageLoader.shared.setImage(userPhotoURLText: imageUrlString, imageView: friendPhotoImageView)
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        friendPhotoImageView.image = UIImage(named: Constants.imagePlaceholderString)
     }
 }

@@ -10,21 +10,36 @@ final class MyGroupsTableViewController: UITableViewController {
     private enum Constants {
         static let myGroupsCellID = "MyGroupCell"
         static let groupsSegueID = "GroupsSegue"
+        static let userIDText = "user_id"
+        static let errorTitleString = "Ошибка"
     }
 
     // MARK: - Private properties.
 
-    private var myGroups: [Group] = []
+    private let networkService = VKNetworkService()
 
-    // MARK: - Public methods.
+    private var groups: [Group] = []
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == Constants.groupsSegueID,
-              let groupsVC = segue.destination as? GroupsTableViewController else { return }
-        groupsVC.configure(myGroups: myGroups) { [weak self] addedGroup in
+    // MARK: - Life cycle.
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getUsersGroups()
+    }
+
+    // MARK: - Private methods.
+
+    private func getUsersGroups() {
+        networkService.fetchUsersGroups { [weak self] result in
             guard let self = self else { return }
-            self.myGroups.append(addedGroup)
-            self.tableView.reloadData()
+            switch result {
+            case let .success(groups):
+                let items = groups
+                self.groups = items
+                self.tableView.reloadData()
+            case let .failure(error):
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
+            }
         }
     }
 }
@@ -33,7 +48,7 @@ final class MyGroupsTableViewController: UITableViewController {
 
 extension MyGroupsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        myGroups.count
+        groups.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,7 +56,7 @@ extension MyGroupsTableViewController {
             withIdentifier: Constants.myGroupsCellID,
             for: indexPath
         ) as? MyGroupTableViewCell else { return UITableViewCell() }
-        let group = myGroups[indexPath.row]
+        let group = groups[indexPath.row]
         groupCell.configure(with: group)
         return groupCell
     }
@@ -57,7 +72,7 @@ extension MyGroupsTableViewController {
     ) {
         switch editingStyle {
         case .delete:
-            myGroups.remove(at: indexPath.row)
+            groups.remove(at: indexPath.row)
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()

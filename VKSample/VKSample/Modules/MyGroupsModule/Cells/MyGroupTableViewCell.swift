@@ -13,7 +13,8 @@ final class MyGroupTableViewCell: UITableViewCell {
     // MARK: - Public methods.
 
     func configure(with group: Group) {
-        groupImageView.image = UIImage(named: group.titleImageName)
+        guard let groupAvatarText = group.avatar else { return }
+        ImageLoader.shared.setImage(userPhotoURLText: groupAvatarText, imageView: groupImageView)
         groupTitleLabel.text = group.name
     }
 }

@@ -5,6 +5,12 @@ import UIKit
 
 /// User-friend cell.
 final class FriendTableViewCell: UITableViewCell {
+    // MARK: - Private Constants.
+
+    private enum Constants {
+        static let userPlaceholderString = "userPlaceholder"
+    }
+
     // MARK: - Private @IBOutlet.
 
     @IBOutlet private var friendImageView: UIImageView!
@@ -12,8 +18,14 @@ final class FriendTableViewCell: UITableViewCell {
 
     // MARK: - Public methods.
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        friendImageView.image = UIImage(named: Constants.userPlaceholderString)
+    }
+
     func configure(with friend: Friend) {
-        friendImageView.image = UIImage(named: friend.avatarImageName)
-        nameLabel.text = "\(friend.name.firstName) \(friend.name.lastName ?? "")"
+        guard let avatar = friend.avatar else { return }
+        ImageLoader.shared.setImage(userPhotoURLText: avatar, imageView: friendImageView)
+        nameLabel.text = "\(friend.firstName) \(friend.lastName)"
     }
 }

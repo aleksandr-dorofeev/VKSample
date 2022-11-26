@@ -284,7 +284,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDk-wO-ZyA" customClass="ShadowAvatarView" customModule="VKSample" customModuleProvider="target">
                                             <rect key="frame" x="10" y="10" width="100" height="100"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SiI-75-Cf0">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="SiI-75-Cf0">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -377,7 +377,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTQ-lx-Nk8">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oe3-wq-kRi">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="oe3-wq-kRi">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7iD-TU-2Dp" customClass="LikeControlView" customModule="VKSample" customModuleProvider="target">
@@ -719,11 +719,13 @@
         <image name="apple.logo" catalog="system" width="105" height="128"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="imagePlaceholder" width="800" height="600"/>
         <image name="logoVk" width="56" height="56"/>
         <image name="person.2" catalog="system" width="128" height="82"/>
         <image name="person.2.fill" catalog="system" width="128" height="81"/>
         <image name="rectangle.3.group" catalog="system" width="128" height="80"/>
         <image name="rectangle.3.group.fill" catalog="system" width="128" height="81"/>
+        <image name="userPlaceholder" width="1200" height="1200"/>
         <namedColor name="Blue">
             <color red="0.10300000011920929" green="0.34400001168251038" blue="0.94199997186660767" alpha="0.77999997138977051" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
