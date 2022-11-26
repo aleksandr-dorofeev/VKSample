@@ -3,6 +3,7 @@
 
 import UIKit
 
+/// Class with loading image method.
 final class ImageLoader {
     static let shared = ImageLoader()
     private init() {}
