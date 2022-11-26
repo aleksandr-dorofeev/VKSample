@@ -5,7 +5,7 @@ import Alamofire
 import Foundation
 import RealmSwift
 
-/// Base network service with load and save data methods.
+/// Base network service with load data method.
 class NetworkService {
     // MARK: - Public enums.
 
