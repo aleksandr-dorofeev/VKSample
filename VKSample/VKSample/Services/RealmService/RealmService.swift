@@ -6,12 +6,6 @@ import RealmSwift
 
 /// Class with methods for realm.
 final class RealmService {
-    // MARK: - Public properties.
-
-    private var friendsToken: NotificationToken?
-    private var groupsToken: NotificationToken?
-    private var photosToken: NotificationToken?
-
     // MARK: - Public methods.
 
     func writeData<T: Object>(items: [T]) where T: Decodable {

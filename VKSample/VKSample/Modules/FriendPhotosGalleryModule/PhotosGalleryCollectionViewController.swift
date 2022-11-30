@@ -19,9 +19,9 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
     // MARK: - Private properties.
 
-    private var friendID = Int()
     private let networkService = VKNetworkService()
     private let realmService = RealmService()
+    private var friendID = Int()
     private var photos: [Photo] = []
     private var selectedCellIndex = 0
 
