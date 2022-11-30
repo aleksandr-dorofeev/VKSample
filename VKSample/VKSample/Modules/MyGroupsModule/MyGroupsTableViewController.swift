@@ -23,7 +23,7 @@ final class MyGroupsTableViewController: UITableViewController {
 
     private var groups: Results<Group>?
 
-    // MARK: - Lifecycle.
+    // MARK: - Life cycle.
 
     override func viewDidLoad() {
         super.viewDidLoad()
