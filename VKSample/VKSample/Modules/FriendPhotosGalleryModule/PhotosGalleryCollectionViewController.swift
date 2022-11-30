@@ -19,9 +19,9 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
     // MARK: - Private properties.
 
-    private let networkService = VKNetworkService()
-    private var photoURLNames: [String] = []
-
+    private let vkNetworkService = VKNetworkService()
+    private var friendID = Int()
+    private var photos: [Photo] = []
     private var selectedCellIndex = 0
 
     // MARK: - Life cycle.
@@ -29,6 +29,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        loadPhotos()
     }
 
     // MARK: - Public methods.
@@ -39,15 +40,14 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
             let destination = segue.destination as? SwipeUserPhotosViewController
         else { return }
         destination.configurePhotosUserVC(
-            photoGalleryNames: photoURLNames,
+            photoGalleryNames: photos,
             currentPhotoIndex: selectedCellIndex
         )
     }
 
     func configure(by friend: Friend) {
-        let friendID = friend.id
+        friendID = friend.id
         title = "\(friend.firstName) \(friend.lastName)"
-        getPhoto(friendID: friendID)
     }
 
     // MARK: - Private methods.
@@ -56,17 +56,23 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
         configureCollectionCellLayout()
     }
 
-    private func getPhoto(friendID: Int) {
-        networkService.fetchUsersPhoto(ownerID: friendID) { [weak self] result in
+    private func loadPhotos() {
+        guard let objects = RealmService.readData(Photo.self) else { return }
+        let userId = objects.map(\.ownerID)
+        if userId.contains(where: { $0 == friendID }) {
+            photos = objects.filter { $0.ownerID == friendID }
+        } else {
+            fetchPhotos()
+        }
+    }
+
+    private func fetchPhotos() {
+        vkNetworkService.fetchUsersPhoto(ownerID: friendID) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case let .success(photoString):
-                let photos = photoString
-                var photosNames: [String] = []
-                for item in photos {
-                    photosNames.append(item.url)
-                }
-                self.photoURLNames = photosNames
+            case let .success(photos):
+                RealmService.writeData(items: photos)
+                self.photos = photos
                 self.collectionView.reloadData()
             case let .failure(error):
                 self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
@@ -91,7 +97,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
 extension PhotosGalleryCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photoURLNames.count
+        photos.count
     }
 
     override func collectionView(
@@ -102,7 +108,7 @@ extension PhotosGalleryCollectionViewController {
             withReuseIdentifier: Constants.friendPhotosGalleryID,
             for: indexPath
         ) as? FriendPhotoGalleryCollectionViewCell else { return UICollectionViewCell() }
-        photoCell.configure(imageUrlString: photoURLNames[indexPath.row])
+        photoCell.configure(imageUrlString: photos[indexPath.row].url)
         return photoCell
     }
 }

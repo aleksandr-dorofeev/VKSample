@@ -20,7 +20,7 @@ final class GroupsTableViewController: UITableViewController {
 
     // MARK: - Private properties.
 
-    private let networkService = VKNetworkService()
+    private let vkNetworkService = VKNetworkService()
     private var filteredGroups: [Group] = []
 
     // MARK: - Life cycle.
@@ -32,8 +32,8 @@ final class GroupsTableViewController: UITableViewController {
 
     // MARK: - Private methods.
 
-    private func loadSearchedGroups(text: String) {
-        networkService.fetchSearchedGroups(text: text) { [weak self] result in
+    private func fetchSearchedGroups(text: String) {
+        vkNetworkService.fetchSearchedGroups(text: text) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(result):
@@ -80,6 +80,6 @@ extension GroupsTableViewController: UISearchBarDelegate {
             tableView.reloadData()
             return
         }
-        loadSearchedGroups(text: searchText)
+        fetchSearchedGroups(text: searchText)
     }
 }

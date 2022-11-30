@@ -1,6 +1,7 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// Screen with friends list.
@@ -16,9 +17,9 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private properties.
 
-    private let networkService = VKNetworkService()
-
-    private var friends: [Friend] = []
+    private let vkNetworkService: VKNetworkServiceProtocol = VKNetworkService()
+    private var friendsToken: NotificationToken?
+    private var friends: Results<Friend>?
     private var sectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
 
@@ -26,8 +27,7 @@ final class FriendsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCellsToSections()
-        fetchFriends()
+        loadFriends()
     }
 
     // MARK: - Public methods.
@@ -45,22 +45,44 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private methods.
 
+    private func loadFriends() {
+        guard let objects = RealmService.readData(Friend.self) else { return }
+        addFriendToken(result: objects)
+        friends = objects
+        setupCellsToSections()
+        fetchFriends()
+    }
+
     private func fetchFriends() {
-        networkService.fetchFriends { [weak self] result in
+        vkNetworkService.fetchFriends { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case let .success(users):
-                let items = users
-                self.friends = items
-                self.setupCellsToSections()
-                self.tableView.reloadData()
+            case let .success(friends):
+                RealmService.writeData(items: friends)
             case let .failure(error):
                 self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
         }
     }
 
+    private func addFriendToken(result: Results<Friend>) {
+        friendsToken = result.observe { [weak self] change in
+            guard let self = self else { return }
+            switch change {
+            case .initial:
+                break
+            case .update:
+                self.friends = result
+                self.setupCellsToSections()
+                self.tableView.reloadData()
+            case let .error(error):
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
+            }
+        }
+    }
+
     private func setupCellsToSections() {
+        guard let friends = friends else { return }
         for friend in friends {
             guard let firstLetterOfFirstName = friend.firstName.first else { return }
             let firstLetter = friend.lastName.first ?? firstLetterOfFirstName

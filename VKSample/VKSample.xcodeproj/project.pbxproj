@@ -13,7 +13,7 @@
 		F8027346293129B70022346B /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8027345293129B70022346B /* Group.swift */; };
 		F802736B293149ED0022346B /* VKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802736A293149ED0022346B /* VKResponse.swift */; };
 		F802736D2931733C0022346B /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802736C2931733C0022346B /* ImageLoader.swift */; };
-		F8027371293178090022346B /* RealmDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8027370293178090022346B /* RealmDataBase.swift */; };
+		F8027371293178090022346B /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8027370293178090022346B /* RealmService.swift */; };
 		F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80EC5182910FFA4007E9437 /* AppDelegate.swift */; };
 		F80EC51B2910FFA4007E9437 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80EC51A2910FFA4007E9437 /* SceneDelegate.swift */; };
 		F80EC51D2910FFA4007E9437 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80EC51C2910FFA4007E9437 /* LoginViewController.swift */; };
@@ -47,6 +47,7 @@
 		F8E47B962919C9B70014AF31 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B952919C9B70014AF31 /* FeedViewController.swift */; };
 		F8E47B9C2919CB5A0014AF31 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B9A2919CB5A0014AF31 /* PostTableViewCell.swift */; };
 		F8E47B9D2919CB5A0014AF31 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8E47B9B2919CB5A0014AF31 /* PostTableViewCell.xib */; };
+		F8F9C8452937C7FF0026E88C /* VKNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9C8442937C7FF0026E88C /* VKNetworkServiceProtocol.swift */; };
 		F8FA9DE12930287200DEA105 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B982919CAA50014AF31 /* Post.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +60,7 @@
 		F8027345293129B70022346B /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		F802736A293149ED0022346B /* VKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKResponse.swift; sourceTree = "<group>"; };
 		F802736C2931733C0022346B /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
-		F8027370293178090022346B /* RealmDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataBase.swift; sourceTree = "<group>"; };
+		F8027370293178090022346B /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		F80EC5152910FFA4007E9437 /* VKSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80EC5182910FFA4007E9437 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F80EC51A2910FFA4007E9437 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 		F8E47B982919CAA50014AF31 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F8E47B9A2919CB5A0014AF31 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		F8E47B9B2919CB5A0014AF31 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
+		F8F9C8442937C7FF0026E88C /* VKNetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNetworkServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,18 +158,18 @@
 		F802736E293177E60022346B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F802736F293177F30022346B /* DB */,
+				F802736F293177F30022346B /* RealmService */,
 				F895E0BE292D5EF9001D4A88 /* NetworkLayer */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		F802736F293177F30022346B /* DB */ = {
+		F802736F293177F30022346B /* RealmService */ = {
 			isa = PBXGroup;
 			children = (
-				F8027370293178090022346B /* RealmDataBase.swift */,
+				F8027370293178090022346B /* RealmService.swift */,
 			);
-			path = DB;
+			path = RealmService;
 			sourceTree = "<group>";
 		};
 		F80EC50C2910FFA4007E9437 = {
@@ -389,6 +391,7 @@
 				F895E0CF292E4222001D4A88 /* NetworkService.swift */,
 				F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */,
 				F802736C2931733C0022346B /* ImageLoader.swift */,
+				F8F9C8442937C7FF0026E88C /* VKNetworkServiceProtocol.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -572,7 +575,7 @@
 			files = (
 				F895E0B5292CEDC5001D4A88 /* Session.swift in Sources */,
 				F82272D02911B8CC003EEB1B /* Verification.swift in Sources */,
-				F8027371293178090022346B /* RealmDataBase.swift in Sources */,
+				F8027371293178090022346B /* RealmService.swift in Sources */,
 				F82272D62911DB37003EEB1B /* GroupsTableViewController.swift in Sources */,
 				F88D6F6B291D84DD008B458F /* InteractiveTransition.swift in Sources */,
 				F88D6F67291D80A2008B458F /* PushTransitionAnimator.swift in Sources */,
@@ -589,6 +592,7 @@
 				F895E0C0292D5F26001D4A88 /* VKNetworkService.swift in Sources */,
 				F88D6F24291CE44B008B458F /* SwipeUserPhotosViewController.swift in Sources */,
 				F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */,
+				F8F9C8452937C7FF0026E88C /* VKNetworkServiceProtocol.swift in Sources */,
 				F88D6F65291D7FD0008B458F /* MainNavigationController.swift in Sources */,
 				F80273412931296B0022346B /* Photo.swift in Sources */,
 				F8490DB5291432600044E9EF /* GroupTableViewCell.swift in Sources */,
