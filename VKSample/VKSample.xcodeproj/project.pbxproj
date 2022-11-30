@@ -47,6 +47,7 @@
 		F8E47B962919C9B70014AF31 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B952919C9B70014AF31 /* FeedViewController.swift */; };
 		F8E47B9C2919CB5A0014AF31 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B9A2919CB5A0014AF31 /* PostTableViewCell.swift */; };
 		F8E47B9D2919CB5A0014AF31 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8E47B9B2919CB5A0014AF31 /* PostTableViewCell.xib */; };
+		F8F9C8452937C7FF0026E88C /* VKNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9C8442937C7FF0026E88C /* VKNetworkServiceProtocol.swift */; };
 		F8FA9DE12930287200DEA105 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B982919CAA50014AF31 /* Post.swift */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,7 @@
 		F8E47B982919CAA50014AF31 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F8E47B9A2919CB5A0014AF31 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		F8E47B9B2919CB5A0014AF31 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
+		F8F9C8442937C7FF0026E88C /* VKNetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNetworkServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,6 +391,7 @@
 				F895E0CF292E4222001D4A88 /* NetworkService.swift */,
 				F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */,
 				F802736C2931733C0022346B /* ImageLoader.swift */,
+				F8F9C8442937C7FF0026E88C /* VKNetworkServiceProtocol.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				F895E0C0292D5F26001D4A88 /* VKNetworkService.swift in Sources */,
 				F88D6F24291CE44B008B458F /* SwipeUserPhotosViewController.swift in Sources */,
 				F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */,
+				F8F9C8452937C7FF0026E88C /* VKNetworkServiceProtocol.swift in Sources */,
 				F88D6F65291D7FD0008B458F /* MainNavigationController.swift in Sources */,
 				F80273412931296B0022346B /* Photo.swift in Sources */,
 				F8490DB5291432600044E9EF /* GroupTableViewCell.swift in Sources */,

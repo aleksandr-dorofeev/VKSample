@@ -7,6 +7,8 @@ import RealmSwift
 /// Friend.
 @objcMembers
 final class Friend: Object, Decodable {
+    // MARK: - Public properties.
+
     dynamic var id: Int
     dynamic var firstName: String
     dynamic var lastName: String

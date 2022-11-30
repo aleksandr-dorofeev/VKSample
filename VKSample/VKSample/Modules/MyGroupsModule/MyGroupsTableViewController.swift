@@ -17,53 +17,49 @@ final class MyGroupsTableViewController: UITableViewController {
 
     // MARK: - Private properties.
 
-    private let networkService = VKNetworkService()
-    private let realmService = RealmService()
+    private let vkNetworkService = VKNetworkService()
     private var groupsToken: NotificationToken?
-
     private var groups: Results<Group>?
 
     // MARK: - Life cycle.
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getUsersGroups()
+        loadGroups()
     }
 
     // MARK: - Private methods.
 
-    private func getUsersGroups() {
-        guard let objects = realmService.readData(items: Group.self) else { return }
-        if !objects.isEmpty {
-            groups = objects
-            tableView.reloadData()
-        } else {
-            networkService.fetchUsersGroups { [weak self] result in
-                guard
-                    let self = self,
-                    let groups = self.groups
-                else { return }
-                switch result {
-                case .success:
-                    self.createGroupNotificationToken(resultGroups: groups)
-                case let .failure(error):
-                    self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
-                }
+    private func loadGroups() {
+        guard let objects = RealmService.readData(Group.self) else { return }
+        addGroupToken(result: objects)
+        groups = objects
+        fetchGroups()
+    }
+
+    private func fetchGroups() {
+        vkNetworkService.fetchUsersGroups { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(groups):
+                RealmService.writeData(items: groups)
+            case let .failure(error):
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
         }
     }
 
-    private func createGroupNotificationToken(resultGroups: Results<Group>) {
-        groupsToken = groups?.observe { [weak self] change in
+    private func addGroupToken(result: Results<Group>) {
+        groupsToken = result.observe { [weak self] change in
             guard let self = self else { return }
             switch change {
             case .initial:
                 break
             case .update:
-                self.groups = resultGroups
+                self.groups = result
                 self.tableView.reloadData()
             case let .error(error):
-                print(error.localizedDescription)
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
         }
     }
@@ -99,7 +95,7 @@ extension MyGroupsTableViewController {
     ) {
         guard let group = groups?[indexPath.row],
               editingStyle == .delete else { return }
-        realmService.deleteGroup(group)
+        RealmService.deleteGroup(group)
         tableView.reloadData()
     }
 }

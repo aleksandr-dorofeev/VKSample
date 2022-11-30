@@ -1,16 +1,19 @@
 // RealmService.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
 import RealmSwift
 
-/// Class with methods for realm.
+/// Methods for realm.
 final class RealmService {
+    // MARK: - Private Properties.
+
+    private static let deleteIfMigration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+
     // MARK: - Public methods.
 
-    func writeData<T: Object>(items: [T]) where T: Decodable {
+    static func writeData<T: Object>(items: [T]) {
         do {
-            let realm = try Realm()
+            let realm = try Realm(configuration: deleteIfMigration)
             try realm.write {
                 realm.add(items, update: .modified)
             }
@@ -19,18 +22,20 @@ final class RealmService {
         }
     }
 
-    @discardableResult func readData<T: Object>(items: T.Type) -> Results<T>? {
-        var data: Results<T>?
+    static func readData<T: Object>(
+        _ type: T.Type,
+        config: Realm.Configuration = Realm.Configuration.defaultConfiguration
+    ) -> Results<T>? {
         do {
-            let realm = try Realm()
-            data = realm.objects(T.self)
+            let realm = try Realm(configuration: deleteIfMigration)
+            return realm.objects(type)
         } catch {
             print(error.localizedDescription)
         }
-        return data
+        return nil
     }
 
-    func deleteGroup<T: Object>(_ group: T) {
+    static func deleteGroup<T: Object>(_ group: T) {
         do {
             let realm = try Realm()
             try realm.write {

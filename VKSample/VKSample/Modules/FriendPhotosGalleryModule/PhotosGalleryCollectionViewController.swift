@@ -19,8 +19,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
     // MARK: - Private properties.
 
-    private let networkService = VKNetworkService()
-    private let realmService = RealmService()
+    private let vkNetworkService = VKNetworkService()
     private var friendID = Int()
     private var photos: [Photo] = []
     private var selectedCellIndex = 0
@@ -30,6 +29,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        loadPhotos()
     }
 
     // MARK: - Public methods.
@@ -48,7 +48,6 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
     func configure(by friend: Friend) {
         friendID = friend.id
         title = "\(friend.firstName) \(friend.lastName)"
-        loadPhotosFromRealm()
     }
 
     // MARK: - Private methods.
@@ -57,30 +56,26 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
         configureCollectionCellLayout()
     }
 
-    private func getPhoto(friendID: Int) {
-        networkService.fetchUsersPhoto(ownerID: friendID) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case let .success(photo):
-                self.photos = photo
-                self.collectionView.reloadData()
-            case let .failure(error):
-                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
-            }
+    private func loadPhotos() {
+        guard let objects = RealmService.readData(Photo.self) else { return }
+        let userId = objects.map(\.ownerID)
+        if userId.contains(where: { $0 == friendID }) {
+            photos = objects.filter { $0.ownerID == friendID }
+        } else {
+            fetchPhotos()
         }
     }
 
-    private func loadPhotosFromRealm() {
-        do {
-            guard let objects = realmService.readData(items: Photo.self) else { return }
-            let userId = objects.map(\.ownerID)
-            if userId.contains(where: { id in
-                id == friendID
-            }) {
-                photos = objects.filter { $0.ownerID == friendID }
-                collectionView.reloadData()
-            } else {
-                getPhoto(friendID: friendID)
+    private func fetchPhotos() {
+        vkNetworkService.fetchUsersPhoto(ownerID: friendID) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(photos):
+                RealmService.writeData(items: photos)
+                self.photos = photos
+                self.collectionView.reloadData()
+            case let .failure(error):
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
         }
     }

@@ -7,6 +7,8 @@ import RealmSwift
 /// User's photo.
 @objcMembers
 final class Photo: Object, Decodable {
+    // MARK: - Public properties.
+
     dynamic var type = String()
     dynamic var url = String()
     dynamic var ownerID = Int()

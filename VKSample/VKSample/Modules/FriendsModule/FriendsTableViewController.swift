@@ -17,9 +17,7 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private properties.
 
-    private let networkService = VKNetworkService()
-    private let realmService = RealmService()
-
+    private let vkNetworkService: VKNetworkServiceProtocol = VKNetworkService()
     private var friendsToken: NotificationToken?
     private var friends: Results<Friend>?
     private var sectionsMap: [Character: [Friend]] = [:]
@@ -29,8 +27,7 @@ final class FriendsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCellsToSections()
-        fetchFriends()
+        loadFriends()
     }
 
     // MARK: - Public methods.
@@ -48,39 +45,38 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private methods.
 
+    private func loadFriends() {
+        guard let objects = RealmService.readData(Friend.self) else { return }
+        addFriendToken(result: objects)
+        friends = objects
+        setupCellsToSections()
+        fetchFriends()
+    }
+
     private func fetchFriends() {
-        guard let objects = realmService.readData(items: Friend.self) else { return }
-        if !objects.isEmpty {
-            friends = objects
-            setupCellsToSections()
-        } else {
-            networkService.fetchFriends { [weak self] result in
-                guard
-                    let self = self,
-                    let friends = self.friends
-                else { return }
-                switch result {
-                case .success:
-                    self.createFriendsNotificationToken(resultFriends: friends)
-                case let .failure(error):
-                    self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
-                }
+        vkNetworkService.fetchFriends { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(friends):
+                RealmService.writeData(items: friends)
+            case let .failure(error):
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
         }
     }
 
-    private func createFriendsNotificationToken(resultFriends: Results<Friend>) {
-        friendsToken = friends?.observe { [weak self] change in
+    private func addFriendToken(result: Results<Friend>) {
+        friendsToken = result.observe { [weak self] change in
             guard let self = self else { return }
             switch change {
             case .initial:
                 break
             case .update:
-                self.friends = resultFriends
-                self.tableView.reloadData()
+                self.friends = result
                 self.setupCellsToSections()
+                self.tableView.reloadData()
             case let .error(error):
-                print(error.localizedDescription)
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
         }
     }

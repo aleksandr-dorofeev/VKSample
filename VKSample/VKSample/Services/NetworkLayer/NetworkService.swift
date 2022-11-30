@@ -2,11 +2,9 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
-import Foundation
-import RealmSwift
 
 /// Base network service with load data method.
-class NetworkService {
+final class NetworkService {
     // MARK: - Public enums.
 
     enum RequestMethod: CustomStringConvertible {
@@ -66,7 +64,6 @@ class NetworkService {
 
     // MARK: - Private properties.
 
-    private let realmDataBase = RealmService()
     private let baseQueryParameters: Parameters = [
         Constants.accessTokenParamText: Session.shared.token,
         Constants.versionParamText: Constants.versionParamValue
@@ -74,23 +71,18 @@ class NetworkService {
 
     // MARK: - Public methods.
 
-    func loadData<T: Decodable>(
-        methodType: RequestMethod,
-        completion: @escaping (Result<[T], Error>) -> Void
-    ) where T: Object {
+    func loadData<T: Decodable>(methodType: RequestMethod, completion: @escaping (Result<[T], Error>) -> Void) {
         let url = "\(Constants.baseURLText)\(methodType.description)"
         let methodParams = methodType.parametersMap
         let parameters = baseQueryParameters.merging(methodParams) { _, _ in }
-        AF.request(url, parameters: parameters).responseData { [weak self] response in
-            guard
-                let self = self,
-                let data = response.value else { return }
-            if let error = response.error {
+        AF.request(url, parameters: parameters).responseData { response in
+            guard let data = response.data else { return }
+            do {
+                let object = try JSONDecoder().decode(VKResponse<T>.self, from: data)
+                completion(.success(object.items))
+            } catch {
                 completion(.failure(error))
             }
-            guard let result = try? JSONDecoder().decode(VKResponse<T>.self, from: data) else { return }
-            completion(.success(result.items))
-            self.realmDataBase.writeData(items: result.items)
         }
     }
 }

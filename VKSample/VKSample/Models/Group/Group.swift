@@ -7,6 +7,8 @@ import RealmSwift
 /// Groups the user is subscribed to.
 @objcMembers
 final class Group: Object, Decodable {
+    // MARK: - Public properties.
+
     dynamic var id: Int
     dynamic var name: String
     dynamic var avatar: String?
