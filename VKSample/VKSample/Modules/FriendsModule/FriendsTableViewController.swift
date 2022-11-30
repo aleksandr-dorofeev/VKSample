@@ -1,6 +1,7 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// Screen with friends list.
@@ -17,8 +18,10 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties.
 
     private let networkService = VKNetworkService()
+    private let realmService = RealmService()
 
-    private var friends: [Friend] = []
+    private var friendsToken: NotificationToken?
+    private var friends: Results<Friend>?
     private var sectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
 
@@ -46,21 +49,44 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private methods.
 
     private func fetchFriends() {
-        networkService.fetchFriends { [weak self] result in
+        guard let objects = realmService.readData(items: Friend.self) else { return }
+        if !objects.isEmpty {
+            friends = objects
+            setupCellsToSections()
+        } else {
+            networkService.fetchFriends { [weak self] result in
+                guard
+                    let self = self,
+                    let friends = self.friends
+                else { return }
+                switch result {
+                case .success:
+                    self.createFriendsNotificationToken(resultFriends: friends)
+                case let .failure(error):
+                    self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
+                }
+            }
+        }
+    }
+
+    private func createFriendsNotificationToken(resultFriends: Results<Friend>) {
+        friendsToken = friends?.observe { [weak self] change in
             guard let self = self else { return }
-            switch result {
-            case let .success(users):
-                let items = users
-                self.friends = items
-                self.setupCellsToSections()
+            switch change {
+            case .initial:
+                break
+            case .update:
+                self.friends = resultFriends
                 self.tableView.reloadData()
-            case let .failure(error):
-                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
+                self.setupCellsToSections()
+            case let .error(error):
+                print(error.localizedDescription)
             }
         }
     }
 
     private func setupCellsToSections() {
+        guard let friends = friends else { return }
         for friend in friends {
             guard let firstLetterOfFirstName = friend.firstName.first else { return }
             let firstLetter = friend.lastName.first ?? firstLetterOfFirstName

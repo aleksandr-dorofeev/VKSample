@@ -66,11 +66,11 @@ class NetworkService {
 
     // MARK: - Private properties.
 
+    private let realmDataBase = RealmService()
     private let baseQueryParameters: Parameters = [
         Constants.accessTokenParamText: Session.shared.token,
         Constants.versionParamText: Constants.versionParamValue
     ]
-    private let realmDataBase = RealmDataBase()
 
     // MARK: - Public methods.
 
@@ -84,14 +84,13 @@ class NetworkService {
         AF.request(url, parameters: parameters).responseData { [weak self] response in
             guard
                 let self = self,
-                let data = response.value
-            else { return }
+                let data = response.value else { return }
             if let error = response.error {
                 completion(.failure(error))
             }
             guard let result = try? JSONDecoder().decode(VKResponse<T>.self, from: data) else { return }
             completion(.success(result.items))
-            self.realmDataBase.saveData(items: result.items)
+            self.realmDataBase.writeData(items: result.items)
         }
     }
 }

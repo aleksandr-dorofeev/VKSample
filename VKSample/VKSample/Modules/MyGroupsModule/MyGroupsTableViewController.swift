@@ -1,6 +1,7 @@
 // MyGroupsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// Screen with my groups.
@@ -17,10 +18,12 @@ final class MyGroupsTableViewController: UITableViewController {
     // MARK: - Private properties.
 
     private let networkService = VKNetworkService()
+    private let realmService = RealmService()
+    private var groupsToken: NotificationToken?
 
-    private var groups: [Group] = []
+    private var groups: Results<Group>?
 
-    // MARK: - Life cycle.
+    // MARK: - Lifecycle.
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +33,37 @@ final class MyGroupsTableViewController: UITableViewController {
     // MARK: - Private methods.
 
     private func getUsersGroups() {
-        networkService.fetchUsersGroups { [weak self] result in
+        guard let objects = realmService.readData(items: Group.self) else { return }
+        if !objects.isEmpty {
+            groups = objects
+            tableView.reloadData()
+        } else {
+            networkService.fetchUsersGroups { [weak self] result in
+                guard
+                    let self = self,
+                    let groups = self.groups
+                else { return }
+                switch result {
+                case .success:
+                    self.createGroupNotificationToken(resultGroups: groups)
+                case let .failure(error):
+                    self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
+                }
+            }
+        }
+    }
+
+    private func createGroupNotificationToken(resultGroups: Results<Group>) {
+        groupsToken = groups?.observe { [weak self] change in
             guard let self = self else { return }
-            switch result {
-            case let .success(groups):
-                let items = groups
-                self.groups = items
+            switch change {
+            case .initial:
+                break
+            case .update:
+                self.groups = resultGroups
                 self.tableView.reloadData()
-            case let .failure(error):
-                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
+            case let .error(error):
+                print(error.localizedDescription)
             }
         }
     }
@@ -48,15 +73,17 @@ final class MyGroupsTableViewController: UITableViewController {
 
 extension MyGroupsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        groups.count
+        groups?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let groupCell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.myGroupsCellID,
-            for: indexPath
-        ) as? MyGroupTableViewCell else { return UITableViewCell() }
-        let group = groups[indexPath.row]
+        guard
+            let groupCell = tableView.dequeueReusableCell(
+                withIdentifier: Constants.myGroupsCellID,
+                for: indexPath
+            ) as? MyGroupTableViewCell,
+            let group = groups?[indexPath.row]
+        else { return UITableViewCell() }
         groupCell.configure(with: group)
         return groupCell
     }
@@ -70,14 +97,9 @@ extension MyGroupsTableViewController {
         commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath
     ) {
-        switch editingStyle {
-        case .delete:
-            groups.remove(at: indexPath.row)
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.endUpdates()
-        default:
-            break
-        }
+        guard let group = groups?[indexPath.row],
+              editingStyle == .delete else { return }
+        realmService.deleteGroup(group)
+        tableView.reloadData()
     }
 }
