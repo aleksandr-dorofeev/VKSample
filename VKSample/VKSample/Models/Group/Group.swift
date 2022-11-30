@@ -5,11 +5,10 @@ import Foundation
 import RealmSwift
 
 /// Groups the user is subscribed to.
-@objcMembers
 final class Group: Object, Decodable {
-    dynamic var id: Int
-    dynamic var name: String
-    dynamic var avatar: String?
+    @objc dynamic var id: Int
+    @objc dynamic var name: String
+    @objc dynamic var avatar: String?
 
     // MARK: - CodingKeys enums.
 
@@ -17,11 +16,5 @@ final class Group: Object, Decodable {
         case id
         case name
         case avatar = "photo_100"
-    }
-
-    // MARK: - Public methods.
-
-    override static func primaryKey() -> String? {
-        "id"
     }
 }

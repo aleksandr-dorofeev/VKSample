@@ -5,12 +5,11 @@ import Foundation
 import RealmSwift
 
 /// Friend.
-@objcMembers
 final class Friend: Object, Decodable {
-    dynamic var id: Int
-    dynamic var firstName: String
-    dynamic var lastName: String
-    dynamic var avatar: String?
+    @objc dynamic var id: Int
+    @objc dynamic var firstName: String
+    @objc dynamic var lastName: String
+    @objc dynamic var avatar: String?
 
     // MARK: - CodingKeys enums.
 
@@ -19,11 +18,5 @@ final class Friend: Object, Decodable {
         case firstName = "first_name"
         case lastName = "last_name"
         case avatar = "photo_100"
-    }
-
-    // MARK: - Public methods.
-
-    override static func primaryKey() -> String? {
-        "id"
     }
 }
