@@ -13,7 +13,7 @@
 		F8027346293129B70022346B /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8027345293129B70022346B /* Group.swift */; };
 		F802736B293149ED0022346B /* VKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802736A293149ED0022346B /* VKResponse.swift */; };
 		F802736D2931733C0022346B /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802736C2931733C0022346B /* ImageLoader.swift */; };
-		F8027371293178090022346B /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8027370293178090022346B /* RealmService.swift */; };
+		F8027371293178090022346B /* RealmDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8027370293178090022346B /* RealmDataBase.swift */; };
 		F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80EC5182910FFA4007E9437 /* AppDelegate.swift */; };
 		F80EC51B2910FFA4007E9437 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80EC51A2910FFA4007E9437 /* SceneDelegate.swift */; };
 		F80EC51D2910FFA4007E9437 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80EC51C2910FFA4007E9437 /* LoginViewController.swift */; };
@@ -59,7 +59,7 @@
 		F8027345293129B70022346B /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		F802736A293149ED0022346B /* VKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKResponse.swift; sourceTree = "<group>"; };
 		F802736C2931733C0022346B /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
-		F8027370293178090022346B /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		F8027370293178090022346B /* RealmDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataBase.swift; sourceTree = "<group>"; };
 		F80EC5152910FFA4007E9437 /* VKSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80EC5182910FFA4007E9437 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F80EC51A2910FFA4007E9437 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,18 +156,18 @@
 		F802736E293177E60022346B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F802736F293177F30022346B /* RealmService */,
+				F802736F293177F30022346B /* DB */,
 				F895E0BE292D5EF9001D4A88 /* NetworkLayer */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		F802736F293177F30022346B /* RealmService */ = {
+		F802736F293177F30022346B /* DB */ = {
 			isa = PBXGroup;
 			children = (
-				F8027370293178090022346B /* RealmService.swift */,
+				F8027370293178090022346B /* RealmDataBase.swift */,
 			);
-			path = RealmService;
+			path = DB;
 			sourceTree = "<group>";
 		};
 		F80EC50C2910FFA4007E9437 = {
@@ -572,7 +572,7 @@
 			files = (
 				F895E0B5292CEDC5001D4A88 /* Session.swift in Sources */,
 				F82272D02911B8CC003EEB1B /* Verification.swift in Sources */,
-				F8027371293178090022346B /* RealmService.swift in Sources */,
+				F8027371293178090022346B /* RealmDataBase.swift in Sources */,
 				F82272D62911DB37003EEB1B /* GroupsTableViewController.swift in Sources */,
 				F88D6F6B291D84DD008B458F /* InteractiveTransition.swift in Sources */,
 				F88D6F67291D80A2008B458F /* PushTransitionAnimator.swift in Sources */,

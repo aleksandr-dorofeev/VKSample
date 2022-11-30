@@ -19,10 +19,9 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
     // MARK: - Private properties.
 
-    private var friendID = Int()
     private let networkService = VKNetworkService()
-    private let realmService = RealmService()
-    private var photos: [Photo] = []
+    private var photoURLNames: [String] = []
+
     private var selectedCellIndex = 0
 
     // MARK: - Life cycle.
@@ -40,15 +39,15 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
             let destination = segue.destination as? SwipeUserPhotosViewController
         else { return }
         destination.configurePhotosUserVC(
-            photoGalleryNames: photos,
+            photoGalleryNames: photoURLNames,
             currentPhotoIndex: selectedCellIndex
         )
     }
 
     func configure(by friend: Friend) {
-        friendID = friend.id
+        let friendID = friend.id
         title = "\(friend.firstName) \(friend.lastName)"
-        loadPhotosFromRealm()
+        getPhoto(friendID: friendID)
     }
 
     // MARK: - Private methods.
@@ -61,26 +60,16 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
         networkService.fetchUsersPhoto(ownerID: friendID) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case let .success(photo):
-                self.photos = photo
+            case let .success(photoString):
+                let photos = photoString
+                var photosNames: [String] = []
+                for item in photos {
+                    photosNames.append(item.url)
+                }
+                self.photoURLNames = photosNames
                 self.collectionView.reloadData()
             case let .failure(error):
                 self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
-            }
-        }
-    }
-
-    private func loadPhotosFromRealm() {
-        do {
-            guard let objects = realmService.readData(items: Photo.self) else { return }
-            let userId = objects.map(\.ownerID)
-            if userId.contains(where: { id in
-                id == friendID
-            }) {
-                photos = objects.filter { $0.ownerID == friendID }
-                collectionView.reloadData()
-            } else {
-                getPhoto(friendID: friendID)
             }
         }
     }
@@ -102,7 +91,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
 extension PhotosGalleryCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photos.count
+        photoURLNames.count
     }
 
     override func collectionView(
@@ -113,7 +102,7 @@ extension PhotosGalleryCollectionViewController {
             withReuseIdentifier: Constants.friendPhotosGalleryID,
             for: indexPath
         ) as? FriendPhotoGalleryCollectionViewCell else { return UICollectionViewCell() }
-        photoCell.configure(imageUrlString: photos[indexPath.row].url)
+        photoCell.configure(imageUrlString: photoURLNames[indexPath.row])
         return photoCell
     }
 }
