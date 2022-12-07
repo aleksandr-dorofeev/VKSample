@@ -4,26 +4,26 @@
 import Foundation
 
 /// Service with requests to VK API.
-final class VKNetworkService: VKNetworkServiceProtocol {
-    // MARK: - Private Properties
-
-    private let networkService = NetworkService()
-
+final class VKNetworkService: NetworkService, VKNetworkServiceProtocol {
     // MARK: - Public methods.
 
     func fetchFriends(completion: @escaping (Result<[Friend], Error>) -> Void) {
-        networkService.loadData(methodType: .getFriends, completion: completion)
+        loadData(methodType: .getFriends, completion: completion)
     }
 
     func fetchUsersPhoto(ownerID: Int, completion: @escaping (Result<[Photo], Error>) -> Void) {
-        networkService.loadData(methodType: .getPhotos(ownerID: ownerID), completion: completion)
+        loadData(methodType: .getPhotos(ownerID: ownerID), completion: completion)
     }
 
     func fetchUsersGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
-        networkService.loadData(methodType: .getGroups, completion: completion)
+        loadData(methodType: .getGroups, completion: completion)
     }
 
     func fetchSearchedGroups(text: String, completion: @escaping (Result<[Group], Error>) -> Void) {
-        networkService.loadData(methodType: .searchGroups(queryText: text), completion: completion)
+        loadData(methodType: .searchGroups(queryText: text), completion: completion)
+    }
+
+    func getNewsfeed(type: NewsType, completion: @escaping (Result<VKNewsResponse, Error>) -> Void) {
+        loadNews(methodType: .newsFeed(type: type), completion: completion)
     }
 }
