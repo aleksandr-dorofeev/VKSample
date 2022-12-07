@@ -43,7 +43,7 @@ import UIKit
 
     // MARK: - Public properties.
 
-    var amountLikes = Int() {
+    var amountLikes = 0 {
         didSet {
             amountLikeLabel.text = "\(amountLikes)"
         }

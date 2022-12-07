@@ -12,6 +12,7 @@ final class NetworkService {
         case getFriends
         case searchGroups(queryText: String)
         case getPhotos(ownerID: Int)
+        case newsFeed
 
         var description: String {
             switch self {
@@ -23,6 +24,8 @@ final class NetworkService {
                 return Constants.groupsSearchText
             case .getPhotos:
                 return Constants.photosGetAllText
+            case .newsFeed:
+                return Constants.newsGetText
             }
         }
 
@@ -39,6 +42,8 @@ final class NetworkService {
                     Constants.extendedParamText: Constants.extendedParamValue,
                     Constants.ownerIDParamText: userID
                 ]
+            case .newsFeed:
+                return [Constants.filtersText: Constants.postTypeText]
             }
         }
     }
@@ -50,16 +55,20 @@ final class NetworkService {
         static let photosGetAllText = "photos.getAll"
         static let groupsGetText = "groups.get"
         static let groupsSearchText = "groups.search"
+        static let newsGetText = "newsfeed.get"
         static let baseURLText = "https://api.vk.com/method/"
         static let fieldsParamText = "fields"
         static let friendFieldsValue = "nickname, photo_100"
         static let extendedParamText = "extended"
+        static let filtersText = "filters"
         static let extendedParamValue = "1"
         static let queryParamText = "q"
         static let ownerIDParamText = "owner_id"
         static let accessTokenParamText = "access_token"
         static let versionParamText = "v"
         static let versionParamValue = "5.131"
+        static let postTypeText = "post"
+        static let photoTypeText = "wall_photo"
     }
 
     // MARK: - Private properties.
@@ -80,6 +89,21 @@ final class NetworkService {
             do {
                 let object = try JSONDecoder().decode(VKResponse<T>.self, from: data)
                 completion(.success(object.items))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func loadNews(methodType: RequestMethod, completion: @escaping (Result<VKNewsResponse, Error>) -> Void) {
+        let url = "\(Constants.baseURLText)\(methodType.description)"
+        let methodParams = methodType.parametersMap
+        let parameters = baseQueryParameters.merging(methodParams) { _, _ in }
+        AF.request(url, parameters: parameters).responseData { response in
+            guard let data = response.data else { return }
+            do {
+                let object = try JSONDecoder().decode(VKNewsResponse.self, from: data)
+                completion(.success(object))
             } catch {
                 completion(.failure(error))
             }

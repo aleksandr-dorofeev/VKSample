@@ -3,13 +3,30 @@
 
 import UIKit
 
+typealias PostCell = UITableViewCell & PostConfigurable
+
+protocol PostConfigurable {
+    func configure(news: News)
+}
+
 /// Screen with feed.
 final class FeedViewController: UIViewController {
     // MARK: - Private Constants.
 
     private enum Constants {
-        static let postCellNibName = "PostTableViewCell"
-        static let postCellID = "PostCell"
+        static let postHeaderNibName = "PostHeaderCell"
+        static let postFooterNibName = "PostFooterCell"
+        static let postTextNibName = "TextPostCell"
+        static let postImageNibName = "ImagePostCell"
+        static let errorTitleString = "Ошибка"
+    }
+
+    // MARK: - Private Types.
+
+    private enum PostCellType: Int, CaseIterable {
+        case header
+        case content
+        case footer
     }
 
     // MARK: - Private @IBOutlet.
@@ -18,13 +35,15 @@ final class FeedViewController: UIViewController {
 
     // MARK: - Private properties.
 
-    private let posts = Posts.getPosts()
+    private let vkNetworkService = VKNetworkService()
+    private var news: [News] = []
 
     // MARK: - Life cycle.
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        fetchNewsfeed()
     }
 
     // MARK: - Private Methods
@@ -33,24 +52,75 @@ final class FeedViewController: UIViewController {
         configureTableView()
     }
 
+    private func fetchNewsfeed() {
+        vkNetworkService.fetchNewsfeed { [weak self] items in
+            guard let self = self else { return }
+            switch items {
+            case let .success(news):
+                self.fetchFullNews(newsResponse: news)
+            case let .failure(error):
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func fetchFullNews(newsResponse: VKNewsResponse) {
+        newsResponse.news.forEach { result in
+            guard result.sourceID < 0
+            else {
+                filterGroups(newsResponse: newsResponse, result: result)
+                return
+            }
+            filterGroups(newsResponse: newsResponse, result: result)
+        }
+        DispatchQueue.main.async {
+            self.news = newsResponse.news
+            self.feedTableView.reloadData()
+        }
+    }
+
+    private func filterGroups(newsResponse: VKNewsResponse, result: News) {
+        guard let group = newsResponse.groups.filter({ group in
+            group.id == (result.sourceID) * -1
+        }).first else { return }
+        result.authorName = group.name
+        result.avatarPath = group.avatar
+    }
+
+    private func filterFriends(newsResponse: VKNewsResponse, result: News) {
+        guard let friend = newsResponse.friends.filter({ friend in
+            friend.id == (result.sourceID) * -1
+        }).first else { return }
+        result.authorName = "\(friend.firstName) \(friend.lastName)"
+        result.avatarPath = friend.avatar
+    }
+
     private func configureTableView() {
         feedTableView.rowHeight = UITableView.automaticDimension
         feedTableView.register(
-            UINib(nibName: Constants.postCellNibName, bundle: nil),
-            forCellReuseIdentifier: Constants.postCellID
+            UINib(nibName: Constants.postHeaderNibName, bundle: nil),
+            forCellReuseIdentifier: Constants.postHeaderNibName
+        )
+        feedTableView.register(
+            UINib(nibName: Constants.postFooterNibName, bundle: nil),
+            forCellReuseIdentifier: Constants.postFooterNibName
+        )
+        feedTableView.register(
+            UINib(nibName: Constants.postTextNibName, bundle: nil),
+            forCellReuseIdentifier: Constants.postTextNibName
+        )
+        feedTableView.register(
+            UINib(nibName: Constants.postImageNibName, bundle: nil),
+            forCellReuseIdentifier: Constants.postImageNibName
         )
     }
 
-    private func setupHightCellForPostImageCollectionView(numberRow: Int) -> CGFloat {
-        let amountOfImages = posts[numberRow].imageNames.count
-        let widthOfBounds = view.bounds.width
-        switch amountOfImages {
-        case 1:
-            return widthOfBounds
-        case let count where count > 1:
-            return (widthOfBounds / 2) * CGFloat(lroundf(Float(amountOfImages) / 2))
-        default:
-            return 0
+    private func setContentCellID(newsType: NewsType) -> String {
+        switch newsType {
+        case .post:
+            return Constants.postTextNibName
+        case .wallPhoto:
+            return Constants.postImageNibName
         }
     }
 }
@@ -58,21 +128,29 @@ final class FeedViewController: UIViewController {
 // MARK: - UITableViewDataSource.
 
 extension FeedViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        news.count
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        posts.count
+        PostCellType.allCases.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.postCellID,
-            for: indexPath
-        ) as? PostTableViewCell,
-            indexPath.row < posts.count
-        else {
-            return UITableViewCell()
+        guard let cellType = PostCellType(rawValue: indexPath.row) else { return UITableViewCell() }
+        let post = news[indexPath.section]
+        var cellIdentifier = String()
+        switch cellType {
+        case .header:
+            cellIdentifier = Constants.postHeaderNibName
+        case .content:
+            cellIdentifier = Constants.postTextNibName
+        case .footer:
+            cellIdentifier = Constants.postFooterNibName
         }
-        let post = posts[indexPath.row]
-        cell.configure(post: post, viewHight: setupHightCellForPostImageCollectionView(numberRow: indexPath.row))
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PostCell
+        else { return UITableViewCell() }
+        cell.configure(news: post)
         return cell
     }
 }

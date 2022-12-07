@@ -5,7 +5,7 @@ import Foundation
 
 /// Service with requests to VK API.
 final class VKNetworkService: VKNetworkServiceProtocol {
-    // MARK: - Private Properties
+    // MARK: - Private Properties.
 
     private let networkService = NetworkService()
 
@@ -25,5 +25,9 @@ final class VKNetworkService: VKNetworkServiceProtocol {
 
     func fetchSearchedGroups(text: String, completion: @escaping (Result<[Group], Error>) -> Void) {
         networkService.loadData(methodType: .searchGroups(queryText: text), completion: completion)
+    }
+
+    func fetchNewsfeed(completion: @escaping (Result<VKNewsResponse, Error>) -> Void) {
+        networkService.loadNews(methodType: .newsFeed, completion: completion)
     }
 }
