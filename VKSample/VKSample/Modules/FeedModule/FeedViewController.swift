@@ -53,7 +53,7 @@ final class FeedViewController: UIViewController {
     }
 
     private func fetchNewsfeed() {
-        vkNetworkService.fetchNewsfeed(type: .all) { [weak self] items in
+        vkNetworkService.fetchNewsfeed { [weak self] items in
             guard let self = self else { return }
             switch items {
             case let .success(news):

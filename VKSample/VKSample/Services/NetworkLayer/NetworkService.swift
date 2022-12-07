@@ -7,29 +7,12 @@ import Alamofire
 class NetworkService {
     // MARK: - Public enums.
 
-    enum NewsType {
-        case photo
-        case post
-        case all
-
-        var stringValue: String {
-            switch self {
-            case .post:
-                return Constants.postTypeText
-            case .photo:
-                return Constants.photoTypeText
-            case .all:
-                return "\(Constants.postTypeText),\(Constants.photoTypeText)"
-            }
-        }
-    }
-
     enum RequestMethod: CustomStringConvertible {
         case getGroups
         case getFriends
         case searchGroups(queryText: String)
         case getPhotos(ownerID: Int)
-        case newsFeed(type: NewsType)
+        case newsFeed
 
         var description: String {
             switch self {
@@ -59,8 +42,8 @@ class NetworkService {
                     Constants.extendedParamText: Constants.extendedParamValue,
                     Constants.ownerIDParamText: userID
                 ]
-            case let .newsFeed(type):
-                return [Constants.filtersText: type.stringValue]
+            case .newsFeed:
+                return [Constants.filtersText: Constants.postTypeText]
             }
         }
     }
