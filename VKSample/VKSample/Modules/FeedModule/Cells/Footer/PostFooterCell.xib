@@ -34,8 +34,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFp-ci-05A">
                                         <rect key="frame" x="60" y="0.0" width="50" height="44"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gb-rw-1nd">
-                                                <rect key="frame" x="35" y="12.666666666666664" width="13.333333333333336" height="19"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gb-rw-1nd">
+                                                <rect key="frame" x="35" y="12.666666666666664" width="7.6666666666666643" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="RpO-JZ-nLi"/>
                                                 </constraints>
@@ -71,8 +71,8 @@
                                                     <constraint firstAttribute="height" constant="20.333333333333343" id="ddM-iy-J4E"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpb-7v-MFk">
-                                                <rect key="frame" x="28.999999999999996" y="12.666666666666664" width="13.333333333333332" height="19"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpb-7v-MFk">
+                                                <rect key="frame" x="29.000000000000004" y="12.666666666666664" width="7.6666666666666679" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="gv9-Pb-9ix"/>
                                                 </constraints>
@@ -149,8 +149,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="amountOfMessagesLabel" destination="2gb-rw-1nd" id="vpn-3z-abX"/>
-                <outlet property="amountOfViewsLabel" destination="JSN-9q-jU8" id="Lf3-hd-JoR"/>
+                <outlet property="amountMessagesLabel" destination="2gb-rw-1nd" id="Rfp-Qe-YOj"/>
+                <outlet property="amountRepostsLabel" destination="Wpb-7v-MFk" id="ISp-zH-HzR"/>
+                <outlet property="amountViewsLabel" destination="JSN-9q-jU8" id="qJB-MT-bWy"/>
                 <outlet property="likeControlView" destination="woA-zp-jn6" id="CkR-Fa-jh8"/>
             </connections>
             <point key="canvasLocation" x="84.615384615384613" y="23.104265402843602"/>

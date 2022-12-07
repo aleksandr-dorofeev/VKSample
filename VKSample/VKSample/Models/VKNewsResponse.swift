@@ -5,8 +5,11 @@ import Foundation
 
 /// Response for items.
 struct VKNewsResponse: Decodable {
+    /// List of news.
     var news: [News]
+    /// List of friend's news.
     var friends: [Friend]
+    /// List of group's news.
     var groups: [Group]
 
     enum CodingKeys: String, CodingKey {

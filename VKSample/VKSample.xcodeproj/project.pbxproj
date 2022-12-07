@@ -50,6 +50,10 @@
 		F895E0C0292D5F26001D4A88 /* VKNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */; };
 		F895E0D0292E4222001D4A88 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0CF292E4222001D4A88 /* NetworkService.swift */; };
 		F899A18D2940D075007682BD /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A18C2940D075007682BD /* DateFormatter+Extension.swift */; };
+		F899A18F29411E87007682BD /* Likes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A18E29411E87007682BD /* Likes.swift */; };
+		F899A19129411EA1007682BD /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A19029411EA1007682BD /* Comments.swift */; };
+		F899A19329411EAF007682BD /* Reposts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A19229411EAF007682BD /* Reposts.swift */; };
+		F899A19529411EBC007682BD /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A19429411EBC007682BD /* Views.swift */; };
 		F8B01E35293F54F400988685 /* TextPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B01E33293F54F400988685 /* TextPostCell.swift */; };
 		F8B01E36293F54F400988685 /* TextPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B01E34293F54F400988685 /* TextPostCell.xib */; };
 		F8B01E39293F551700988685 /* ImagePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B01E37293F551700988685 /* ImagePostCell.swift */; };
@@ -107,6 +111,10 @@
 		F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNetworkService.swift; sourceTree = "<group>"; };
 		F895E0CF292E4222001D4A88 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F899A18C2940D075007682BD /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
+		F899A18E29411E87007682BD /* Likes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Likes.swift; sourceTree = "<group>"; };
+		F899A19029411EA1007682BD /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
+		F899A19229411EAF007682BD /* Reposts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reposts.swift; sourceTree = "<group>"; };
+		F899A19429411EBC007682BD /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
 		F8B01E33293F54F400988685 /* TextPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostCell.swift; sourceTree = "<group>"; };
 		F8B01E34293F54F400988685 /* TextPostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextPostCell.xib; sourceTree = "<group>"; };
 		F8B01E37293F551700988685 /* ImagePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePostCell.swift; sourceTree = "<group>"; };
@@ -373,6 +381,10 @@
 			isa = PBXGroup;
 			children = (
 				F880502E293F97B400D90DAA /* News.swift */,
+				F899A18E29411E87007682BD /* Likes.swift */,
+				F899A19029411EA1007682BD /* Comments.swift */,
+				F899A19229411EAF007682BD /* Reposts.swift */,
+				F899A19429411EBC007682BD /* Views.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -644,6 +656,7 @@
 				F82272D62911DB37003EEB1B /* GroupsTableViewController.swift in Sources */,
 				F840413C293E6FB600C7CF46 /* PostFooterCell.swift in Sources */,
 				F8404138293E6F9E00C7CF46 /* PostHeaderCell.swift in Sources */,
+				F899A19529411EBC007682BD /* Views.swift in Sources */,
 				F88D6F6B291D84DD008B458F /* InteractiveTransition.swift in Sources */,
 				F88D6F67291D80A2008B458F /* PushTransitionAnimator.swift in Sources */,
 				F8490DAD29141B550044E9EF /* FriendPhotoGalleryCollectionViewCell.swift in Sources */,
@@ -651,6 +664,8 @@
 				F8E47B962919C9B70014AF31 /* FeedViewController.swift in Sources */,
 				F82272CD2911B6F9003EEB1B /* UITextField+Extension.swift in Sources */,
 				F88D6F69291D8433008B458F /* PopTransitionAnimator.swift in Sources */,
+				F899A19129411EA1007682BD /* Comments.swift in Sources */,
+				F899A19329411EAF007682BD /* Reposts.swift in Sources */,
 				F8027346293129B70022346B /* Group.swift in Sources */,
 				F82272CB2911B5F3003EEB1B /* UIViewController+Extension.swift in Sources */,
 				F80EC51D2910FFA4007E9437 /* LoginViewController.swift in Sources */,
@@ -670,6 +685,7 @@
 				F899A18D2940D075007682BD /* DateFormatter+Extension.swift in Sources */,
 				F802736B293149ED0022346B /* VKResponse.swift in Sources */,
 				F8490DBA291439EE0044E9EF /* MyGroupTableViewCell.swift in Sources */,
+				F899A18F29411E87007682BD /* Likes.swift in Sources */,
 				F8490DC02914699D0044E9EF /* LikeControlView.swift in Sources */,
 				F82272D42911CB0E003EEB1B /* FriendsTableViewController.swift in Sources */,
 				F802736D2931733C0022346B /* ImageLoader.swift in Sources */,

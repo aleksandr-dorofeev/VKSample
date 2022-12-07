@@ -34,7 +34,7 @@ final class PostHeaderCell: UITableViewCell, PostConfigurable {
     func configure(news: News) {
         guard let avatar = news.avatarPath else { return }
         profileNameLabel.text = news.authorName
-        postingTimeLabel.text = DateFormatter.convertDate(dateValue: news.date)
+        postingTimeLabel.text = DateFormatter.convert(dateValue: news.date)
         ImageLoader.shared.setImage(userPhotoURLText: avatar, imageView: profileImageView)
     }
 

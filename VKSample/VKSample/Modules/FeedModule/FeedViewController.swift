@@ -57,23 +57,23 @@ final class FeedViewController: UIViewController {
             guard let self = self else { return }
             switch items {
             case let .success(news):
-                self.fetchFullNewsData(data: news)
+                self.fetchFullNews(newsResponse: news)
             case let .failure(error):
                 self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
         }
     }
 
-    private func fetchFullNewsData(data: VKNewsResponse) {
-        data.news.forEach { result in
+    private func fetchFullNews(newsResponse: VKNewsResponse) {
+        newsResponse.news.forEach { result in
             if result.sourceID < 0 {
-                guard let group = data.groups.filter({ group in
+                guard let group = newsResponse.groups.filter({ group in
                     group.id == result.sourceID * -1
                 }).first else { return }
                 result.authorName = group.name
                 result.avatarPath = group.avatar
             } else {
-                guard let user = data.friends.filter({ user in
+                guard let user = newsResponse.friends.filter({ user in
                     user.id == result.sourceID
                 }).first else { return }
                 result.authorName = "\(user.firstName) \(user.lastName)"
@@ -81,7 +81,7 @@ final class FeedViewController: UIViewController {
             }
         }
         DispatchQueue.main.async {
-            self.news = data.news
+            self.news = newsResponse.news
             self.feedTableView.reloadData()
         }
     }

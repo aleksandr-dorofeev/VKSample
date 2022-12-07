@@ -13,7 +13,7 @@ extension DateFormatter {
 
     // MARK: - Public methods.
 
-    class func convertDate(dateValue: Int) -> String {
+    class func convert(dateValue: Int) -> String {
         let truncatedTime = TimeInterval(dateValue)
         let date = Date(timeIntervalSince1970: truncatedTime)
         let formatter = DateFormatter()
