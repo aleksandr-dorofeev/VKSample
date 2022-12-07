@@ -66,24 +66,33 @@ final class FeedViewController: UIViewController {
 
     private func fetchFullNews(newsResponse: VKNewsResponse) {
         newsResponse.news.forEach { result in
-            if result.sourceID < 0 {
-                guard let group = newsResponse.groups.filter({ group in
-                    group.id == result.sourceID * -1
-                }).first else { return }
-                result.authorName = group.name
-                result.avatarPath = group.avatar
-            } else {
-                guard let user = newsResponse.friends.filter({ user in
-                    user.id == result.sourceID
-                }).first else { return }
-                result.authorName = "\(user.firstName) \(user.lastName)"
-                result.avatarPath = user.avatar
+            guard result.sourceID < 0
+            else {
+                filterGroups(newsResponse: newsResponse, result: result)
+                return
             }
+            filterGroups(newsResponse: newsResponse, result: result)
         }
         DispatchQueue.main.async {
             self.news = newsResponse.news
             self.feedTableView.reloadData()
         }
+    }
+
+    private func filterGroups(newsResponse: VKNewsResponse, result: News) {
+        guard let group = newsResponse.groups.filter({ group in
+            group.id == (result.sourceID) * -1
+        }).first else { return }
+        result.authorName = group.name
+        result.avatarPath = group.avatar
+    }
+
+    private func filterFriends(newsResponse: VKNewsResponse, result: News) {
+        guard let friend = newsResponse.friends.filter({ friend in
+            friend.id == (result.sourceID) * -1
+        }).first else { return }
+        result.authorName = "\(friend.firstName) \(friend.lastName)"
+        result.avatarPath = friend.avatar
     }
 
     private func configureTableView() {
