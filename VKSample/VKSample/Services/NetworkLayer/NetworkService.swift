@@ -106,7 +106,6 @@ class NetworkService {
                 completion(.success(object))
             } catch {
                 completion(.failure(error))
-                print(error)
             }
         }
     }
