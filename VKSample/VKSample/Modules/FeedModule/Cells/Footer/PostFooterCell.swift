@@ -13,9 +13,5 @@ final class PostFooterCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods.
 
-    func configure(post: News) {
-//        amountOfViewsLabel.text = "\(post.amountOfViews)"
-//        amountOfMessagesLabel.text = "\(news.amountOfMessages)"
-//        likeControlView.amountLikes = news.amountOfLikes
-    }
+    func configure(news: News) {}
 }

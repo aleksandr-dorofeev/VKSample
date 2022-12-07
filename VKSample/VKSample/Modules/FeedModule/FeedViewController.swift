@@ -6,7 +6,7 @@ import UIKit
 typealias PostCell = UITableViewCell & PostConfigurable
 
 protocol PostConfigurable {
-    func configure(post: News)
+    func configure(news: News)
 }
 
 /// Screen with feed.
@@ -20,6 +20,8 @@ final class FeedViewController: UIViewController {
         static let postImageNibName = "ImagePostCell"
         static let errorTitleString = "Ошибка"
     }
+
+    // MARK: - Private Types.
 
     private enum PostCellType: Int, CaseIterable {
         case header
@@ -41,7 +43,7 @@ final class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        fetchNews()
+        fetchNewsfeed()
     }
 
     // MARK: - Private Methods
@@ -50,8 +52,9 @@ final class FeedViewController: UIViewController {
         configureTableView()
     }
 
-    private func fetchNews() {
-        vkNetworkService.getNewsfeed(type: .all) { items in
+    private func fetchNewsfeed() {
+        vkNetworkService.fetchNewsfeed(type: .all) { [weak self] items in
+            guard let self = self else { return }
             switch items {
             case let .success(news):
                 self.fetchFullNewsData(data: news)
@@ -62,23 +65,23 @@ final class FeedViewController: UIViewController {
     }
 
     private func fetchFullNewsData(data: VKNewsResponse) {
-        data.items.forEach { item in
-            if item.sourceID < 0 {
+        data.news.forEach { result in
+            if result.sourceID < 0 {
                 guard let group = data.groups.filter({ group in
-                    group.id == item.sourceID * -1
+                    group.id == result.sourceID * -1
                 }).first else { return }
-                item.authorName = group.name
-                item.avatarPath = group.avatar
+                result.authorName = group.name
+                result.avatarPath = group.avatar
             } else {
-                guard let user = data.profiles.filter({ user in
-                    user.id == item.sourceID
+                guard let user = data.friends.filter({ user in
+                    user.id == result.sourceID
                 }).first else { return }
-                item.authorName = "\(user.firstName) \(user.lastName)"
-                item.avatarPath = user.avatar
+                result.authorName = "\(user.firstName) \(user.lastName)"
+                result.avatarPath = user.avatar
             }
         }
         DispatchQueue.main.async {
-            self.news = data.items
+            self.news = data.news
             self.feedTableView.reloadData()
         }
     }
@@ -103,8 +106,8 @@ final class FeedViewController: UIViewController {
         )
     }
 
-    private func setContentCellID(post: NewsType) -> String {
-        switch post {
+    private func setContentCellID(newsType: NewsType) -> String {
+        switch newsType {
         case .post:
             return Constants.postTextNibName
         case .wallPhoto:
@@ -138,7 +141,7 @@ extension FeedViewController: UITableViewDataSource {
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PostCell
         else { return UITableViewCell() }
-        cell.configure(post: post)
+        cell.configure(news: post)
         return cell
     }
 }

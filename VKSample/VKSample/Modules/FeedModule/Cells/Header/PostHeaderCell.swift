@@ -31,10 +31,10 @@ final class PostHeaderCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods.
 
-    func configure(post: News) {
-        guard let avatar = post.avatarPath else { return }
-        profileNameLabel.text = post.authorName
-        postingTimeLabel.text = convertDate(dateValue: post.date)
+    func configure(news: News) {
+        guard let avatar = news.avatarPath else { return }
+        profileNameLabel.text = news.authorName
+        postingTimeLabel.text = DateFormatter.convertDate(dateValue: news.date)
         ImageLoader.shared.setImage(userPhotoURLText: avatar, imageView: profileImageView)
     }
 
@@ -47,13 +47,5 @@ final class PostHeaderCell: UITableViewCell, PostConfigurable {
     private func configureBackgroundView() {
         backgroundCustomView.layer.cornerRadius = backgroundCustomView.frame.width / 2
         backgroundCustomView.backgroundColor = UIColor(named: Constants.viewColorName)
-    }
-
-    private func convertDate(dateValue: Int) -> String {
-        let truncatedTime = TimeInterval(dateValue)
-        let date = Date(timeIntervalSince1970: truncatedTime)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy HH:mm"
-        return formatter.string(from: date)
     }
 }

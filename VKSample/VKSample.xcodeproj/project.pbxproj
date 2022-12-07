@@ -49,6 +49,7 @@
 		F895E0BC292D528F001D4A88 /* AuthorizationVKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0BB292D528F001D4A88 /* AuthorizationVKViewController.swift */; };
 		F895E0C0292D5F26001D4A88 /* VKNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */; };
 		F895E0D0292E4222001D4A88 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F895E0CF292E4222001D4A88 /* NetworkService.swift */; };
+		F899A18D2940D075007682BD /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A18C2940D075007682BD /* DateFormatter+Extension.swift */; };
 		F8B01E35293F54F400988685 /* TextPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B01E33293F54F400988685 /* TextPostCell.swift */; };
 		F8B01E36293F54F400988685 /* TextPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B01E34293F54F400988685 /* TextPostCell.xib */; };
 		F8B01E39293F551700988685 /* ImagePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B01E37293F551700988685 /* ImagePostCell.swift */; };
@@ -105,6 +106,7 @@
 		F895E0BB292D528F001D4A88 /* AuthorizationVKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVKViewController.swift; sourceTree = "<group>"; };
 		F895E0BF292D5F26001D4A88 /* VKNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNetworkService.swift; sourceTree = "<group>"; };
 		F895E0CF292E4222001D4A88 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		F899A18C2940D075007682BD /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		F8B01E33293F54F400988685 /* TextPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostCell.swift; sourceTree = "<group>"; };
 		F8B01E34293F54F400988685 /* TextPostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextPostCell.xib; sourceTree = "<group>"; };
 		F8B01E37293F551700988685 /* ImagePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePostCell.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			children = (
 				F82272CA2911B5F3003EEB1B /* UIViewController+Extension.swift */,
 				F82272CC2911B6F9003EEB1B /* UITextField+Extension.swift */,
+				F899A18C2940D075007682BD /* DateFormatter+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				F8490DB5291432600044E9EF /* GroupTableViewCell.swift in Sources */,
 				F8490DA5291412C10044E9EF /* FriendTableViewCell.swift in Sources */,
 				F802733B293128CC0022346B /* Friend.swift in Sources */,
+				F899A18D2940D075007682BD /* DateFormatter+Extension.swift in Sources */,
 				F802736B293149ED0022346B /* VKResponse.swift in Sources */,
 				F8490DBA291439EE0044E9EF /* MyGroupTableViewCell.swift in Sources */,
 				F8490DC02914699D0044E9EF /* LikeControlView.swift in Sources */,

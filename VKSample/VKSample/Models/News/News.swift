@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Type of posts.
+/// Type of news.
 enum NewsType: String, Decodable {
     case wallPhoto
     case post

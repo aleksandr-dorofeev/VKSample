@@ -11,8 +11,8 @@ final class ImagePostCell: UITableViewCell, PostConfigurable {
 
     // MARK: - Public methods.
 
-    func configure(post: News) {
-        guard let imageName = post.avatarPath else { return }
+    func configure(news: News) {
+        guard let imageName = news.avatarPath else { return }
         ImageLoader.shared.setImage(userPhotoURLText: imageName, imageView: postImageView)
     }
 }
