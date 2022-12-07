@@ -4,7 +4,7 @@
 import Alamofire
 
 /// Base network service with load data method.
-class NetworkService {
+final class NetworkService {
     // MARK: - Public enums.
 
     enum RequestMethod: CustomStringConvertible {
