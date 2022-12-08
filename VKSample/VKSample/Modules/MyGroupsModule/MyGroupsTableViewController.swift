@@ -34,7 +34,11 @@ final class MyGroupsTableViewController: UITableViewController {
         guard let objects = RealmService.readData(Group.self) else { return }
         addGroupToken(result: objects)
         groups = objects
-        fetchGroups()
+        fetchGroupsOperation()
+    }
+
+    private func fetchGroupsOperation() {
+        vkNetworkService.fetchOperationalGroups()
     }
 
     private func fetchGroups() {
