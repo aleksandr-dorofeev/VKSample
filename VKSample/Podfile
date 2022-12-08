@@ -7,5 +7,6 @@ target 'VKSample' do
 
 pod 'Alamofire'
 pod 'RealmSwift'
+pod 'PromiseKit'
 
 end

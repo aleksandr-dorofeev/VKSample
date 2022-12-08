@@ -110,17 +110,28 @@ final class NetworkService {
         }
     }
 
-    func fetchGroups(methodType: RequestMethod) {
+    func fetchOperationGroups(methodType: RequestMethod) {
         let queueOperation = OperationQueue()
         let request = sendGroupRequest(methodType: methodType)
-        let getDataOperation = GetDataOperation(request: request)
+        let getDataOperation = GetGroupsDataOperation(request: request)
         queueOperation.addOperation(getDataOperation)
-        let parseData = ParsingData()
+        let parseData = ParsingGroupsData()
         parseData.addDependency(getDataOperation)
         queueOperation.addOperation(parseData)
-        let saveDataOperation = SaveDataOperation()
+        let saveDataOperation = SaveGroupsDataOperation()
         saveDataOperation.addDependency(parseData)
         queueOperation.addOperation(saveDataOperation)
+    }
+
+    func configurePromiseFriendsUrl() -> String {
+        let url = "\(Constants.baseURLText)\(RequestMethod.getFriends.description)"
+        return url
+    }
+
+    func configurePromiseFriendsParams() -> Parameters {
+        let methodParams = RequestMethod.getFriends.parametersMap
+        let parameters = baseQueryParameters.merging(methodParams) { _, _ in }
+        return parameters
     }
 
     // MARK: - Private methods.

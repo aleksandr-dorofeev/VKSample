@@ -31,7 +31,7 @@ final class VKNetworkService: VKNetworkServiceProtocol {
         networkService.loadNews(methodType: .newsFeed, completion: completion)
     }
 
-    func fetchOperationalGroups() {
-        networkService.fetchGroups(methodType: .getGroups)
+    func fetchOperationGroups() {
+        networkService.fetchOperationGroups(methodType: .getGroups)
     }
 }
