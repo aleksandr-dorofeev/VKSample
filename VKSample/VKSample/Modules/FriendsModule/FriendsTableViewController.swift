@@ -1,6 +1,7 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import PromiseKit
 import RealmSwift
 import UIKit
 
@@ -17,7 +18,7 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private properties.
 
-    private let vkNetworkService: VKNetworkServiceProtocol = VKNetworkService()
+    private let promiseService = PromiseService()
     private var friendsToken: NotificationToken?
     private var friends: Results<Friend>?
     private var sectionsMap: [Character: [Friend]] = [:]
@@ -50,18 +51,16 @@ final class FriendsTableViewController: UITableViewController {
         addFriendToken(result: objects)
         friends = objects
         setupCellsToSections()
-        fetchFriends()
+        fetchPromiseFriends()
     }
 
-    private func fetchFriends() {
-        vkNetworkService.fetchFriends { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case let .success(friends):
-                RealmService.writeData(items: friends)
-            case let .failure(error):
-                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
-            }
+    private func fetchPromiseFriends() {
+        firstly {
+            promiseService.friendsRequest()
+        }.done { friends in
+            RealmService.writeData(items: friends.items)
+        }.catch { [weak self] error in
+            self?.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
         }
     }
 

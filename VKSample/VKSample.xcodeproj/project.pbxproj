@@ -54,6 +54,11 @@
 		F899A19129411EA1007682BD /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A19029411EA1007682BD /* Comments.swift */; };
 		F899A19329411EAF007682BD /* Reposts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A19229411EAF007682BD /* Reposts.swift */; };
 		F899A19529411EBC007682BD /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A19429411EBC007682BD /* Views.swift */; };
+		F899A1BC29424BF0007682BD /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A1BB29424BF0007682BD /* AsyncOperation.swift */; };
+		F899A1BE29424C9C007682BD /* GetGroupsDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A1BD29424C9C007682BD /* GetGroupsDataOperation.swift */; };
+		F899A1C029424D42007682BD /* ParsingGroupsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A1BF29424D42007682BD /* ParsingGroupsData.swift */; };
+		F899A1C229425070007682BD /* SaveGroupsDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A1C129425070007682BD /* SaveGroupsDataOperation.swift */; };
+		F899A1CA29428D30007682BD /* PromiseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F899A1C929428D30007682BD /* PromiseService.swift */; };
 		F8B01E35293F54F400988685 /* TextPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B01E33293F54F400988685 /* TextPostCell.swift */; };
 		F8B01E36293F54F400988685 /* TextPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B01E34293F54F400988685 /* TextPostCell.xib */; };
 		F8B01E39293F551700988685 /* ImagePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B01E37293F551700988685 /* ImagePostCell.swift */; };
@@ -115,6 +120,11 @@
 		F899A19029411EA1007682BD /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		F899A19229411EAF007682BD /* Reposts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reposts.swift; sourceTree = "<group>"; };
 		F899A19429411EBC007682BD /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		F899A1BB29424BF0007682BD /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		F899A1BD29424C9C007682BD /* GetGroupsDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGroupsDataOperation.swift; sourceTree = "<group>"; };
+		F899A1BF29424D42007682BD /* ParsingGroupsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingGroupsData.swift; sourceTree = "<group>"; };
+		F899A1C129425070007682BD /* SaveGroupsDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveGroupsDataOperation.swift; sourceTree = "<group>"; };
+		F899A1C929428D30007682BD /* PromiseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseService.swift; sourceTree = "<group>"; };
 		F8B01E33293F54F400988685 /* TextPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostCell.swift; sourceTree = "<group>"; };
 		F8B01E34293F54F400988685 /* TextPostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextPostCell.xib; sourceTree = "<group>"; };
 		F8B01E37293F551700988685 /* ImagePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePostCell.swift; sourceTree = "<group>"; };
@@ -215,6 +225,7 @@
 		F80EC5172910FFA4007E9437 /* VKSample */ = {
 			isa = PBXGroup;
 			children = (
+				F899A1C729428AFA007682BD /* Multithreading */,
 				F802736E293177E60022346B /* Services */,
 				F895E0BD292D5EE6001D4A88 /* Mocks */,
 				F895E0B3292CED10001D4A88 /* Models */,
@@ -451,6 +462,34 @@
 			path = NetworkLayer;
 			sourceTree = "<group>";
 		};
+		F899A1BA29424BDF007682BD /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				F899A1BB29424BF0007682BD /* AsyncOperation.swift */,
+				F899A1BD29424C9C007682BD /* GetGroupsDataOperation.swift */,
+				F899A1BF29424D42007682BD /* ParsingGroupsData.swift */,
+				F899A1C129425070007682BD /* SaveGroupsDataOperation.swift */,
+			);
+			path = Operation;
+			sourceTree = "<group>";
+		};
+		F899A1C729428AFA007682BD /* Multithreading */ = {
+			isa = PBXGroup;
+			children = (
+				F899A1C829428B85007682BD /* Promise */,
+				F899A1BA29424BDF007682BD /* Operation */,
+			);
+			path = Multithreading;
+			sourceTree = "<group>";
+		};
+		F899A1C829428B85007682BD /* Promise */ = {
+			isa = PBXGroup;
+			children = (
+				F899A1C929428D30007682BD /* PromiseService.swift */,
+			);
+			path = Promise;
+			sourceTree = "<group>";
+		};
 		F8B01E31293F548F00988685 /* TextPost */ = {
 			isa = PBXGroup;
 			children = (
@@ -654,6 +693,7 @@
 				F8027371293178090022346B /* RealmService.swift in Sources */,
 				F8805031293F9B7600D90DAA /* VKNewsResponse.swift in Sources */,
 				F82272D62911DB37003EEB1B /* GroupsTableViewController.swift in Sources */,
+				F899A1BE29424C9C007682BD /* GetGroupsDataOperation.swift in Sources */,
 				F840413C293E6FB600C7CF46 /* PostFooterCell.swift in Sources */,
 				F8404138293E6F9E00C7CF46 /* PostHeaderCell.swift in Sources */,
 				F899A19529411EBC007682BD /* Views.swift in Sources */,
@@ -673,6 +713,8 @@
 				F80BDBB5293FF59D009E2ED5 /* Post.swift in Sources */,
 				F895E0C0292D5F26001D4A88 /* VKNetworkService.swift in Sources */,
 				F88D6F24291CE44B008B458F /* SwipeUserPhotosViewController.swift in Sources */,
+				F899A1C029424D42007682BD /* ParsingGroupsData.swift in Sources */,
+				F899A1CA29428D30007682BD /* PromiseService.swift in Sources */,
 				F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */,
 				F8F9C8452937C7FF0026E88C /* VKNetworkServiceProtocol.swift in Sources */,
 				F8B01E39293F551700988685 /* ImagePostCell.swift in Sources */,
@@ -682,12 +724,14 @@
 				F8490DB5291432600044E9EF /* GroupTableViewCell.swift in Sources */,
 				F8490DA5291412C10044E9EF /* FriendTableViewCell.swift in Sources */,
 				F802733B293128CC0022346B /* Friend.swift in Sources */,
+				F899A1BC29424BF0007682BD /* AsyncOperation.swift in Sources */,
 				F899A18D2940D075007682BD /* DateFormatter+Extension.swift in Sources */,
 				F802736B293149ED0022346B /* VKResponse.swift in Sources */,
 				F8490DBA291439EE0044E9EF /* MyGroupTableViewCell.swift in Sources */,
 				F899A18F29411E87007682BD /* Likes.swift in Sources */,
 				F8490DC02914699D0044E9EF /* LikeControlView.swift in Sources */,
 				F82272D42911CB0E003EEB1B /* FriendsTableViewController.swift in Sources */,
+				F899A1C229425070007682BD /* SaveGroupsDataOperation.swift in Sources */,
 				F802736D2931733C0022346B /* ImageLoader.swift in Sources */,
 				F895E0BC292D528F001D4A88 /* AuthorizationVKViewController.swift in Sources */,
 				F8490DAF29142CC10044E9EF /* MyGroupsTableViewController.swift in Sources */,

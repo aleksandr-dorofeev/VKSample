@@ -30,4 +30,8 @@ final class VKNetworkService: VKNetworkServiceProtocol {
     func fetchNewsfeed(completion: @escaping (Result<VKNewsResponse, Error>) -> Void) {
         networkService.loadNews(methodType: .newsFeed, completion: completion)
     }
+
+    func fetchOperationGroups() {
+        networkService.fetchOperationGroups(methodType: .getGroups)
+    }
 }

@@ -109,4 +109,38 @@ final class NetworkService {
             }
         }
     }
+
+    func fetchOperationGroups(methodType: RequestMethod) {
+        let queueOperation = OperationQueue()
+        let request = sendGroupRequest(methodType: methodType)
+        let getDataOperation = GetGroupsDataOperation(request: request)
+        queueOperation.addOperation(getDataOperation)
+        let parseData = ParsingGroupsData()
+        parseData.addDependency(getDataOperation)
+        queueOperation.addOperation(parseData)
+        let saveDataOperation = SaveGroupsDataOperation()
+        saveDataOperation.addDependency(parseData)
+        queueOperation.addOperation(saveDataOperation)
+    }
+
+    func configurePromiseFriendsUrl() -> String {
+        let url = "\(Constants.baseURLText)\(RequestMethod.getFriends.description)"
+        return url
+    }
+
+    func configurePromiseFriendsParams() -> Parameters {
+        let methodParams = RequestMethod.getFriends.parametersMap
+        let parameters = baseQueryParameters.merging(methodParams) { _, _ in }
+        return parameters
+    }
+
+    // MARK: - Private methods.
+
+    private func sendGroupRequest(methodType: RequestMethod) -> DataRequest {
+        let url = "\(Constants.baseURLText)\(methodType.description)"
+        let methodParams = methodType.parametersMap
+        let parameters = baseQueryParameters.merging(methodParams) { _, _ in }
+        let request = AF.request(url, parameters: parameters)
+        return request
+    }
 }

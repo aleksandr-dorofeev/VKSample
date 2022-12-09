@@ -8,4 +8,5 @@ protocol VKNetworkServiceProtocol {
     func fetchUsersGroups(completion: @escaping (Result<[Group], Error>) -> Void)
     func fetchSearchedGroups(text: String, completion: @escaping (Result<[Group], Error>) -> Void)
     func fetchNewsfeed(completion: @escaping (Result<VKNewsResponse, Error>) -> Void)
+    func fetchOperationGroups()
 }
