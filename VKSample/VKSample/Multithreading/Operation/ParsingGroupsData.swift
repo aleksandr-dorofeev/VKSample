@@ -7,7 +7,7 @@ import Foundation
 final class ParsingGroupsData: Operation {
     // MARK: - Public properties.
 
-    var outputData: [Group] = []
+    var groups: [Group] = []
 
     // MARK: - Pubic methods.
 
@@ -16,7 +16,7 @@ final class ParsingGroupsData: Operation {
               let data = getDataOperation.data else { return }
         do {
             let response = try JSONDecoder().decode(VKResponse<Group>.self, from: data)
-            outputData = response.items
+            groups = response.items
         } catch {
             print(error.localizedDescription)
         }

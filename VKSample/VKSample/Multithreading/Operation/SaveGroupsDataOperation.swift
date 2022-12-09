@@ -9,6 +9,6 @@ final class SaveGroupsDataOperation: AsyncOperation {
 
     override func main() {
         guard let parseData = dependencies.first as? ParsingGroupsData else { return }
-        RealmService.writeData(items: parseData.outputData)
+        RealmService.writeData(items: parseData.groups)
     }
 }

@@ -41,18 +41,6 @@ final class MyGroupsTableViewController: UITableViewController {
         vkNetworkService.fetchOperationGroups()
     }
 
-    private func fetchGroups() {
-        vkNetworkService.fetchUsersGroups { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case let .success(groups):
-                RealmService.writeData(items: groups)
-            case let .failure(error):
-                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
-            }
-        }
-    }
-
     private func addGroupToken(result: Results<Group>) {
         groupsToken = result.observe { [weak self] change in
             guard let self = self else { return }
