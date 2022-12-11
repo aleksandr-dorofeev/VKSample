@@ -18,6 +18,7 @@ final class MyGroupsTableViewController: UITableViewController {
     // MARK: - Private properties.
 
     private let vkNetworkService = VKNetworkService()
+    private var photoService: PhotoService?
     private var groupsToken: NotificationToken?
     private var groups: Results<Group>?
 
@@ -35,6 +36,7 @@ final class MyGroupsTableViewController: UITableViewController {
         addGroupToken(result: objects)
         groups = objects
         fetchOperationGroups()
+        photoService = PhotoService(container: self)
     }
 
     private func fetchOperationGroups() {
@@ -70,9 +72,11 @@ extension MyGroupsTableViewController {
                 withIdentifier: Constants.myGroupsCellID,
                 for: indexPath
             ) as? MyGroupTableViewCell,
-            let group = groups?[indexPath.row]
+            let group = groups?[indexPath.row],
+            let groupAvatarUrl = group.avatar,
+            let groupAvatar = photoService?.photo(indexPath: indexPath, url: groupAvatarUrl)
         else { return UITableViewCell() }
-        groupCell.configure(with: group)
+        groupCell.configure(with: group, image: groupAvatar)
         return groupCell
     }
 }

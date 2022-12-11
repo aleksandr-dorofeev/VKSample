@@ -12,9 +12,8 @@ final class MyGroupTableViewCell: UITableViewCell {
 
     // MARK: - Public methods.
 
-    func configure(with group: Group) {
-        guard let groupAvatarText = group.avatar else { return }
-        ImageLoader.shared.setImage(userPhotoURLText: groupAvatarText, imageView: groupImageView)
+    func configure(with group: Group, image: UIImage) {
+        groupImageView.image = image
         groupTitleLabel.text = group.name
     }
 }
