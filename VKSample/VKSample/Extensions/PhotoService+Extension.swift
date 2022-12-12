@@ -4,7 +4,7 @@
 import UIKit
 
 /// Reload collection and table.
-extension PhotoService {
+extension ImageService {
     /// Reload UITableViewController.
     class TableViewController: DataReloadable {
         // MARK: - Private properties.
@@ -19,8 +19,8 @@ extension PhotoService {
 
         // MARK: - Public methods.
 
-        func reloadRow(atIndexPath indexPath: IndexPath) {
-            table.tableView.reloadRows(at: [indexPath], with: .none)
+        func reloadRow() {
+            table.tableView.reloadData()
         }
     }
 
@@ -38,8 +38,8 @@ extension PhotoService {
 
         // MARK: - Public methods.
 
-        func reloadRow(atIndexPath indexPath: IndexPath) {
-            collection.collectionView.reloadItems(at: [indexPath])
+        func reloadRow() {
+            collection.collectionView.reloadData()
         }
     }
 }

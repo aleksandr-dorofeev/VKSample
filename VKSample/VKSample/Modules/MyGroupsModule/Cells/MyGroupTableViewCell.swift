@@ -12,8 +12,9 @@ final class MyGroupTableViewCell: UITableViewCell {
 
     // MARK: - Public methods.
 
-    func configure(with group: Group, image: UIImage) {
-        groupImageView.image = image
+    func configure(with group: Group, service: ImageService) {
+        guard let avatarUrl = group.avatar else { return }
+        groupImageView.image = service.getPhoto(url: avatarUrl)
         groupTitleLabel.text = group.name
     }
 }

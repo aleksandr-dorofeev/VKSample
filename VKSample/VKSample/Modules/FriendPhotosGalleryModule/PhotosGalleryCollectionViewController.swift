@@ -20,7 +20,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
     // MARK: - Private properties.
 
     private let vkNetworkService = VKNetworkService()
-    private var photoService: PhotoService?
+    private var imageService: ImageService?
     private var friendID = Int()
     private var photos: [Photo]?
     private var selectedCellIndex = 0
@@ -39,12 +39,12 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
         guard
             segue.identifier == Constants.segueToSwipePhotosID,
             let destination = segue.destination as? SwipeUserPhotosViewController,
-            let photos = photos
+            let photos = photos,
+            let imageService = imageService
         else { return }
-        var images: [UIImage] = []
-        sortedFriendImages(images: &images, photos: photos)
         destination.configurePhotosUserVC(
-            photoGallery: images,
+            service: imageService,
+            photoGalleryNames: photos,
             currentPhotoIndex: selectedCellIndex
         )
     }
@@ -60,14 +60,6 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
         configureCollectionCellLayout()
     }
 
-    private func sortedFriendImages(images: inout [UIImage], photos: [Photo]) {
-        for photo in photos {
-            guard let image = photoService?.photo(indexPath: IndexPath(index: selectedCellIndex), url: photo.url)
-            else { return }
-            images.append(image)
-        }
-    }
-
     private func loadPhotos() {
         guard let objects = RealmService.readData(Photo.self) else { return }
         let userId = objects.map(\.ownerID)
@@ -76,7 +68,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
         } else {
             fetchPhotos()
         }
-        photoService = PhotoService(container: self)
+        imageService = ImageService(container: self)
     }
 
     private func fetchPhotos() {
@@ -122,10 +114,10 @@ extension PhotosGalleryCollectionViewController {
                 withReuseIdentifier: Constants.friendPhotosGalleryID,
                 for: indexPath
             ) as? FriendPhotoGalleryCollectionViewCell,
-            let photoUrl = photos?[indexPath.row].url,
-            let friendImage = photoService?.photo(indexPath: indexPath, url: photoUrl)
+            let urlPhoto = photos?[indexPath.row].url,
+            let imageService = imageService
         else { return UICollectionViewCell() }
-        photoCell.configure(image: friendImage)
+        photoCell.configure(urlPhoto: urlPhoto, service: imageService)
         return photoCell
     }
 }

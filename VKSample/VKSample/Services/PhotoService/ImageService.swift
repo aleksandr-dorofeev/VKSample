@@ -1,11 +1,11 @@
-// PhotoService.swift
+// ImageService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
 import Foundation
 
-/// Cache images.
-final class PhotoService {
+/// Service for download and cache images.
+final class ImageService {
     // MARK: - Private Constants.
 
     private enum Constants {
@@ -37,13 +37,13 @@ final class PhotoService {
 
     // MARK: - Public methods.
 
-    func photo(indexPath: IndexPath, url: String) -> UIImage? {
+    func getPhoto(url: String) -> UIImage? {
         if let image = imagesMap[url] {
             return image
         } else if let image = getImageFromDisk(url: url) {
             return image
         } else {
-            loadImage(url: url, indexPath: indexPath)
+            loadImage(url: url)
             return placeholderImage
         }
     }
@@ -61,7 +61,7 @@ final class PhotoService {
         return image
     }
 
-    private func loadImage(url: String, indexPath: IndexPath) {
+    private func loadImage(url: String) {
         AF.request(url).responseData { [weak self] response in
             guard
                 let self = self,
@@ -70,7 +70,7 @@ final class PhotoService {
             else { return }
             self.imagesMap[url] = image
             self.saveImageToDisk(url: url, image: image)
-            self.container.reloadRow(atIndexPath: indexPath)
+            self.container.reloadRow()
         }
     }
 
@@ -101,7 +101,7 @@ final class PhotoService {
     private func saveImageToDisk(url: String, image: UIImage) {
         guard
             let filePath = getImagePath(url: url),
-            let data = image.pngData()
+            let data = image.jpegData(compressionQuality: 200)
         else { return }
         fileManager.createFile(atPath: filePath, contents: data)
     }

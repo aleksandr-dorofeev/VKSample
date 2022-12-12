@@ -12,8 +12,9 @@ final class FriendTableViewCell: UITableViewCell {
 
     // MARK: - Public methods.
 
-    func configure(image: UIImage, with friend: Friend) {
-        friendImageView.image = image
+    func configure(service: ImageService, with friend: Friend) {
+        guard let avatarUrl = friend.avatar else { return }
+        friendImageView.image = service.getPhoto(url: avatarUrl)
         nameLabel.text = "\(friend.firstName) \(friend.lastName)"
     }
 }

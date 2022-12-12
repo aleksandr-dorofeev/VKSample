@@ -12,9 +12,9 @@ final class FriendPhotoGalleryCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public methods.
 
-    func configure(image: UIImage) {
+    func configure(urlPhoto: String, service: ImageService) {
         backgroundPhotoView.layer.borderWidth = 2
         backgroundPhotoView.layer.borderColor = UIColor.black.cgColor
-        friendPhotoImageView.image = image
+        friendPhotoImageView.image = service.getPhoto(url: urlPhoto)
     }
 }
