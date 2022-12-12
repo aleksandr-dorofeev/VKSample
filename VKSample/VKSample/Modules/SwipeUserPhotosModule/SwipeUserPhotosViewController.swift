@@ -29,6 +29,7 @@ final class SwipeUserPhotosViewController: UIViewController {
 
     private var photos: [Photo] = []
     private var currentPhotoIndex = 0
+    private var imageService: ImageService?
 
     // MARK: - Life cycle.
 
@@ -39,7 +40,8 @@ final class SwipeUserPhotosViewController: UIViewController {
 
     // MARK: - Public methods.
 
-    func configurePhotosUserVC(photoGalleryNames: [Photo], currentPhotoIndex: Int) {
+    func configurePhotosUserVC(service: ImageService, photoGalleryNames: [Photo], currentPhotoIndex: Int) {
+        imageService = service
         photos = photoGalleryNames
         self.currentPhotoIndex = currentPhotoIndex
     }
@@ -64,36 +66,24 @@ final class SwipeUserPhotosViewController: UIViewController {
 
     private func prepareAnimationForRightSwipe() {
         currentImageView.layer.zPosition = 1
-        ImageLoader.shared.setImage(
-            userPhotoURLText: photos[currentPhotoIndex].url,
-            imageView: currentImageView
-        )
+        currentImageView.image = imageService?.getPhoto(url: photos[currentPhotoIndex].url)
         nextImageTrailingConstraint.constant = 100
         nextImageLeadingConstraint.constant = 100
         nextImageTopConstraint.constant = 200
         nextImageBottomConstraint.constant = -200
         nextImageView.layer.zPosition = 1
-        ImageLoader.shared.setImage(
-            userPhotoURLText: photos[currentPhotoIndex - 1].url,
-            imageView: nextImageView
-        )
+        nextImageView.image = imageService?.getPhoto(url: photos[currentPhotoIndex - 1].url)
         currentPhotoIndex -= 1
     }
 
     private func prepareAnimationForLeftSwipe() {
         let viewWidth = view.frame.width
         currentImageView.layer.zPosition = 1
-        ImageLoader.shared.setImage(
-            userPhotoURLText: photos[currentPhotoIndex].url,
-            imageView: currentImageView
-        )
+        currentImageView.image = imageService?.getPhoto(url: photos[currentPhotoIndex].url)
         nextImageTrailingConstraint.constant = -viewWidth
         nextImageLeadingConstraint.constant = viewWidth
         nextImageView.layer.zPosition = 2
-        ImageLoader.shared.setImage(
-            userPhotoURLText: photos[currentPhotoIndex + 1].url,
-            imageView: nextImageView
-        )
+        nextImageView.image = imageService?.getPhoto(url: photos[currentPhotoIndex + 1].url)
         currentPhotoIndex += 1
     }
 
@@ -141,10 +131,7 @@ final class SwipeUserPhotosViewController: UIViewController {
     }
 
     private func configureImageViews() {
-        ImageLoader.shared.setImage(
-            userPhotoURLText: photos[currentPhotoIndex].url,
-            imageView: currentImageView
-        )
+        currentImageView.image = imageService?.getPhoto(url: photos[currentPhotoIndex].url)
     }
 
     @objc private func swipeGestureRecognizerAction(gesture: UISwipeGestureRecognizer) {

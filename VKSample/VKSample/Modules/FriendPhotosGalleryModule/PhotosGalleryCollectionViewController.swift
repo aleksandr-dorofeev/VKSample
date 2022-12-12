@@ -20,8 +20,9 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
     // MARK: - Private properties.
 
     private let vkNetworkService = VKNetworkService()
+    private var imageService: ImageService?
     private var friendID = Int()
-    private var photos: [Photo] = []
+    private var photos: [Photo]?
     private var selectedCellIndex = 0
 
     // MARK: - Life cycle.
@@ -37,9 +38,12 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard
             segue.identifier == Constants.segueToSwipePhotosID,
-            let destination = segue.destination as? SwipeUserPhotosViewController
+            let destination = segue.destination as? SwipeUserPhotosViewController,
+            let photos = photos,
+            let imageService = imageService
         else { return }
         destination.configurePhotosUserVC(
+            service: imageService,
             photoGalleryNames: photos,
             currentPhotoIndex: selectedCellIndex
         )
@@ -64,6 +68,7 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
         } else {
             fetchPhotos()
         }
+        imageService = ImageService(container: self)
     }
 
     private func fetchPhotos() {
@@ -97,18 +102,22 @@ final class PhotosGalleryCollectionViewController: UICollectionViewController {
 
 extension PhotosGalleryCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photos.count
+        photos?.count ?? 0
     }
 
     override func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let photoCell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Constants.friendPhotosGalleryID,
-            for: indexPath
-        ) as? FriendPhotoGalleryCollectionViewCell else { return UICollectionViewCell() }
-        photoCell.configure(imageUrlString: photos[indexPath.row].url)
+        guard
+            let photoCell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Constants.friendPhotosGalleryID,
+                for: indexPath
+            ) as? FriendPhotoGalleryCollectionViewCell,
+            let urlPhoto = photos?[indexPath.row].url,
+            let imageService = imageService
+        else { return UICollectionViewCell() }
+        photoCell.configure(urlPhoto: urlPhoto, service: imageService)
         return photoCell
     }
 }

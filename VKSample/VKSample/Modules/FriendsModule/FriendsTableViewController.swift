@@ -19,6 +19,7 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private properties.
 
     private let promiseService = PromiseService()
+    private var imageService: ImageService?
     private var friendsToken: NotificationToken?
     private var friends: Results<Friend>?
     private var sectionsMap: [Character: [Friend]] = [:]
@@ -52,6 +53,7 @@ final class FriendsTableViewController: UITableViewController {
         friends = objects
         setupCellsToSections()
         fetchPromiseFriends()
+        imageService = ImageService(container: self)
     }
 
     private func fetchPromiseFriends() {
@@ -125,9 +127,10 @@ extension FriendsTableViewController {
                 withIdentifier: Constants.friendsCellID,
                 for: indexPath
             ) as? FriendTableViewCell,
-            let friend = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row]
+            let friend = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row],
+            let imageService = imageService
         else { return UITableViewCell() }
-        cell.configure(with: friend)
+        cell.configure(service: imageService, with: friend)
         return cell
     }
 }
