@@ -7,9 +7,9 @@ import UIKit
 extension PhotoService {
     /// Reload UITableViewController.
     class TableViewController: DataReloadable {
-        // MARK: - Public properties.
+        // MARK: - Private properties.
 
-        let table: UITableViewController
+        private let table: UITableViewController
 
         // MARK: - Initializers.
 
@@ -26,9 +26,9 @@ extension PhotoService {
 
     /// Reload UICollectionViewController.
     class CollectionViewController: DataReloadable {
-        // MARK: - Public properties.
+        // MARK: - Private properties.
 
-        let collection: UICollectionViewController
+        private let collection: UICollectionViewController
 
         // MARK: - Initializers.
 

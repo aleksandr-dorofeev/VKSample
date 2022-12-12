@@ -74,9 +74,9 @@ extension MyGroupsTableViewController {
             ) as? MyGroupTableViewCell,
             let group = groups?[indexPath.row],
             let groupAvatarUrl = group.avatar,
-            let groupAvatar = photoService?.photo(indexPath: indexPath, url: groupAvatarUrl)
+            let groupAvatarImage = photoService?.photo(indexPath: indexPath, url: groupAvatarUrl)
         else { return UITableViewCell() }
-        groupCell.configure(with: group, image: groupAvatar)
+        groupCell.configure(with: group, image: groupAvatarImage)
         return groupCell
     }
 }

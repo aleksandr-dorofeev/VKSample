@@ -129,9 +129,9 @@ extension FriendsTableViewController {
             ) as? FriendTableViewCell,
             let friend = sectionsMap[sectionTitles[indexPath.section]]?[indexPath.row],
             let friendAvatarUrl = friend.avatar,
-            let friendAvatar = photoService?.photo(indexPath: indexPath, url: friendAvatarUrl)
+            let friendAvatarImage = photoService?.photo(indexPath: indexPath, url: friendAvatarUrl)
         else { return UITableViewCell() }
-        cell.configure(image: friendAvatar, with: friend)
+        cell.configure(image: friendAvatarImage, with: friend)
         return cell
     }
 }
