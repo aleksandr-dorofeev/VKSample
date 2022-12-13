@@ -13,7 +13,7 @@ final class AuthorizationVKViewController: UIViewController {
         static let vkHostText = "oauth.vk.com"
         static let authorizePortText = "/authorize"
         static let clientIDParamText = "client_id"
-        static let clientIDText = "51496825"
+        static let clientIDText = "51502988"
         static let displayParamText = "display"
         static let displayMobileText = "mobile"
         static let redirectUriParamText = "redirect_uri"

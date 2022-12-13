@@ -7,6 +7,7 @@ import Foundation
 enum NewsType: String, Decodable {
     case wallPhoto
     case post
+    case photo
 }
 
 /// News.
@@ -23,6 +24,8 @@ class News: Decodable {
     var avatarPath: String?
     /// Name of the owner of the news, which is installed from the Friends model.
     var authorName: String?
+    /// Attachments of the owner
+    var attachments: [Attachments]?
     /// Comments for news.
     var comments: Comments?
     /// Likes for news.
@@ -43,5 +46,6 @@ class News: Decodable {
         case likes
         case reposts
         case views
+        case attachments
     }
 }

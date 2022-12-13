@@ -14,7 +14,6 @@
 		F802736B293149ED0022346B /* VKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802736A293149ED0022346B /* VKResponse.swift */; };
 		F802736D2931733C0022346B /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802736C2931733C0022346B /* ImageLoader.swift */; };
 		F8027371293178090022346B /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8027370293178090022346B /* RealmService.swift */; };
-		F80BDBB5293FF59D009E2ED5 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E47B982919CAA50014AF31 /* Post.swift */; };
 		F80EC5192910FFA4007E9437 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80EC5182910FFA4007E9437 /* AppDelegate.swift */; };
 		F80EC51B2910FFA4007E9437 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80EC51A2910FFA4007E9437 /* SceneDelegate.swift */; };
 		F80EC51D2910FFA4007E9437 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80EC51C2910FFA4007E9437 /* LoginViewController.swift */; };
@@ -38,6 +37,7 @@
 		F8490DBA291439EE0044E9EF /* MyGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DB9291439EE0044E9EF /* MyGroupTableViewCell.swift */; };
 		F8490DBD29145EBF0044E9EF /* ShadowAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DBC29145EBF0044E9EF /* ShadowAvatarView.swift */; };
 		F8490DC02914699D0044E9EF /* LikeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8490DBF2914699D0044E9EF /* LikeControlView.swift */; };
+		F864AB24294925A30010F3FE /* Attachments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864AB23294925A30010F3FE /* Attachments.swift */; };
 		F866A6E62945F4C70041EABE /* PhotoService+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866A6E52945F4C70041EABE /* PhotoService+Extension.swift */; };
 		F880502F293F97B400D90DAA /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = F880502E293F97B400D90DAA /* News.swift */; };
 		F8805031293F9B7600D90DAA /* VKNewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8805030293F9B7600D90DAA /* VKNewsResponse.swift */; };
@@ -97,16 +97,15 @@
 		F8404137293E6F9E00C7CF46 /* PostHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostHeaderCell.xib; sourceTree = "<group>"; };
 		F840413A293E6FB600C7CF46 /* PostFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFooterCell.swift; sourceTree = "<group>"; };
 		F840413B293E6FB600C7CF46 /* PostFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostFooterCell.xib; sourceTree = "<group>"; };
-		F8490DA1291405530044E9EF /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		F8490DA4291412C10044E9EF /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		F8490DA92914197E0044E9EF /* PhotosGalleryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosGalleryCollectionViewController.swift; sourceTree = "<group>"; };
 		F8490DAC29141B550044E9EF /* FriendPhotoGalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoGalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8490DAE29142CC10044E9EF /* MyGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsTableViewController.swift; sourceTree = "<group>"; };
-		F8490DB129142DA70044E9EF /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		F8490DB4291432600044E9EF /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
 		F8490DB9291439EE0044E9EF /* MyGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupTableViewCell.swift; sourceTree = "<group>"; };
 		F8490DBC29145EBF0044E9EF /* ShadowAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowAvatarView.swift; sourceTree = "<group>"; };
 		F8490DBF2914699D0044E9EF /* LikeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControlView.swift; sourceTree = "<group>"; };
+		F864AB23294925A30010F3FE /* Attachments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachments.swift; sourceTree = "<group>"; };
 		F866A6E52945F4C70041EABE /* PhotoService+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoService+Extension.swift"; sourceTree = "<group>"; };
 		F880502E293F97B400D90DAA /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		F8805030293F9B7600D90DAA /* VKNewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNewsResponse.swift; sourceTree = "<group>"; };
@@ -136,7 +135,6 @@
 		F8B01E37293F551700988685 /* ImagePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePostCell.swift; sourceTree = "<group>"; };
 		F8B01E38293F551700988685 /* ImagePostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePostCell.xib; sourceTree = "<group>"; };
 		F8E47B952919C9B70014AF31 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		F8E47B982919CAA50014AF31 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F8F9C8442937C7FF0026E88C /* VKNetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNetworkServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,7 +232,6 @@
 			children = (
 				F899A1C729428AFA007682BD /* Multithreading */,
 				F802736E293177E60022346B /* Services */,
-				F895E0BD292D5EE6001D4A88 /* Mocks */,
 				F895E0B3292CED10001D4A88 /* Models */,
 				F88D6F63291D7F95008B458F /* CustomNavigation */,
 				F8490DBE291469800044E9EF /* CustomViews */,
@@ -412,6 +409,7 @@
 				F899A19029411EA1007682BD /* Comments.swift */,
 				F899A19229411EAF007682BD /* Reposts.swift */,
 				F899A19429411EBC007682BD /* Views.swift */,
+				F864AB23294925A30010F3FE /* Attachments.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -455,16 +453,6 @@
 				F895E0BB292D528F001D4A88 /* AuthorizationVKViewController.swift */,
 			);
 			path = AuthorizationVKModule;
-			sourceTree = "<group>";
-		};
-		F895E0BD292D5EE6001D4A88 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				F8E47B982919CAA50014AF31 /* Post.swift */,
-				F8490DB129142DA70044E9EF /* Group.swift */,
-				F8490DA1291405530044E9EF /* Friend.swift */,
-			);
-			path = Mocks;
 			sourceTree = "<group>";
 		};
 		F895E0BE292D5EF9001D4A88 /* NetworkLayer */ = {
@@ -737,7 +725,6 @@
 				F82272CB2911B5F3003EEB1B /* UIViewController+Extension.swift in Sources */,
 				F80EC51D2910FFA4007E9437 /* LoginViewController.swift in Sources */,
 				F8490DBD29145EBF0044E9EF /* ShadowAvatarView.swift in Sources */,
-				F80BDBB5293FF59D009E2ED5 /* Post.swift in Sources */,
 				F895E0C0292D5F26001D4A88 /* VKNetworkService.swift in Sources */,
 				F88D6F24291CE44B008B458F /* SwipeUserPhotosViewController.swift in Sources */,
 				F899A1C029424D42007682BD /* ParsingGroupsData.swift in Sources */,
@@ -759,6 +746,7 @@
 				F899A18F29411E87007682BD /* Likes.swift in Sources */,
 				F8490DC02914699D0044E9EF /* LikeControlView.swift in Sources */,
 				F82272D42911CB0E003EEB1B /* FriendsTableViewController.swift in Sources */,
+				F864AB24294925A30010F3FE /* Attachments.swift in Sources */,
 				F899A1C229425070007682BD /* SaveGroupsDataOperation.swift in Sources */,
 				F802736D2931733C0022346B /* ImageLoader.swift in Sources */,
 				F895E0BC292D528F001D4A88 /* AuthorizationVKViewController.swift in Sources */,
