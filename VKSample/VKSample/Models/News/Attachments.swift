@@ -3,7 +3,8 @@
 
 import Foundation
 
-/// Attachments.
+/// Attachments for news.
 struct Attachments: Decodable {
+  /// News photo.
     var photo: Photo?
 }
