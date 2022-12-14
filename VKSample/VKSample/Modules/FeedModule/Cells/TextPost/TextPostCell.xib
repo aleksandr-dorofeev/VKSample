@@ -21,36 +21,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="3480.6666666666665" height="72"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5v-mb-l5j">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAh-wC-skT">
+                                <rect key="frame" x="5" y="0.0" width="310" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="ezt-Yd-cEF"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="i5v-mb-l5j" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="DN6-96-XrW"/>
-                    <constraint firstAttribute="height" secondItem="i5v-mb-l5j" secondAttribute="height" id="FJS-vz-myW"/>
-                    <constraint firstItem="i5v-mb-l5j" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lps-Mh-w9a"/>
-                    <constraint firstItem="i5v-mb-l5j" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="qYU-ey-sVu"/>
+                    <constraint firstItem="lAh-wC-skT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9bA-fm-bt6"/>
+                    <constraint firstAttribute="bottom" secondItem="lAh-wC-skT" secondAttribute="bottom" id="H9t-uP-HT5"/>
+                    <constraint firstItem="lAh-wC-skT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="bGj-js-aqc"/>
+                    <constraint firstAttribute="trailing" secondItem="lAh-wC-skT" secondAttribute="trailing" constant="5" id="xyc-sq-d8f"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="postTextView" destination="i5v-mb-l5j" id="Vxz-eo-wIF"/>
+                <outlet property="postTextLabel" destination="lAh-wC-skT" id="IB4-3D-NFG"/>
             </connections>
             <point key="canvasLocation" x="135.38461538461539" y="30.568720379146917"/>
         </tableViewCell>
     </objects>
     <resources>
-        <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

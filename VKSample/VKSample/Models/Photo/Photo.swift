@@ -9,11 +9,17 @@ import RealmSwift
 final class Photo: Object, Decodable {
     // MARK: - Public properties.
 
+    /// Photo type.
     dynamic var type = String()
+    /// Photo url.
     dynamic var url = String()
+    /// Photo owner id.
     dynamic var ownerID = Int()
+    /// Photo id.
     dynamic var id = Int()
+    /// Photo height
     var height = Int()
+    /// Photo width.
     var width = Int()
 
     var aspectRatio: CGFloat {

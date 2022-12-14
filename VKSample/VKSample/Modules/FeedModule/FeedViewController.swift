@@ -19,6 +19,7 @@ final class FeedViewController: UIViewController {
         static let postTextNibName = "TextPostCell"
         static let postImageNibName = "ImagePostCell"
         static let errorTitleString = "Ошибка"
+        static let tenSeconds = 10
     }
 
     // MARK: - Private Types.
@@ -40,6 +41,7 @@ final class FeedViewController: UIViewController {
     private var news: [News] = []
     private var isLoading = false
     private var nextPage: String?
+    private var currentDate = 0
 
     // MARK: - Life cycle.
 
@@ -128,9 +130,8 @@ final class FeedViewController: UIViewController {
         feedTableView.refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
     }
 
-    private func fetchLastNews() {
-        let firstNewsDate = news.first?.date ?? 0
-        vkNetworkService.fetchNewsfeed(startTime: firstNewsDate + 10) { [weak self] result in
+    private func fetchNewsfeed(firstNewsDate: Int) {
+        vkNetworkService.fetchNewsfeed(startTime: firstNewsDate + Constants.tenSeconds) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(items):
@@ -141,7 +142,7 @@ final class FeedViewController: UIViewController {
         }
     }
 
-    private func fetchOldNews(page: String) {
+    private func fetchNewsfeed(page: String) {
         vkNetworkService.fetchNewsfeed(page: page) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -162,7 +163,8 @@ final class FeedViewController: UIViewController {
 
     @objc private func refreshAction() {
         feedTableView.refreshControl?.beginRefreshing()
-        fetchLastNews()
+        let firstNewsDate = news.first?.date ?? 0
+        fetchNewsfeed(firstNewsDate: firstNewsDate)
     }
 }
 
@@ -225,6 +227,6 @@ extension FeedViewController: UITableViewDataSourcePrefetching {
             let page = nextPage
         else { return }
         isLoading = true
-        fetchOldNews(page: page)
+        fetchNewsfeed(page: page)
     }
 }
