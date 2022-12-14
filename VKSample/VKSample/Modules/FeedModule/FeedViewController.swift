@@ -128,18 +128,9 @@ final class FeedViewController: UIViewController {
         feedTableView.refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
     }
 
-//    private func setContentCellID(newsType: NewsType) -> String {
-//        switch newsType {
-//        case .post:
-//            return Constants.postTextNibName
-//        case .wallPhoto, .photo:
-//            return Constants.postImageNibName
-//        }
-//    }
-
     private func fetchLastNews() {
         let firstNewsDate = news.first?.date ?? 0
-        vkNetworkService.fetchNewsfeed(startTime: firstNewsDate + 1) { [weak self] result in
+        vkNetworkService.fetchNewsfeed(startTime: firstNewsDate + 10) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(items):
@@ -159,6 +150,9 @@ final class FeedViewController: UIViewController {
                 let newSections = (oldNewsCount ..< (oldNewsCount + items.news.count)).map { $0 }
                 self.news.append(contentsOf: items.news)
                 self.feedTableView.insertSections(IndexSet(newSections), with: .automatic)
+                if let page = items.nextPage {
+                    self.nextPage = page
+                }
                 self.isLoading = false
             case let .failure(error):
                 self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
@@ -201,6 +195,22 @@ extension FeedViewController: UITableViewDataSource {
         else { return UITableViewCell() }
         cell.configure(news: post)
         return cell
+    }
+}
+
+// MARK: - UITableViewDelegate.
+
+extension FeedViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 2:
+            let tableWidth = tableView.bounds.width
+            let news = self.news[indexPath.section]
+            let cellHeight = tableWidth * (news.attachments?.first?.photo?.aspectRatio ?? CGFloat())
+            return cellHeight
+        default:
+            return UITableView.automaticDimension
+        }
     }
 }
 

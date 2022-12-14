@@ -13,6 +13,12 @@ final class Photo: Object, Decodable {
     dynamic var url = String()
     dynamic var ownerID = Int()
     dynamic var id = Int()
+    var height = Int()
+    var width = Int()
+
+    var aspectRatio: CGFloat {
+        CGFloat(height) / CGFloat(width)
+    }
 
     // MARK: - CodingKeys enums.
 
@@ -25,6 +31,8 @@ final class Photo: Object, Decodable {
     enum SizeKeys: String, CodingKey {
         case type
         case url
+        case height
+        case width
     }
 
     // MARK: - Initializers.
@@ -41,6 +49,8 @@ final class Photo: Object, Decodable {
             let reviewCountContainer = try sizeValues.nestedContainer(keyedBy: SizeKeys.self)
             type = try reviewCountContainer.decode(String.self, forKey: .type)
             url = try reviewCountContainer.decode(String.self, forKey: .url)
+            height = try reviewCountContainer.decode(Int.self, forKey: .height)
+            width = try reviewCountContainer.decode(Int.self, forKey: .width)
         }
     }
 
