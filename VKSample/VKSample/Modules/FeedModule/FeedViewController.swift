@@ -19,6 +19,7 @@ final class FeedViewController: UIViewController {
         static let postTextNibName = "TextPostCell"
         static let postImageNibName = "ImagePostCell"
         static let errorTitleString = "Ошибка"
+        static let tenSeconds = 10
     }
 
     // MARK: - Private Types.
@@ -26,6 +27,7 @@ final class FeedViewController: UIViewController {
     private enum PostCellType: Int, CaseIterable {
         case header
         case content
+        case image
         case footer
     }
 
@@ -37,6 +39,9 @@ final class FeedViewController: UIViewController {
 
     private let vkNetworkService = VKNetworkService()
     private var news: [News] = []
+    private var isLoading = false
+    private var nextPage: String?
+    private var currentDate = 0
 
     // MARK: - Life cycle.
 
@@ -50,14 +55,16 @@ final class FeedViewController: UIViewController {
 
     private func configureUI() {
         configureTableView()
+        createPullRefresh()
     }
 
     private func fetchNewsfeed() {
-        vkNetworkService.fetchNewsfeed { [weak self] items in
+        vkNetworkService.fetchNewsfeed { [weak self] result in
             guard let self = self else { return }
-            switch items {
-            case let .success(news):
-                self.fetchFullNews(newsResponse: news)
+            switch result {
+            case let .success(items):
+                self.fetchFullNews(newsResponse: items)
+                self.nextPage = items.nextPage
             case let .failure(error):
                 self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
             }
@@ -74,8 +81,9 @@ final class FeedViewController: UIViewController {
             filterGroups(newsResponse: newsResponse, result: result)
         }
         DispatchQueue.main.async {
-            self.news = newsResponse.news
+            self.news = newsResponse.news + self.news
             self.feedTableView.reloadData()
+            self.feedTableView.refreshControl?.endRefreshing()
         }
     }
 
@@ -97,6 +105,7 @@ final class FeedViewController: UIViewController {
 
     private func configureTableView() {
         feedTableView.rowHeight = UITableView.automaticDimension
+        feedTableView.prefetchDataSource = self
         feedTableView.register(
             UINib(nibName: Constants.postHeaderNibName, bundle: nil),
             forCellReuseIdentifier: Constants.postHeaderNibName
@@ -115,13 +124,47 @@ final class FeedViewController: UIViewController {
         )
     }
 
-    private func setContentCellID(newsType: NewsType) -> String {
-        switch newsType {
-        case .post:
-            return Constants.postTextNibName
-        case .wallPhoto:
-            return Constants.postImageNibName
+    private func createPullRefresh() {
+        feedTableView.refreshControl = UIRefreshControl()
+        feedTableView.refreshControl?.tintColor = .gray
+        feedTableView.refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
+    }
+
+    private func fetchNewsfeed(firstNewsDate: Int) {
+        vkNetworkService.fetchNewsfeed(startTime: firstNewsDate + Constants.tenSeconds) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(items):
+                self.fetchFullNews(newsResponse: items)
+            case let .failure(error):
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
+            }
         }
+    }
+
+    private func fetchNewsfeed(page: String) {
+        vkNetworkService.fetchNewsfeed(page: page) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(items):
+                let oldNewsCount = self.news.count
+                let newSections = (oldNewsCount ..< (oldNewsCount + items.news.count)).map { $0 }
+                self.news.append(contentsOf: items.news)
+                self.feedTableView.insertSections(IndexSet(newSections), with: .automatic)
+                if let page = items.nextPage {
+                    self.nextPage = page
+                }
+                self.isLoading = false
+            case let .failure(error):
+                self.showErrorAlert(title: Constants.errorTitleString, message: "\(error.localizedDescription)")
+            }
+        }
+    }
+
+    @objc private func refreshAction() {
+        feedTableView.refreshControl?.beginRefreshing()
+        let firstNewsDate = news.first?.date ?? 0
+        fetchNewsfeed(firstNewsDate: firstNewsDate)
     }
 }
 
@@ -143,6 +186,8 @@ extension FeedViewController: UITableViewDataSource {
         switch cellType {
         case .header:
             cellIdentifier = Constants.postHeaderNibName
+        case .image:
+            cellIdentifier = Constants.postImageNibName
         case .content:
             cellIdentifier = Constants.postTextNibName
         case .footer:
@@ -152,5 +197,36 @@ extension FeedViewController: UITableViewDataSource {
         else { return UITableViewCell() }
         cell.configure(news: post)
         return cell
+    }
+}
+
+// MARK: - UITableViewDelegate.
+
+extension FeedViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 2:
+            let tableWidth = tableView.bounds.width
+            let news = self.news[indexPath.section]
+            let cellHeight = tableWidth * (news.attachments?.first?.photo?.aspectRatio ?? CGFloat())
+            return cellHeight
+        default:
+            return UITableView.automaticDimension
+        }
+    }
+}
+
+// MARK: - UITableViewDataSourcePrefetching.
+
+extension FeedViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard
+            let maxRow = indexPaths.map(\.section).max(),
+            maxRow > news.count - 3,
+            isLoading == false,
+            let page = nextPage
+        else { return }
+        isLoading = true
+        fetchNewsfeed(page: page)
     }
 }

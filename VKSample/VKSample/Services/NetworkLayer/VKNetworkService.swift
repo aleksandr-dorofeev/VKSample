@@ -27,8 +27,12 @@ final class VKNetworkService: VKNetworkServiceProtocol {
         networkService.loadData(methodType: .searchGroups(queryText: text), completion: completion)
     }
 
-    func fetchNewsfeed(completion: @escaping (Result<VKNewsResponse, Error>) -> Void) {
-        networkService.loadNews(methodType: .newsFeed, completion: completion)
+    func fetchNewsfeed(
+        startTime: Int? = nil,
+        page: String? = nil,
+        completion: @escaping (Result<VKNewsResponse, Error>) -> Void
+    ) {
+        networkService.loadNews(methodType: .newsFeed(time: startTime, nextPage: page), completion: completion)
     }
 
     func fetchOperationGroups() {

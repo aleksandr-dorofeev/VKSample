@@ -12,7 +12,7 @@ final class NetworkService {
         case getFriends
         case searchGroups(queryText: String)
         case getPhotos(ownerID: Int)
-        case newsFeed
+        case newsFeed(time: Int?, nextPage: String?)
 
         var description: String {
             switch self {
@@ -42,8 +42,14 @@ final class NetworkService {
                     Constants.extendedParamText: Constants.extendedParamValue,
                     Constants.ownerIDParamText: userID
                 ]
-            case .newsFeed:
-                return [Constants.filtersText: Constants.postTypeText]
+            case let .newsFeed(time, nextPage):
+                var paramsMap: [String: Any] = [Constants.filtersText: Constants.allTypeText]
+                if time != nil {
+                    paramsMap[Constants.startTimeParamText] = time
+                } else if nextPage != nil {
+                    paramsMap[Constants.startFromParamText] = nextPage
+                }
+                return paramsMap
             }
         }
     }
@@ -67,8 +73,9 @@ final class NetworkService {
         static let accessTokenParamText = "access_token"
         static let versionParamText = "v"
         static let versionParamValue = "5.131"
-        static let postTypeText = "post"
-        static let photoTypeText = "wall_photo"
+        static let allTypeText = "post, wall_photo, photo"
+        static let startTimeParamText = "start_time"
+        static let startFromParamText = "start_from"
     }
 
     // MARK: - Private properties.

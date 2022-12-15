@@ -7,11 +7,11 @@ import UIKit
 final class TextPostCell: UITableViewCell, PostConfigurable {
     // MARK: - Private @IBOutlets.
 
-    @IBOutlet private var postTextView: UITextView!
+    @IBOutlet var postTextLabel: UILabel!
 
     // MARK: - Public methods.
 
     func configure(news: News) {
-        postTextView.text = news.text
+        postTextLabel.text = news.text
     }
 }
